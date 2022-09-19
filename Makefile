@@ -4,8 +4,13 @@ DFLAGS = -g2 -fsanitize=address
 
 RM = rm -f
 
-SRCS = src/cat3d.c
-SRCS_BONUS = src/cat3d_bonus.c
+SRCS =	src/cat3d.c \
+		src/init.c \
+		src/check_arg.c \
+		src/parse_map.c \
+		src/utils.c
+
+SRCS_BONUS = bonus/cat3d_bonus.c
 
 OBJS = $(SRCS:%.c=%.o)
 OBJS_BONUS = $(SRCS_BONUS:%.c=%.o)
@@ -18,25 +23,35 @@ all : $(NAME)
 bonus : $(BONUS)
 
 $(NAME) :	$(OBJS)
+			@make -C ./mlx
+			@clear
+			@cat ./decoration/cat
 			@make -C ./libft fclean
 			@make -C ./libft
-			@./loading.sh
-			@$(CC) $(CFLAGS) $(OBJS) -o $(NAME) ./libft/libft.a
+			@chmod +x ./decoration/loading.sh
+			@./decoration/loading.sh
+			@$(CC) $(CFLAGS) $(OBJS) ./libft/libft.a -L./mlx -lmlx -framework OpenGL -framework AppKit -o $(NAME)
 
 $(BONUS) :	$(OBJS_BONUS)
+			@make -C ./mlx
+			@clear
+			@cat ./decoration/cat
 			@make -C ./libft fclean
 			@make -C ./libft
-			@./loading.sh
-			@$(CC) $(CFLAGS) $(OBJS_BONUS) -o $(BONUS) ./libft/libft.a
+			@chmod +x ./decoration/loading.sh
+			@./decoration/loading.sh
+			@$(CC) $(CFLAGS) $(OBJS_BONUS) ./libft/libft.a -L./mlx -lmlx -framework OpenGL -framework AppKit -o $(BONUS)
 
 %.o : %.c
-		@$(CC) -c $< -o $@
+		@$(CC) $(CFLAGS) -Imlx -c $< -o $@
 
 clean :
+		@make -C ./mlx clean
 		@make -C ./libft fclean
 		@$(RM) $(OBJS) $(OBJS_BONUS)
 
 fclean :
+		@make -C ./mlx clean
 		@make -C ./libft fclean
 		@$(RM) $(OBJS) $(NAME) $(OBJS_BONUS) $(BONUS)
 
@@ -44,10 +59,4 @@ re :
 	@make fclean
 	@make all
 
-run :
-	@cat ascii_art/cat
-	@make re
-	@make clean
-	@exec ./cat3d
-
-.PHONY : all clean fclean re run bonus
+.PHONY : all clean fclean re bonus
