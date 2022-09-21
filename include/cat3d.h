@@ -6,7 +6,7 @@
 /*   By: kyhan <kyhan@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/19 14:00:14 by jisookim          #+#    #+#             */
-/*   Updated: 2022/09/21 15:33:24 by kyhan            ###   ########.fr       */
+/*   Updated: 2022/09/21 15:47:14 by kyhan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,12 @@ typedef struct s_map
 	char	**map
 	char	direction;
 }				t_map;
+
+typedef struct s_rgb
+{
+	int			*floor;
+	int			*ceiling;
+}				t_rgb;
 
 
 typedef struct s_game
