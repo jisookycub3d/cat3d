@@ -6,7 +6,7 @@
 /*   By: kyhan <kyhan@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/19 14:00:14 by jisookim          #+#    #+#             */
-/*   Updated: 2022/09/20 02:53:38 by kyhan            ###   ########.fr       */
+/*   Updated: 2022/09/21 15:33:24 by kyhan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,11 +20,30 @@
 # include "../mlx/mlx.h"
 # include "../libft/libft.h"
 
+typedef struct s_texture
+{
+	char		*north;
+	char		*south;
+	char		*east;
+	char		*west;
+}				t_texture;
+
+typedef struct s_map
+{
+	char	**map
+	char	direction;
+}				t_map;
+
+
 typedef struct s_game
 {
 	void		*mlx;
 	void		*win;
+	t_texture	texture;
+	t_map		map;
 }				t_game;
+
+
 
 /* init.c */
 void	init_game(t_game *game);
