@@ -6,7 +6,7 @@
 /*   By: kyhan <kyhan@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/20 02:28:13 by kyhan             #+#    #+#             */
-/*   Updated: 2022/09/20 02:28:22 by kyhan            ###   ########.fr       */
+/*   Updated: 2022/09/21 21:38:55 by kyhan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,4 +15,5 @@
 void	init_game(t_game *game)
 {
 	game->mlx = mlx_init();
+	game->map.map = 0;
 }

@@ -6,7 +6,7 @@
 /*   By: kyhan <kyhan@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/19 14:00:14 by jisookim          #+#    #+#             */
-/*   Updated: 2022/09/21 15:47:14 by kyhan            ###   ########.fr       */
+/*   Updated: 2022/09/21 20:08:16 by kyhan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ typedef struct s_texture
 
 typedef struct s_map
 {
-	char	**map
+	char	**map;
 	char	direction;
 }				t_map;
 
@@ -53,6 +53,7 @@ typedef struct s_game
 
 /* init.c */
 void	init_game(t_game *game);
+void	ft_free(char **strs);
 
 /* check_arg.c */
 void	check_arg(int argc, char **argv);

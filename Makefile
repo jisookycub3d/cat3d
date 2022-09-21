@@ -30,7 +30,7 @@ $(NAME) :	$(OBJS)
 			@make -C ./libft
 			@chmod +x ./decoration/loading.sh
 			@./decoration/loading.sh
-			@$(CC) $(CFLAGS) $(OBJS) ./libft/libft.a -L./mlx -lmlx -framework OpenGL -framework AppKit -o $(NAME)
+			@$(CC) $(CFLAGS) $(DFLAGS) $(OBJS) ./libft/libft.a -L./mlx -lmlx -framework OpenGL -framework AppKit -o $(NAME)
 
 $(BONUS) :	$(OBJS_BONUS)
 			@make -C ./mlx
@@ -43,7 +43,7 @@ $(BONUS) :	$(OBJS_BONUS)
 			@$(CC) $(CFLAGS) $(OBJS_BONUS) ./libft/libft.a -L./mlx -lmlx -framework OpenGL -framework AppKit -o $(BONUS)
 
 %.o : %.c
-		@$(CC) $(CFLAGS) -Imlx -c $< -o $@
+		@$(CC) $(CFLAGS) $(DFLAGS) -Imlx -c $< -o $@
 
 clean :
 		@make -C ./mlx clean
