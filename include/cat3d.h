@@ -6,7 +6,7 @@
 /*   By: kyhan <kyhan@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/19 14:00:14 by jisookim          #+#    #+#             */
-/*   Updated: 2022/09/21 20:08:16 by kyhan            ###   ########.fr       */
+/*   Updated: 2022/09/21 22:22:14 by kyhan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 # include <stdio.h>
 # include <unistd.h>
 # include <fcntl.h>
+# include <errno.h>
 # include "../mlx/mlx.h"
 # include "../libft/libft.h"
 
@@ -54,6 +55,7 @@ typedef struct s_game
 /* init.c */
 void	init_game(t_game *game);
 void	ft_free(char **strs);
+void	free_game(t_game *game);
 
 /* check_arg.c */
 void	check_arg(int argc, char **argv);

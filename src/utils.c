@@ -6,7 +6,7 @@
 /*   By: kyhan <kyhan@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/20 02:27:26 by kyhan             #+#    #+#             */
-/*   Updated: 2022/09/21 20:07:54 by kyhan            ###   ########.fr       */
+/*   Updated: 2022/09/21 22:21:07 by kyhan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,4 +29,18 @@ void	ft_free(char **strs)
 		i++;
 	}
 	free(strs);
+}
+
+void	free_game(t_game *game)
+{
+	if (game->map.map)
+		ft_free(game->map.map);
+	if (game->texture.east)
+		free(game->texture.east);
+	if (game->texture.west)
+		free(game->texture.west);
+	if (game->texture.north)
+		free(game->texture.north);
+	if (game->texture.south)
+		free(game->texture.south);
 }

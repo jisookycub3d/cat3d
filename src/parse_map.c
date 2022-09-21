@@ -6,7 +6,7 @@
 /*   By: kyhan <kyhan@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/20 02:20:07 by kyhan             #+#    #+#             */
-/*   Updated: 2022/09/21 21:42:37 by kyhan            ###   ########.fr       */
+/*   Updated: 2022/09/21 22:55:02 by kyhan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,123 @@
 // 	//대각선 임의채우기
 // 	//판별법 : 동서남북으로만
 // }
+
+void	open_texture(t_game *game, char *path, char *gnl)
+{
+	int	fd;
+
+	fd = open(path, O_RDONLY);
+	if (fd == -1)
+	{
+		free_game(game);
+		if (gnl)
+			free(gnl);
+		printf("%s\n", strerror(errno));
+		exit(0);
+	}
+	close(fd);	
+}
+
+int	init_north(t_game *game, char *line, int *completed, char *gnl)
+{
+	int	i;
+
+	if (*completed == 1)
+		return (0);
+	if (ft_strncmp(line, "NO ", 3))
+		return (0);
+	i = 2;
+	while (line[i] == ' ')
+		i++;
+	if (ft_strncmp(&line[i], "./", 2))
+		return (1);
+	game->texture.north = ft_strdup(&line[i]);
+	open_texture(game, game->texture.north, gnl);
+	*completed = 1;
+	return (0);
+}
+
+int	init_south(t_game *game, char *line, int *completed, char *gnl)
+{
+	int	i;
+
+	if (*completed == 1)
+		return (0);
+	if (ft_strncmp(line, "SO ", 3))
+		return (0);
+	i = 2;
+	while (line[i] == ' ')
+		i++;
+	if (ft_strncmp(&line[i], "./", 2))
+		return (1);
+	game->texture.south = ft_strdup(&line[i]);
+	open_texture(game, game->texture.south, gnl);
+	*completed = 1;
+	return (0);
+}
+
+int	init_east(t_game *game, char *line, int *completed, char *gnl)
+{
+	int	i;
+
+	if (*completed == 1)
+		return (0);
+	if (ft_strncmp(line, "EA ", 3))
+		return (0);
+	i = 2;
+	while (line[i] == ' ')
+		i++;
+	if (ft_strncmp(&line[i], "./", 2))
+		return (1);
+	game->texture.east = ft_strdup(&line[i]);
+	open_texture(game, game->texture.east, gnl);
+	*completed = 1;
+	return (0);
+}
+
+int	init_west(t_game *game, char *line, int *completed, char *gnl)
+{
+	int	i;
+
+	if (*completed == 1)
+		return (0);
+	if (ft_strncmp(line, "WE ", 3))
+		return (0);
+	i = 2;
+	while (line[i] == ' ')
+		i++;
+	if (ft_strncmp(&line[i], "./", 2))
+		return (1);
+	game->texture.west = ft_strdup(&line[i]);
+	open_texture(game, game->texture.west, gnl);
+	*completed = 1;
+	return (0);
+}
+
+int	init_texture(t_game *game, char *gnl, int *checked, int *map_flag)
+{
+	int	i;
+	int	completed;
+
+	i = 0;
+	completed = 0;
+	while (gnl[i] == ' ')
+		i++;
+	if (init_north(game, &gnl[i], &completed, gnl))
+		return (1);
+	if (init_south(game, &gnl[i], &completed, gnl))
+		return (1);
+	if (init_east(game, &gnl[i], &completed, gnl))
+		return (1);
+	if (init_west(game, &gnl[i], &completed, gnl))
+		return (1);
+	if (!completed)
+		return (0);
+	*checked = 1;
+	if (game->map.map)
+		*map_flag = 1;
+	return (0);
+}
 
 void	make_map(t_game *game, char *line)
 {
@@ -94,8 +211,10 @@ int	init_content(t_game *game, char *gnl)
 	checked = 0;
 	while (gnl[i] == ' ')
 		i++;
-	// if (init_texture(game, gnl, &checked, &map_flag))
-	// 	return (1);
+	if (gnl[i] == '\0')
+		return (0);
+	if (init_texture(game, gnl, &checked, &map_flag))
+		return (1);
 	if (init_map(game, gnl, &checked, &map_flag))
 		return (1);
 	// if (init_rgb(game, gnl, &checked, &map_flag))
@@ -105,13 +224,31 @@ int	init_content(t_game *game, char *gnl)
 	return (0);
 }
 
+int	 check_texture(t_game *game)
+{
+	if (game->texture.east && game->texture.west && game->texture.north && game->texture.south)
+		return (0);
+	return (1);
+}
+
+int	check_valid(t_game *game)
+{
+	if (check_texture(game))
+		return (1);
+	// if (check_map(game))
+	// 	return (1);
+	// if (check_rgb(game))
+	// 	return (1);
+	return (0);
+}
+
 void	get_lines(t_game *game, char *gnl, int fd)
 {
 	int	i;
 
-	i = 0;
 	while (gnl)
 	{
+		i = 0;
 		while (gnl[i] && gnl[i] != '\n')
 			i++;
 		ft_strlcpy(&gnl[i], &gnl[i + 1], ft_strlen(&gnl[i]));
@@ -125,6 +262,12 @@ void	get_lines(t_game *game, char *gnl, int fd)
 		gnl = get_next_line(fd);
 	}
 	close(fd);
+	if (check_valid(game))
+	{
+		//check_map
+		ft_free(game->map.map);
+		exit_with_message("Error");
+	}
 	// if (check_map(game->map.map))
 	// {
 	// 	ft_free(game->map.map);
