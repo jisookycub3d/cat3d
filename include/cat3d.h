@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cat3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kyhan <kyhan@student.42seoul.kr>           +#+  +:+       +#+        */
+/*   By: kyhan <kyhan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/19 14:00:14 by jisookim          #+#    #+#             */
-/*   Updated: 2022/09/22 15:43:53 by kyhan            ###   ########.fr       */
+/*   Updated: 2022/09/23 03:20:10 by kyhan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,5 +64,23 @@ void	exit_with_message(char *msg);
 
 /* parse_map.c */
 int	parse_map(t_game *game, char *map);
+
+/* init_texture.c */
+int	init_texture(t_game *game, char *gnl, int *checked, int *map_flag);
+
+/* open_texture.c */
+void	open_texture(t_game *game, char *path, char *gnl);
+
+/* init_rgb.c */
+int	init_rgb(t_game *game, char *gnl, int *checked, int *map_flag);
+
+/* rgb_atoi.c */
+int	rgb_atoi(t_game *game, char **rgb, char flag);
+
+/* check_valid.c */
+int	check_valid(t_game *game);
+
+/* init_map.c */
+int	init_map(t_game *game, char *gnl, int *checked, int *map_flag);
 
 #endif

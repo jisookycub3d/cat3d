@@ -7,8 +7,14 @@ RM = rm -f
 SRCS =	src/cat3d.c \
 		src/init.c \
 		src/check_arg.c \
-		src/parse_map.c \
-		src/utils.c
+		src/utils.c \
+		src/parsing/parse_map.c \
+		src/parsing/check_valid.c \
+		src/parsing/init_map.c \
+		src/parsing/init_rgb.c \
+		src/parsing/init_texture.c \
+		src/parsing/open_texture.c \
+		src/parsing/rgb_atoi.c
 
 SRCS_BONUS = bonus/cat3d_bonus.c
 
