@@ -6,7 +6,7 @@
 /*   By: kyhan <kyhan@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/20 02:20:07 by kyhan             #+#    #+#             */
-/*   Updated: 2022/09/21 22:55:02 by kyhan            ###   ########.fr       */
+/*   Updated: 2022/09/22 12:25:53 by kyhan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -212,7 +212,11 @@ int	init_content(t_game *game, char *gnl)
 	while (gnl[i] == ' ')
 		i++;
 	if (gnl[i] == '\0')
+	{
+		if (game->map.map)
+			map_flag = 1;
 		return (0);
+	}
 	if (init_texture(game, gnl, &checked, &map_flag))
 		return (1);
 	if (init_map(game, gnl, &checked, &map_flag))
