@@ -6,7 +6,7 @@
 /*   By: kyhan <kyhan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/20 02:20:07 by kyhan             #+#    #+#             */
-/*   Updated: 2022/09/23 03:21:49 by kyhan            ###   ########.fr       */
+/*   Updated: 2022/09/23 05:11:38 by kyhan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,10 +26,6 @@
 
 int	init_content(t_game *game, char *gnl)
 {
-	//빈 줄 건너뛰기
-	//동서남북 파일 저장 및 중복 및 열리는지 체크
-	//rgb체크
-	//맵 체크
 	// 맵 3줄이상이어야함
 	// 모든 요소 맵, 동서남북, 천장 바닥 이런거 또 나오면 안됨 (중복처리)
 	// 공백 워드스플릿해야함 (맵빼고)
@@ -83,15 +79,9 @@ void	get_lines(t_game *game, char *gnl, int fd)
 	close(fd);
 	if (check_valid(game))
 	{
-		//check_map
 		free_game(game);
 		exit_with_message("Error");
 	}
-	// if (check_map(game->map.map))
-	// {
-	// 	ft_free(game->map.map);
-	// 	exit_with_message("Error");
-	// }
 }
 
 int	parse_map(t_game *game, char *mapfile)
@@ -105,8 +95,8 @@ int	parse_map(t_game *game, char *mapfile)
 	int i = 0;
 	while (game->map.map[i])
 	{
-		printf("%d", i);
-		printf("%s\n", game->map.map[i]);
+		printf("%d|", i);
+		printf("%s$\n", game->map.map[i]);
 		i++;
 	}
 	return (0);

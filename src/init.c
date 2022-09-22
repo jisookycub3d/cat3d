@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kyhan <kyhan@student.42seoul.kr>           +#+  +:+       +#+        */
+/*   By: kyhan <kyhan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/20 02:28:13 by kyhan             #+#    #+#             */
-/*   Updated: 2022/09/22 15:59:32 by kyhan            ###   ########.fr       */
+/*   Updated: 2022/09/23 05:50:29 by kyhan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,4 +22,5 @@ void	init_game(t_game *game)
 	game->texture.west = 0;
 	game->rgb.ceiling = 0;
 	game->rgb.floor = 0;
+	game->player.direction = 0;
 }

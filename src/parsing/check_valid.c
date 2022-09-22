@@ -6,7 +6,7 @@
 /*   By: kyhan <kyhan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/23 03:14:28 by kyhan             #+#    #+#             */
-/*   Updated: 2022/09/23 03:21:27 by kyhan            ###   ########.fr       */
+/*   Updated: 2022/09/23 05:56:56 by kyhan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,8 @@
 
 int	 check_texture(t_game *game)
 {
-	if (game->texture.east && game->texture.west && game->texture.north && game->texture.south)
+	if (game->texture.east && game->texture.west 
+		&& game->texture.north && game->texture.south)
 		return (0);
 	return (1);
 }
@@ -30,8 +31,8 @@ int	check_valid(t_game *game)
 {
 	if (check_texture(game))
 		return (1);
-	// if (check_map(game))
-	// 	return (1);
+	if (check_map(game))
+		return (1);
 	if (check_rgb(game))
 		return (1);
 	return (0);

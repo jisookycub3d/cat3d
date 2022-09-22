@@ -6,7 +6,7 @@
 /*   By: kyhan <kyhan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/19 14:00:14 by jisookim          #+#    #+#             */
-/*   Updated: 2022/09/23 03:20:10 by kyhan            ###   ########.fr       */
+/*   Updated: 2022/09/23 05:48:17 by kyhan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,6 @@ typedef struct s_texture
 typedef struct s_map
 {
 	char	**map;
-	char	direction;
 }				t_map;
 
 typedef struct s_rgb
@@ -40,6 +39,11 @@ typedef struct s_rgb
 	int			*floor;
 	int			*ceiling;
 }				t_rgb;
+
+typedef struct s_player
+{
+	char		direction;
+}				t_player;
 
 
 typedef struct s_game
@@ -49,18 +53,20 @@ typedef struct s_game
 	t_texture	texture;
 	t_map		map;
 	t_rgb		rgb;
+	t_player	player;
 }				t_game;
 
 /* init.c */
 void	init_game(t_game *game);
-void	ft_free(char **strs);
-void	free_game(t_game *game);
 
 /* check_arg.c */
 void	check_arg(int argc, char **argv);
 
 /* utils.c */
 void	exit_with_message(char *msg);
+void	ft_free(char **strs);
+int		ft_strslen(char **strs);
+void	free_game(t_game *game);
 
 /* parse_map.c */
 int	parse_map(t_game *game, char *map);
@@ -82,5 +88,12 @@ int	check_valid(t_game *game);
 
 /* init_map.c */
 int	init_map(t_game *game, char *gnl, int *checked, int *map_flag);
+
+/* check_map.c */
+int	check_map(t_game *game);
+
+/* trim_map.c */
+void	trim_map_front(t_game *game);
+void	trim_map_back(t_game *game);
 
 #endif

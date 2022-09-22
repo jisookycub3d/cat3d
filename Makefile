@@ -1,6 +1,6 @@
 CC = cc
 CFLAGS = -Wall -Werror -Wextra
-DFLAGS = -g3 -fsanitize=address
+DFLAGS = -g2 -fsanitize=address
 
 RM = rm -f
 
@@ -14,7 +14,9 @@ SRCS =	src/cat3d.c \
 		src/parsing/init_rgb.c \
 		src/parsing/init_texture.c \
 		src/parsing/open_texture.c \
-		src/parsing/rgb_atoi.c
+		src/parsing/rgb_atoi.c \
+		src/parsing/check_map.c \
+		src/parsing/trim_map.c
 
 SRCS_BONUS = bonus/cat3d_bonus.c
 
