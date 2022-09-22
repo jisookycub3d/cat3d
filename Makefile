@@ -1,6 +1,6 @@
 CC = cc
 CFLAGS = -Wall -Werror -Wextra
-DFLAGS = -g2 -fsanitize=address
+DFLAGS = -g3 -fsanitize=address
 
 RM = rm -f
 

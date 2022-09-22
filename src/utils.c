@@ -6,7 +6,7 @@
 /*   By: kyhan <kyhan@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/20 02:27:26 by kyhan             #+#    #+#             */
-/*   Updated: 2022/09/22 12:31:10 by kyhan            ###   ########.fr       */
+/*   Updated: 2022/09/22 15:41:44 by kyhan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,4 +43,8 @@ void	free_game(t_game *game)
 		free(game->texture.north);
 	if (game->texture.south)
 		free(game->texture.south);
+	if (game->rgb.ceiling)
+		free(game->rgb.ceiling);
+	if (game->rgb.floor)
+		free(game->rgb.floor);
 }

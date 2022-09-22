@@ -6,7 +6,7 @@
 /*   By: kyhan <kyhan@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/19 14:00:14 by jisookim          #+#    #+#             */
-/*   Updated: 2022/09/21 22:22:14 by kyhan            ###   ########.fr       */
+/*   Updated: 2022/09/22 15:43:53 by kyhan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,9 +48,8 @@ typedef struct s_game
 	void		*win;
 	t_texture	texture;
 	t_map		map;
+	t_rgb		rgb;
 }				t_game;
-
-
 
 /* init.c */
 void	init_game(t_game *game);
