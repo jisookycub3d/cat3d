@@ -3,16 +3,46 @@
 /*                                                        :::      ::::::::   */
 /*   check_map.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kyhan <kyhan@student.42.fr>                +#+  +:+       +#+        */
+/*   By: kyhan <kyhan@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/23 05:22:12 by kyhan             #+#    #+#             */
-/*   Updated: 2022/09/23 05:56:12 by kyhan            ###   ########.fr       */
+/*   Updated: 2022/09/23 09:39:35 by kyhan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/cat3d.h"
+//col_len / row_len 저장해놓고 쓰기 (시간복잡도 낮추기)
+int	check_full_col(t_game *game)
+{
+	int	i;
+	int	j;
+	int	row_len;
+	int	col_len;
 
-int	check_full(t_game *game)
+	i = 0;
+	row_len = ft_strlen(game->map.map[0]);
+	col_len = ft_strslen(game->map.map);
+	while (i < row_len)
+	{
+		j = 0;
+		while (game->map.map[j][i] == ' ')
+			j++;
+		while (j < col_len && game->map.map[j][i] != ' ')
+		{
+			if (!ft_strchr("NSEW10D", game->map.map[j][i]))
+				return (1);
+			j++;
+		}
+		while (j < col_len && game->map.map[j][i] == ' ')
+			j++;
+		if (j != col_len)
+			return (1);
+		i++;
+	}
+	return (0);
+}
+
+int	check_full_row(t_game *game)
 {
 	int	i;
 	int	j;
@@ -67,7 +97,9 @@ int	check_right_composition(t_game *game)
 
 int	check_composition(t_game *game)
 {
-	if (check_full(game))
+	if (check_full_row(game))
+		return (1);
+	if (check_full_col(game))
 		return (1);
 	if (check_right_composition(game))
 		return (1);
@@ -126,7 +158,6 @@ int	check_col(t_game *game)
 
 int	check_map(t_game *game)
 {
-	char	**map;
 	int		i;
 
 	if (!game->map.map)
@@ -135,7 +166,6 @@ int	check_map(t_game *game)
 	if (i < 3)
 		return (1);
 	i = 0;
-	map = game->map.map;
 	trim_map_front(game);
 	trim_map_back(game);
 	if (check_row(game))
