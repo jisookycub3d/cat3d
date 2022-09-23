@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_texture.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kyhan <kyhan@student.42.fr>                +#+  +:+       +#+        */
+/*   By: kyhan <kyhan@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/23 03:07:35 by kyhan             #+#    #+#             */
-/*   Updated: 2022/09/23 03:21:41 by kyhan            ###   ########.fr       */
+/*   Updated: 2022/09/23 10:51:25 by kyhan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,12 +18,12 @@ int	init_north(t_game *game, char *line, int *completed, char *gnl)
 
 	if (*completed == 1)
 		return (0);
-	if (ft_strncmp(line, "NO ", 3))
+	if (ft_strncmp(line, "NO", 2) || !is_space(line[2]))
 		return (0);
 	if (game->texture.north)
 		return (1);
 	i = 2;
-	while (line[i] == ' ')
+	while (is_space(line[i]))
 		i++;
 	if (ft_strncmp(&line[i], "./", 2))
 		return (1);
@@ -39,12 +39,12 @@ int	init_south(t_game *game, char *line, int *completed, char *gnl)
 
 	if (*completed == 1)
 		return (0);
-	if (ft_strncmp(line, "SO ", 3))
+	if (ft_strncmp(line, "SO", 2) || !is_space(line[2]))
 		return (0);
 	if (game->texture.south)
 		return (1);
 	i = 2;
-	while (line[i] == ' ')
+	while (is_space(line[i]))
 		i++;
 	if (ft_strncmp(&line[i], "./", 2))
 		return (1);
@@ -60,12 +60,12 @@ int	init_east(t_game *game, char *line, int *completed, char *gnl)
 
 	if (*completed == 1)
 		return (0);
-	if (ft_strncmp(line, "EA ", 3))
+	if (ft_strncmp(line, "EA", 2) || !is_space(line[2]))
 		return (0);
 	if (game->texture.east)
 		return (1);
 	i = 2;
-	while (line[i] == ' ')
+	while (is_space(line[i]))
 		i++;
 	if (ft_strncmp(&line[i], "./", 2))
 		return (1);
@@ -81,12 +81,12 @@ int	init_west(t_game *game, char *line, int *completed, char *gnl)
 
 	if (*completed == 1)
 		return (0);
-	if (ft_strncmp(line, "WE ", 3))
+	if (ft_strncmp(line, "WE", 2) || !is_space(line[2]))
 		return (0);
 	if (game->texture.west)
 		return (1);
 	i = 2;
-	while (line[i] == ' ')
+	while (is_space(line[i]))
 		i++;
 	if (ft_strncmp(&line[i], "./", 2))
 		return (1);
@@ -103,7 +103,7 @@ int	init_texture(t_game *game, char *gnl, int *checked, int *map_flag)
 
 	i = 0;
 	completed = 0;
-	while (gnl[i] == ' ')
+	while (is_space(gnl[i]))
 		i++;
 	if (init_north(game, &gnl[i], &completed, gnl))
 		return (1);

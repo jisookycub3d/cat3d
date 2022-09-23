@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cat3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kyhan <kyhan@student.42.fr>                +#+  +:+       +#+        */
+/*   By: kyhan <kyhan@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/19 14:00:14 by jisookim          #+#    #+#             */
-/*   Updated: 2022/09/23 05:48:17 by kyhan            ###   ########.fr       */
+/*   Updated: 2022/09/23 10:24:10 by kyhan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,7 @@ void	exit_with_message(char *msg);
 void	ft_free(char **strs);
 int		ft_strslen(char **strs);
 void	free_game(t_game *game);
+int		is_space(char c);
 
 /* parse_map.c */
 int	parse_map(t_game *game, char *map);

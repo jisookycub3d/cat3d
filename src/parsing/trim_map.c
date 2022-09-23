@@ -3,14 +3,31 @@
 /*                                                        :::      ::::::::   */
 /*   trim_map.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kyhan <kyhan@student.42.fr>                +#+  +:+       +#+        */
+/*   By: kyhan <kyhan@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/23 05:25:09 by kyhan             #+#    #+#             */
-/*   Updated: 2022/09/23 05:25:27 by kyhan            ###   ########.fr       */
+/*   Updated: 2022/09/23 11:05:12 by kyhan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/cat3d.h"
+
+int	ft_strlen_without_space(char *str)
+{
+	int	i;
+
+	i = 0;
+	while (str[i])
+		i++;
+	i--;
+	while (str[i] == ' ')
+	{
+		ft_strlcpy(&str[i], &str[i + 1], ft_strlen(&str[i]));
+		i--;
+	}
+	i++;
+	return (i);
+}
 
 void	add_space(t_game *game, int cnt)
 {
@@ -43,7 +60,7 @@ void	trim_map_back(t_game *game)
 	cnt = 0;
 	while (game->map.map[i])
 	{
-		j = ft_strlen(game->map.map[i]);
+		j = ft_strlen_without_space(game->map.map[i]);
 		if (cnt < j)
 			cnt = j;
 		i++;

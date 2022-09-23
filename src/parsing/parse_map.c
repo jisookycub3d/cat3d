@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_map.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kyhan <kyhan@student.42.fr>                +#+  +:+       +#+        */
+/*   By: kyhan <kyhan@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/20 02:20:07 by kyhan             #+#    #+#             */
-/*   Updated: 2022/09/23 05:11:38 by kyhan            ###   ########.fr       */
+/*   Updated: 2022/09/23 10:27:29 by kyhan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ int	init_content(t_game *game, char *gnl)
 
 	i = 0;
 	checked = 0;
-	while (gnl[i] == ' ')
+	while (is_space(gnl[i]))
 		i++;
 	if (gnl[i] == '\0')
 	{

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kyhan <kyhan@student.42.fr>                +#+  +:+       +#+        */
+/*   By: kyhan <kyhan@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/20 02:27:26 by kyhan             #+#    #+#             */
-/*   Updated: 2022/09/23 05:03:06 by kyhan            ###   ########.fr       */
+/*   Updated: 2022/09/23 10:59:36 by kyhan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,4 +57,11 @@ int	ft_strslen(char **strs)
 	while (strs[i])
 		i++;
 	return (i);
+}
+
+int	is_space(char c)
+{
+	if ((c >= 9 && c <= 13) || c == 32)
+		return (1);
+	return(0);
 }

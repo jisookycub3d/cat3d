@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_rgb.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kyhan <kyhan@student.42.fr>                +#+  +:+       +#+        */
+/*   By: kyhan <kyhan@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/23 03:10:20 by kyhan             #+#    #+#             */
-/*   Updated: 2022/09/23 03:21:37 by kyhan            ###   ########.fr       */
+/*   Updated: 2022/09/23 10:39:42 by kyhan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ int	get_rgb(t_game *game, char *line)
 	else
 		flag = 'F';
 	line++;
-	while (*line == ' ')
+	while (is_space(*line))
 		line++;
 	rgb = ft_split(line, ',');
 	while (rgb[i])
@@ -44,7 +44,7 @@ int	init_ceiling(t_game *game, char *line, int *complited)
 {
 	if (*complited == 1)
 		return (0);
-	if (ft_strncmp(line, "C ", 2))
+	if (ft_strncmp(line, "C", 1) && !is_space(line[1]))
 		return (0);
 	if (game->rgb.ceiling)
 		return (1);
@@ -61,7 +61,7 @@ int	init_floor(t_game *game, char *line, int *complited)
 {
 	if (*complited == 1)
 		return (0);
-	if (ft_strncmp(line, "F ", 2))
+	if (ft_strncmp(line, "F", 1) && !is_space(line[1]))
 		return (0);
 	if (game->rgb.floor)
 		return (1);
@@ -81,7 +81,7 @@ int	init_rgb(t_game *game, char *gnl, int *checked, int *map_flag)
 
 	i = 0;
 	completed = 0;
-	while (gnl[i] == ' ')
+	while (is_space(gnl[i]))
 		i++;
 	if (init_ceiling(game, &gnl[i], &completed))
 		return (1);
