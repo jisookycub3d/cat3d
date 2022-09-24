@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jisookim <jisookim@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: kyhan <kyhan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/24 08:59:08 by jisookim          #+#    #+#             */
-/*   Updated: 2022/09/24 09:36:45 by jisookim         ###   ########.fr       */
+/*   Updated: 2022/09/24 13:58:11 by kyhan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,11 +15,11 @@
 
 enum e_words
 {
-	WALL = 1 << 1,
-	EMPTY = 1 << 2,
-	DIRECTION = 1 << 3,
-	DOOR = 1 << 4,
-	SPACE = 1 << 5
+	WALL = 1 << 0,
+	EMPTY = 1 << 1,
+	DIRECTION = 1 << 2,
+	DOOR = 1 << 3,
+	SPACE = 1 << 4
 };
 
 #endif

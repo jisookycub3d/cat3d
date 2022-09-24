@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_map.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jisookim <jisookim@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: kyhan <kyhan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/20 02:20:07 by kyhan             #+#    #+#             */
-/*   Updated: 2022/09/24 09:22:30 by jisookim         ###   ########.fr       */
+/*   Updated: 2022/09/24 14:18:20 by kyhan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,12 +80,5 @@ int	parse_map(t_game *game, char *mapfile)
 	fd = open(mapfile, O_RDONLY);
 	gnl = get_next_line(fd);
 	get_lines(game, gnl, fd);
-	int i = 0;
-	while (game->map.map[i])
-	{
-		printf("%d|", i);
-		printf("%s$\n", game->map.map[i]);
-		i++;
-	}
 	return (0);
 }
