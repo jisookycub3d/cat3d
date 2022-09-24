@@ -16,7 +16,8 @@ SRCS =	src/cat3d.c \
 		src/parsing/open_texture.c \
 		src/parsing/rgb_atoi.c \
 		src/parsing/check_map.c \
-		src/parsing/trim_map.c
+		src/parsing/trim_map.c \
+		src/start_game.c
 
 SRCS_BONUS = bonus/cat3d_bonus.c
 

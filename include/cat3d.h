@@ -6,7 +6,7 @@
 /*   By: kyhan <kyhan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/19 14:00:14 by jisookim          #+#    #+#             */
-/*   Updated: 2022/09/24 14:27:16 by kyhan            ###   ########.fr       */
+/*   Updated: 2022/09/24 20:04:18 by kyhan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,6 @@ typedef struct s_player
 {
 	char		direction;
 }				t_player;
-
 
 typedef struct s_game
 {
@@ -96,5 +95,8 @@ int	check_map(t_game *game);
 /* trim_map.c */
 void	trim_map_front(t_game *game);
 void	trim_map_back(t_game *game);
+
+/* start_game.c */
+void	start_game(t_game *game);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: kyhan <kyhan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/23 05:22:12 by kyhan             #+#    #+#             */
-/*   Updated: 2022/09/24 15:35:24 by kyhan            ###   ########.fr       */
+/*   Updated: 2022/09/24 20:34:18 by kyhan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -138,14 +138,6 @@ int	check_map(t_game *game)
 	i = 0;
 	trim_map_front(game);
 	trim_map_back(game); 
-
-	int a = 0;
-	while (game->map.map[a])
-	{
-		printf("%d|", a);
-		printf("%s$\n", game->map.map[a]);
-		a++;
-	}
 	if (check_composition(game))
 		return (1);
 	return (0);
