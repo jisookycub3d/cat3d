@@ -1,19 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   init.c                                             :+:      :+:    :+:   */
+/*   parse.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jisookim <jisookim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/09/20 02:28:13 by kyhan             #+#    #+#             */
-/*   Updated: 2022/09/24 09:08:11 by jisookim         ###   ########.fr       */
+/*   Created: 2022/09/24 08:59:08 by jisookim          #+#    #+#             */
+/*   Updated: 2022/09/24 09:01:54 by jisookim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/cat3d.h"
+#ifndef PARSE_H
+# define PARSE_H
 
-void	init_game(t_game *game)
+enum e_words
 {
-	ft_memset(game, 0, sizeof(t_game));
-	game->mlx = mlx_init();
-}
+	WALL = 1 << 0,
+	EMPTY = 1 << 1,
+	DIRECTION = 1 << 3,
+	DOOR = 1 << 4	
+};
+
+#endif
