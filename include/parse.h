@@ -6,7 +6,7 @@
 /*   By: jisookim <jisookim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/24 08:59:08 by jisookim          #+#    #+#             */
-/*   Updated: 2022/09/24 09:01:54 by jisookim         ###   ########.fr       */
+/*   Updated: 2022/09/24 09:36:45 by jisookim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,11 @@
 
 enum e_words
 {
-	WALL = 1 << 0,
-	EMPTY = 1 << 1,
+	WALL = 1 << 1,
+	EMPTY = 1 << 2,
 	DIRECTION = 1 << 3,
-	DOOR = 1 << 4	
+	DOOR = 1 << 4,
+	SPACE = 1 << 5
 };
 
 #endif

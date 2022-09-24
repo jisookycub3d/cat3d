@@ -6,7 +6,7 @@
 /*   By: jisookim <jisookim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/23 05:22:12 by kyhan             #+#    #+#             */
-/*   Updated: 2022/09/24 09:06:18 by jisookim         ###   ########.fr       */
+/*   Updated: 2022/09/24 09:31:50 by jisookim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,13 +71,62 @@
 // 	return (0);
 // }
 
+// int	check_row(t_game *game)
+// {
+// 	int	i;
+// 	int	j;
+// 	int	front;
+// 	int	back;
+
+// 	i = 0;
+// 	j = ft_strlen(game->map.map[i]) - 1;
+// 	while (game->map.map[i])
+// 	{
+// 		front = 0;
+// 		back = j;
+// 		while (game->map.map[i][front] == ' ')
+// 			front++;
+// 		while (game->map.map[i][back] == ' ')
+// 			back--;
+// 		if (!(game->map.map[i][front] == '1' && game->map.map[i][back] == '1'))
+// 			return (1);
+// 		i++;
+// 	}
+// 	return (0);
+// }
+
+// int	check_col(t_game *game)
+// {
+// 	int	i;
+// 	int	j;
+// 	int	col_idx;
+// 	int	row_len;
+// 	int	col_len;
+
+// 	i = 0;
+// 	j = ft_strslen(game->map.map) - 1;
+// 	row_len = ft_strlen(game->map.map[i]);
+// 	while (i < row_len)
+// 	{
+// 		col_idx = 0;
+// 		col_len = j;
+// 		while (game->map.map[col_idx][i] == ' ')
+// 			col_idx++;
+// 		while (game->map.map[col_len][i] == ' ')
+// 			col_len--;
+// 		if (!(game->map.map[col_idx][i] == '1' && game->map.map[col_len][i] == '1'))
+// 			return (1);
+// 		i++;
+// 	}
+// 	return (0);
+// }
 
 int	check_full(t_game *game)
 {
 	return (0);
 }
 
-int	check_right_composition(t_game *game)
+int	check_right_direct(t_game *game)
 {
 	int	i;
 	int	j;
@@ -106,62 +155,10 @@ int	check_right_composition(t_game *game)
 
 int	check_composition(t_game *game)
 {
-	if (check_full_row(game))
+	if (check_right_direct(game))
 		return (1);
-	if (check_full_col(game))
+	if (check_full(game));
 		return (1);
-	if (check_right_composition(game))
-		return (1);
-	return (0);
-}
-
-int	check_row(t_game *game)
-{
-	int	i;
-	int	j;
-	int	front;
-	int	back;
-
-	i = 0;
-	j = ft_strlen(game->map.map[i]) - 1;
-	while (game->map.map[i])
-	{
-		front = 0;
-		back = j;
-		while (game->map.map[i][front] == ' ')
-			front++;
-		while (game->map.map[i][back] == ' ')
-			back--;
-		if (!(game->map.map[i][front] == '1' && game->map.map[i][back] == '1'))
-			return (1);
-		i++;
-	}
-	return (0);
-}
-
-int	check_col(t_game *game)
-{
-	int	i;
-	int	j;
-	int	col_idx;
-	int	row_len;
-	int	col_len;
-
-	i = 0;
-	j = ft_strslen(game->map.map) - 1;
-	row_len = ft_strlen(game->map.map[i]);
-	while (i < row_len)
-	{
-		col_idx = 0;
-		col_len = j;
-		while (game->map.map[col_idx][i] == ' ')
-			col_idx++;
-		while (game->map.map[col_len][i] == ' ')
-			col_len--;
-		if (!(game->map.map[col_idx][i] == '1' && game->map.map[col_len][i] == '1'))
-			return (1);
-		i++;
-	}
 	return (0);
 }
 
@@ -177,10 +174,6 @@ int	check_map(t_game *game)
 	i = 0;
 	trim_map_front(game);
 	trim_map_back(game);
-	if (check_row(game))
-		return (1);
-	if (check_col(game))
-		return (1);
 	if (check_composition(game))
 		return (1);
 	return (0);
