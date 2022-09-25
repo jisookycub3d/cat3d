@@ -6,7 +6,7 @@
 /*   By: kyhan <kyhan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/23 05:22:12 by kyhan             #+#    #+#             */
-/*   Updated: 2022/09/24 20:34:18 by kyhan            ###   ########.fr       */
+/*   Updated: 2022/09/25 22:43:43 by kyhan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,19 @@ int	check_full(t_game *game)
 	return (0);
 }
 
+int	get_direct_pos(t_game *game, char c, int i, int j)
+{
+	if (!game->player.direction)
+	{
+		game->player.direction = c;
+		game->player.pos_x = i;
+		game->player.pos_y = j;
+	}
+	else
+		return (1);
+	return (0);
+}
+
 int	check_right_direct(t_game *game)
 {
 	int	i;
@@ -65,9 +78,7 @@ int	check_right_direct(t_game *game)
 		{
 			if (ft_strchr("NSEW", game->map.map[i][j]))
 			{
-				if (!game->player.direction)
-					game->player.direction = game->map.map[i][j];
-				else
+				if (get_direct_pos(game, game->map.map[i][j], i, j))
 					return (1);
 			}
 			j++;
