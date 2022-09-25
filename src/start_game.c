@@ -6,7 +6,7 @@
 /*   By: kyhan <kyhan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/24 19:34:42 by kyhan             #+#    #+#             */
-/*   Updated: 2022/09/25 23:00:56 by kyhan            ###   ########.fr       */
+/*   Updated: 2022/09/25 23:14:21 by kyhan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,9 +45,9 @@ void	*make_image(t_game *game, char *file)
 void	init_image(t_game *game, t_image *image)
 {
 	image->wall_n = make_image(game, game->texture.north);
-// 	image->wall_s = make_image(game, game->texture.south);
-// 	image->wall_w = make_image(game, game->texture.west);
-// 	image->wall_e = make_image(game, game->texture.east);
+	// image->wall_s = make_image(game, game->texture.south);
+	// image->wall_w = make_image(game, game->texture.west);
+	// image->wall_e = make_image(game, game->texture.east);
 }
 
 void	start_game(t_game *game)
