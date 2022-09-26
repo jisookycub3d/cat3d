@@ -6,13 +6,14 @@
 /*   By: kyhan <kyhan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/24 19:34:42 by kyhan             #+#    #+#             */
-/*   Updated: 2022/09/25 23:14:21 by kyhan            ###   ########.fr       */
+/*   Updated: 2022/09/26 13:57:57 by kyhan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/cat3d.h"
 #include "../include/param.h"
 #include "../include/image.h"
+#include "../include/parse.h"
 
 int	key_press(int keycode, t_param *param)
 {
@@ -50,6 +51,53 @@ void	init_image(t_game *game, t_image *image)
 	// image->wall_e = make_image(game, game->texture.east);
 }
 
+int	rgb_to_i(int *arr)
+{
+	return (arr[0] * 16 * 16 * 16 * 16 + arr[1] * 16 * 16 + arr[2]);
+}
+
+void	draw_floor(t_game *game)
+{
+	int	i;
+	int	j;
+	int	rgb;
+
+	i = 0;
+	rgb = rgb_to_i(game->rgb.floor);
+	while (i < 2560)
+	{
+		j = 0;
+		while (j < 1440)
+		{
+			mlx_pixel_put(game->mlx, game->win, i, j, rgb);
+			j++;
+		}
+		i++;
+	}
+}
+
+void	draw_wall(t_game *game, t_image *image)
+{
+	int	i;
+	int	j;
+
+	i = 0;
+	while (game->map.map[i])
+	{
+		j = 0;
+		while (game->map.map[i][j])
+		{
+			if (game->map.map[i][j] & WALL)
+			{
+				printf ("%d, %d\n", i, j);
+				mlx_put_image_to_window(game->mlx, game->win, image->wall_n, j * 64, i * 64);
+			}
+			j++;
+		}
+		i++;
+	}
+}
+
 void	start_game(t_game *game)
 {
 	t_param	param;
@@ -58,7 +106,8 @@ void	start_game(t_game *game)
 	init_param(&param);
 	game->win = mlx_new_window(game->mlx, 2560, 1440, "jisookim");
 	init_image(game, &image);
-	mlx_put_image_to_window(game->mlx, game->win, image.wall_n, 50, 50);
+	draw_floor(game);
+	draw_wall(game, &image);
 	mlx_hook(game->win, 2, 0, key_press, &param);
 	mlx_loop(game->mlx);
 }
