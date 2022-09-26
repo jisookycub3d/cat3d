@@ -6,7 +6,7 @@
 /*   By: kyhan <kyhan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/24 19:34:42 by kyhan             #+#    #+#             */
-/*   Updated: 2022/09/26 13:57:57 by kyhan            ###   ########.fr       */
+/*   Updated: 2022/09/26 14:33:43 by kyhan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,13 @@
 #include "../include/param.h"
 #include "../include/image.h"
 #include "../include/parse.h"
+
+int	move_player(t_game *game)
+{
+	mlx_pixel_put(game->mlx, game->win, game->player.pos_x, game->player.pos_y, rgb_to_i(game->rgb.floor));
+	mlx_pixel_put(game->mlx, game->win, game->player.pos_x, game->player.pos_y, 255);
+	return (0);
+}
 
 int	key_press(int keycode, t_param *param)
 {
@@ -23,13 +30,13 @@ int	key_press(int keycode, t_param *param)
 		exit(0);
 	}
 	if (keycode == KEY_A)
-		param->x--;
+		param->x -= 4;
 	if (keycode == KEY_D)
-		param->x++;
+		param->x += 4;
 	if (keycode == KEY_S)
-		param->y--;
+		param->y -= 4;
 	if (keycode == KEY_W)
-		param->y++;
+		param->y += 4;
 	return (0);
 }
 
@@ -98,6 +105,11 @@ void	draw_wall(t_game *game, t_image *image)
 	}
 }
 
+void	draw_player(t_game *game)
+{
+	mlx_pixel_put(game->mlx, game->win, game->player.pos_x, game->player.pos_y, 255);
+}
+
 void	start_game(t_game *game)
 {
 	t_param	param;
@@ -108,6 +120,8 @@ void	start_game(t_game *game)
 	init_image(game, &image);
 	draw_floor(game);
 	draw_wall(game, &image);
+	draw_player(game);
 	mlx_hook(game->win, 2, 0, key_press, &param);
+	// mlx_loop_hook(game->mlx, move_player, game);
 	mlx_loop(game->mlx);
 }
