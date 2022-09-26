@@ -40,6 +40,7 @@ $(NAME) :	$(OBJS)
 			@chmod +x ./decoration/loading.sh
 			@./decoration/loading.sh
 			@$(CC) $(CFLAGS) $(DFLAGS) $(OBJS) ./libft/libft.a -L./mlx -lmlx -framework OpenGL -framework AppKit -o $(NAME)
+			@install_name_tool -change libmlx.dylib mlx/libmlx.dylib cat3D
 
 $(BONUS) :	$(OBJS_BONUS)
 			@make -C ./mlx
