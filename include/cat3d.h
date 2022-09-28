@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cat3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jisookim <jisookim@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: kyhan <kyhan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/19 14:00:14 by jisookim          #+#    #+#             */
-/*   Updated: 2022/09/28 15:10:24 by jisookim         ###   ########.fr       */
+/*   Updated: 2022/09/28 16:45:26 by kyhan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -148,7 +148,7 @@ void	init_image(t_game *game, t_image *image);
 
 /* mlx_key_press.c */
 int	key_press(int keycode, t_game *game);
-int	press_exit_button(int keycode, t_game *game);
+int	press_exit_button(t_game *game);
 
 /* start_game.c */
 void	start_game(t_game *game);
@@ -172,7 +172,7 @@ int	ft_strlen_without_space(char *str);
 int	rgb_atoi(t_game *game, char **rgb, char flag);
 
 /* utils.c */
-void	bit_mask(char *c);
-int	rgb_to_i(int *arr);
+char	bit_mask(char c);
+int		rgb_to_i(int *arr);
 
 #endif

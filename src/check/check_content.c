@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_content.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jisookim <jisookim@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: kyhan <kyhan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/28 14:35:51 by jisookim          #+#    #+#             */
-/*   Updated: 2022/09/28 14:59:39 by jisookim         ###   ########.fr       */
+/*   Updated: 2022/09/28 16:03:55 by kyhan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ static int	check_right_composition(t_game *game)
 		while (game->map.map[i][j])
 		{
 			if ((ft_strchr("NSEW10D ", game->map.map[i][j])))
-				bit_mask(&game->map.map[i][j]);
+				game->map.map[i][j] = bit_mask(game->map.map[i][j]);
 			else
 				return (1);
 			j++;

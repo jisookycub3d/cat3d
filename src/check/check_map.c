@@ -6,7 +6,7 @@
 /*   By: kyhan <kyhan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/23 05:22:12 by kyhan             #+#    #+#             */
-/*   Updated: 2022/09/28 15:31:26 by kyhan            ###   ########.fr       */
+/*   Updated: 2022/09/28 16:07:42 by kyhan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ int	check_map(t_game *game)
 		printf("%s\n", game->map.map[i]);
 	}
 	trim_map_front(game);
-	trim_map_back(game); 
+	trim_map_back(game);
 	if (check_content(game))
 		return (1);
 	return (0);
