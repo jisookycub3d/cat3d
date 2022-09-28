@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_map.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jisookim <jisookim@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: kyhan <kyhan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/23 03:17:04 by kyhan             #+#    #+#             */
-/*   Updated: 2022/09/28 15:14:21 by jisookim         ###   ########.fr       */
+/*   Updated: 2022/09/28 15:35:36 by kyhan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,8 @@
 static int	init_check_gnl_in_map(char *gnl, int *checked, int *map_flag)
 {
 	int	i;
-	int	res;
 
 	i = 0;
-	res = 0;
 	if (*checked == 1)
 		return (0);
 	while (gnl[i] == ' ')
@@ -28,8 +26,8 @@ static int	init_check_gnl_in_map(char *gnl, int *checked, int *map_flag)
 	else
 		return (0);
 	if (*map_flag)
-		return (1);
-	return (0);
+		return (-1);
+	return (1);
 }
 
 static void	do_map_append(t_game *game, char *line)
@@ -69,10 +67,15 @@ static void	init_set_map(t_game *game, char *line)
 
 int	init_map(t_game *game, char *gnl, int *checked, int *map_flag)
 {
+	int		ret;
 	char	*line;
 	
-	if (init_check_gnl_in_map(gnl, checked, map_flag))
+	ret = 0;
+	ret = init_check_gnl_in_map(gnl, checked, map_flag);
+	if (ret == -1)
 		return (1);
+	else if (!ret)
+		return (0);
 	line = ft_strdup(gnl);
 	init_set_map(game, line);
 	return (0);
