@@ -1,25 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parse.h                                            :+:      :+:    :+:   */
+/*   image.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kyhan <kyhan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/09/24 08:59:08 by jisookim          #+#    #+#             */
-/*   Updated: 2022/09/26 14:04:07 by kyhan            ###   ########.fr       */
+/*   Created: 2022/09/25 22:46:06 by kyhan             #+#    #+#             */
+/*   Updated: 2022/09/25 22:52:12 by kyhan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PARSE_H
-# define PARSE_H
+#ifndef IMAGE_H
+# define IMAGE_H
 
-enum e_words
+typedef struct s_image
 {
-	WALL = 1 << 0,
-	EMPTY = 1 << 1,
-	DIRECTION = 1 << 2,
-	DOOR = 1 << 3,
-	SPACE = 1 << 4
-};
+	void	*wall_n;
+	void	*wall_s;
+	void	*wall_w;
+	void	*wall_e;
+	void	*door;
+}				t_image;
 
 #endif

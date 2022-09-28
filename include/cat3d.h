@@ -6,7 +6,7 @@
 /*   By: kyhan <kyhan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/19 14:00:14 by jisookim          #+#    #+#             */
-/*   Updated: 2022/09/24 20:04:18 by kyhan            ###   ########.fr       */
+/*   Updated: 2022/09/25 22:35:23 by kyhan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,8 @@ typedef struct s_rgb
 typedef struct s_player
 {
 	char		direction;
+	int			pos_x;
+	int			pos_y;
 }				t_player;
 
 typedef struct s_game
