@@ -1,6 +1,9 @@
 {
 	"C_Cpp.dimInactiveRegions": false,
 	"files.associations": {
-		"cat3d.h": "c"
+		"cat3d.h": "c",
+		"param.h": "c",
+		"image.h": "c",
+		"parse.h": "c"
 	}
 }

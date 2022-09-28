@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   init_rgb.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kyhan <kyhan@student.42seoul.kr>           +#+  +:+       +#+        */
+/*   By: jisookim <jisookim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/23 03:10:20 by kyhan             #+#    #+#             */
-/*   Updated: 2022/09/23 10:39:42 by kyhan            ###   ########.fr       */
+/*   Updated: 2022/09/28 15:01:12 by jisookim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/cat3d.h"
 
-int	get_rgb(t_game *game, char *line)
+static int	get_rgb(t_game *game, char *line)
 {
 	int		i;
 	char	**rgb;
@@ -40,7 +40,7 @@ int	get_rgb(t_game *game, char *line)
 	return (0);
 }
 
-int	init_ceiling(t_game *game, char *line, int *complited)
+static int	init_ceiling(t_game *game, char *line, int *complited)
 {
 	if (*complited == 1)
 		return (0);
@@ -57,7 +57,7 @@ int	init_ceiling(t_game *game, char *line, int *complited)
 	return (0);
 }
 
-int	init_floor(t_game *game, char *line, int *complited)
+static int	init_floor(t_game *game, char *line, int *complited)
 {
 	if (*complited == 1)
 		return (0);

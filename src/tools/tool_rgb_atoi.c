@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   rgb_atoi.c                                         :+:      :+:    :+:   */
+/*   tool_rgb_atoi.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kyhan <kyhan@student.42.fr>                +#+  +:+       +#+        */
+/*   By: jisookim <jisookim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/23 03:11:02 by kyhan             #+#    #+#             */
-/*   Updated: 2022/09/23 03:21:53 by kyhan            ###   ########.fr       */
+/*   Updated: 2022/09/28 15:09:56 by jisookim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/cat3d.h"
 
-int	*get_num(char **strs)
+static int	*get_num(char **strs)
 {
 	int	num;
 	int	*arr;
@@ -36,9 +36,9 @@ int	*get_num(char **strs)
 	return (arr);
 }
 
-int	check_unsigned_char(char *str)
+static int	check_unsigned_char(char *str)
 {
-	int	i;
+	int				i;
 	unsigned int	num;
 	
 	i = 0;

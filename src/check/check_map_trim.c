@@ -1,35 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   trim_map.c                                         :+:      :+:    :+:   */
+/*   check_map_trim.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kyhan <kyhan@student.42.fr>                +#+  +:+       +#+        */
+/*   By: jisookim <jisookim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/23 05:25:09 by kyhan             #+#    #+#             */
-/*   Updated: 2022/09/24 14:25:10 by kyhan            ###   ########.fr       */
+/*   Updated: 2022/09/28 14:59:53 by jisookim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/cat3d.h"
 
-int	ft_strlen_without_space(char *str)
-{
-	int	i;
-
-	i = 0;
-	while (str[i])
-		i++;
-	i--;
-	while (str[i] == ' ')
-	{
-		ft_strlcpy(&str[i], &str[i + 1], ft_strlen(&str[i]));
-		i--;
-	}
-	i++;
-	return (i);
-}
-
-void	add_space(t_game *game, int cnt)
+static void	add_space(t_game *game, int cnt)
 {
 	int	i;
 	int	j;
@@ -68,7 +51,7 @@ void	trim_map_back(t_game *game)
 	add_space(game, cnt);
 }
 
-void	del_space(t_game *game, int cnt)
+static void	del_space(t_game *game, int cnt)
 {
 	int	i;
 	int	j;

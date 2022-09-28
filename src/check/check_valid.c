@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   check_valid.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kyhan <kyhan@student.42.fr>                +#+  +:+       +#+        */
+/*   By: jisookim <jisookim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/23 03:14:28 by kyhan             #+#    #+#             */
-/*   Updated: 2022/09/23 05:56:56 by kyhan            ###   ########.fr       */
+/*   Updated: 2022/09/28 15:00:10 by jisookim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/cat3d.h"
 
-int	 check_texture(t_game *game)
+static int	 check_texture(t_game *game)
 {
 	if (game->texture.east && game->texture.west 
 		&& game->texture.north && game->texture.south)
@@ -20,7 +20,7 @@ int	 check_texture(t_game *game)
 	return (1);
 }
 
-int	check_rgb(t_game *game)
+static int	check_rgb(t_game *game)
 {
 	if (game->rgb.ceiling && game->rgb.floor)
 		return (0);

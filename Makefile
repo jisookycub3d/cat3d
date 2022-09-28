@@ -2,30 +2,47 @@ CC = cc
 CFLAGS = -Wall -Werror -Wextra
 DFLAGS = -g2 -fsanitize=address
 
+NAME = cat3D
+BONUS = cat3D_bonus
+
 RM = rm -f
 
-SRCS =	src/cat3d.c \
-		src/init.c \
-		src/check_arg.c \
-		src/utils.c \
-		src/parsing/parse_map.c \
-		src/parsing/check_valid.c \
-		src/parsing/init_map.c \
-		src/parsing/init_rgb.c \
-		src/parsing/init_texture.c \
-		src/parsing/open_texture.c \
-		src/parsing/rgb_atoi.c \
-		src/parsing/check_map.c \
-		src/parsing/trim_map.c \
-		src/start_game.c
+SRCS_DIR := ./src
+
+DIR_CHECK		:=	$(SRCS_DIR)/check
+DIR_INIT		:=	$(SRCS_DIR)/init
+DIR_INIT_MLX	:=	$(SRCS_DIR)/init_mlx
+DIR_MAIN		:=	$(SRCS_DIR)/main
+DIR_MAP			:=	$(SRCS_DIR)/map
+DIR_TOOLS		:=	$(SRCS_DIR)/tools
+
+SRC_CHECK		:=	check_arg.c check_content.c	check_map_trim.c check_map.c \
+					check_valid.c
+SRC_CHECK		:=	$(addprefix $(DIR_CHECK)/, $(SRC_CHECK))
+
+SRC_INIT		:=	init_game.c init_map.c init_rgb.c init_start_game.c \
+					init_texture.c
+SRC_INIT		:=	$(addprefix $(DIR_INIT)/, $(SRC_INIT))
+
+SRC_INIT_MLX	:=	init_draw_obj.c mlx_init_img.c mlx_key_press.c
+SRC_INIT_MLX	:=	$(addprefix $(DIR_INIT_MLX)/, $(SRC_INIT_MLX))
+
+SRC_MAIN		:=	cat3d.c start_game.c
+SRC_MAIN		:=	$(addprefix $(DIR_MAIN)/, $(SRC_MAIN))
+
+SRC_MAP			:=	parse_map.c texture_open.c
+SRC_MAP			:=	$(addprefix $(DIR_MAP)/, $(SRC_MAP))
+
+SRC_TOOLS		:=	error.c free_game.c jk_tools.c tool_rgb_atoi.c utils.c
+SRC_TOOLS		:=	$(addprefix $(DIR_TOOLS)/, $(SRC_TOOLS))
+
+SRCS			=	$(SRC_CHECK) $(SRC_INIT) $(SRC_INIT_MLX) $(SRC_MAIN) \
+					$(SRC_MAP) $(SRC_TOOLS)
 
 SRCS_BONUS = bonus/cat3d_bonus.c
 
 OBJS = $(SRCS:%.c=%.o)
 OBJS_BONUS = $(SRCS_BONUS:%.c=%.o)
-
-NAME = cat3D
-BONUS = cat3D_bonus
 
 all : $(NAME)
 

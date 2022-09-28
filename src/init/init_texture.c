@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   init_texture.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kyhan <kyhan@student.42seoul.kr>           +#+  +:+       +#+        */
+/*   By: jisookim <jisookim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/23 03:07:35 by kyhan             #+#    #+#             */
-/*   Updated: 2022/09/23 10:51:25 by kyhan            ###   ########.fr       */
+/*   Updated: 2022/09/28 15:02:12 by jisookim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/cat3d.h"
 
-int	init_north(t_game *game, char *line, int *completed, char *gnl)
+static int	init_north(t_game *game, char *line, int *completed, char *gnl)
 {
 	int	i;
 
@@ -33,7 +33,7 @@ int	init_north(t_game *game, char *line, int *completed, char *gnl)
 	return (0);
 }
 
-int	init_south(t_game *game, char *line, int *completed, char *gnl)
+static int	init_south(t_game *game, char *line, int *completed, char *gnl)
 {
 	int	i;
 
@@ -54,7 +54,7 @@ int	init_south(t_game *game, char *line, int *completed, char *gnl)
 	return (0);
 }
 
-int	init_east(t_game *game, char *line, int *completed, char *gnl)
+static int	init_east(t_game *game, char *line, int *completed, char *gnl)
 {
 	int	i;
 
@@ -75,7 +75,7 @@ int	init_east(t_game *game, char *line, int *completed, char *gnl)
 	return (0);
 }
 
-int	init_west(t_game *game, char *line, int *completed, char *gnl)
+static int	init_west(t_game *game, char *line, int *completed, char *gnl)
 {
 	int	i;
 

@@ -3,16 +3,36 @@
 /*                                                        :::      ::::::::   */
 /*   init_map.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kyhan <kyhan@student.42.fr>                +#+  +:+       +#+        */
+/*   By: jisookim <jisookim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/23 03:17:04 by kyhan             #+#    #+#             */
-/*   Updated: 2022/09/23 03:21:33 by kyhan            ###   ########.fr       */
+/*   Updated: 2022/09/28 15:14:21 by jisookim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/cat3d.h"
 
-void	make_map(t_game *game, char *line)
+static int	init_check_gnl_in_map(char *gnl, int *checked, int *map_flag)
+{
+	int	i;
+	int	res;
+
+	i = 0;
+	res = 0;
+	if (*checked == 1)
+		return (0);
+	while (gnl[i] == ' ')
+		i++;
+	if (gnl[i] == '1')
+		*checked = 1;
+	else
+		return (0);
+	if (*map_flag)
+		return (1);
+	return (0);
+}
+
+static void	do_map_append(t_game *game, char *line)
 {
 	int		i;
 	int		j;
@@ -35,30 +55,25 @@ void	make_map(t_game *game, char *line)
 	free(tmp);
 }
 
-int	init_map(t_game *game, char *gnl, int *checked, int *map_flag)
+static void	init_set_map(t_game *game, char *line)
 {
-	int		i;
-	char	*line;
-
-	i = 0;
-	if (*checked == 1)
-		return (0);
-	while (gnl[i] == ' ')
-		i++;
-	if (gnl[i] == '1')
-		*checked = 1;
-	else
-		return (0);
-	if (*map_flag)
-		return (1);
-	line = ft_strdup(gnl);
-	if (!game->map.map)
+	if (!game->map.map) // set map if there's no initialized map.
 	{
 		game->map.map = ft_calloc(2, sizeof(char *));
 		game->map.map[0] = line;
 		game->map.map[1] = 0;
 	}
 	else
-		make_map(game, line);
+		do_map_append(game, line);
+}
+
+int	init_map(t_game *game, char *gnl, int *checked, int *map_flag)
+{
+	char	*line;
+	
+	if (init_check_gnl_in_map(gnl, checked, map_flag))
+		return (1);
+	line = ft_strdup(gnl);
+	init_set_map(game, line);
 	return (0);
 }

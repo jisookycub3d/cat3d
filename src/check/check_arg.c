@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   check_arg.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kyhan <kyhan@student.42seoul.kr>           +#+  +:+       +#+        */
+/*   By: jisookim <jisookim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/20 02:23:45 by kyhan             #+#    #+#             */
-/*   Updated: 2022/09/20 03:06:06 by kyhan            ###   ########.fr       */
+/*   Updated: 2022/09/28 14:55:25 by jisookim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/cat3d.h"
+#include "../../include/cat3d.h"
 
-int	file_extension_err(char *file)
+static int	file_extension_err(char *file)
 {
 	int	i;
 
@@ -28,7 +28,7 @@ int	file_extension_err(char *file)
 	return (1);
 }
 
-int	invalid_file(char *file)
+static int	invalid_file(char *file)
 {
 	int		fd;
 	char	buf[2];

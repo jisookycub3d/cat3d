@@ -3,33 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kyhan <kyhan@student.42seoul.kr>           +#+  +:+       +#+        */
+/*   By: jisookim <jisookim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/20 02:27:26 by kyhan             #+#    #+#             */
-/*   Updated: 2022/09/23 10:59:36 by kyhan            ###   ########.fr       */
+/*   Updated: 2022/09/28 14:47:17 by jisookim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/cat3d.h"
-
-void	exit_with_message(char *msg)
-{
-	printf("%s\n", msg);
-	exit(0);
-}
-
-void	ft_free(char **strs)
-{
-	int	i;
-
-	i = 0;
-	while (strs[i])
-	{
-		free(strs[i]);
-		i++;
-	}
-	free(strs);
-}
 
 void	free_game(t_game *game)
 {
@@ -47,21 +28,4 @@ void	free_game(t_game *game)
 		free(game->rgb.ceiling);
 	if (game->rgb.floor)
 		free(game->rgb.floor);
-}
-
-int	ft_strslen(char **strs)
-{
-	int	i;
-
-	i = 0;
-	while (strs[i])
-		i++;
-	return (i);
-}
-
-int	is_space(char c)
-{
-	if ((c >= 9 && c <= 13) || c == 32)
-		return (1);
-	return(0);
 }

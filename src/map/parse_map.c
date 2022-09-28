@@ -3,46 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   parse_map.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kyhan <kyhan@student.42.fr>                +#+  +:+       +#+        */
+/*   By: jisookim <jisookim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/20 02:20:07 by kyhan             #+#    #+#             */
-/*   Updated: 2022/09/24 14:18:20 by kyhan            ###   ########.fr       */
+/*   Updated: 2022/09/28 15:14:50 by jisookim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/cat3d.h"
-
-// 맵 3줄이상이어야함
-// 모든 요소 맵, 동서남북, 천장 바닥 이런거 또 나오면 안됨 (중복처리)
-// 공백 워드스플릿해야함 (맵빼고)
-// 맵은 무조건 1을 만남
-// map flag는 texture or rgb에서 map이 있으면 켜줌
-int	init_content(t_game *game, char *gnl)
-{
-	int	i;
-	int	checked;
-	static int	map_flag;
-
-	i = 0;
-	checked = 0;
-	while (is_space(gnl[i]))
-		i++;
-	if (gnl[i] == '\0')
-	{
-		if (game->map.map)
-			map_flag = 1;
-		return (0);
-	}
-	if (init_texture(game, gnl, &checked, &map_flag))
-		return (1);
-	if (init_map(game, gnl, &checked, &map_flag))
-		return (1);
-	if (init_rgb(game, gnl, &checked, &map_flag))
-		return (1);
-	if (!checked)
-		return (1);
-	return (0);
-}
 
 void	get_lines(t_game *game, char *gnl, int fd)
 {

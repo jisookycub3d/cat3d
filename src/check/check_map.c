@@ -3,15 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   check_map.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kyhan <kyhan@student.42.fr>                +#+  +:+       +#+        */
+/*   By: jisookim <jisookim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/23 05:22:12 by kyhan             #+#    #+#             */
-/*   Updated: 2022/09/26 14:22:09 by kyhan            ###   ########.fr       */
+/*   Updated: 2022/09/28 14:41:06 by jisookim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/cat3d.h"
-#include "../../include/parse.h"
 
 int	check_wall(t_game *game, int i, int j)
 {
@@ -31,27 +30,6 @@ int	check_wall(t_game *game, int i, int j)
 	return (0);
 }
 
-int	check_full(t_game *game)
-{
-	int	i;
-	int	j;
-
-	i = 0;
-	while (game->map.map[i])
-	{
-		j = 0;
-		while (game->map.map[i][j])
-		{
-			if (!(game->map.map[i][j] & WALL) && !(game->map.map[i][j] & SPACE))
-				if (check_wall(game, i, j))
-					return (1);
-			j++;
-		}
-		i++;
-	}
-	return (0);
-}
-
 int	get_direct_pos(t_game *game, char c, int i, int j)
 {
 	if (!game->player.direction)
@@ -61,78 +39,6 @@ int	get_direct_pos(t_game *game, char c, int i, int j)
 		game->player.pos_y = i * 64 + 32;
 	}
 	else
-		return (1);
-	return (0);
-}
-
-int	check_right_direct(t_game *game)
-{
-	int	i;
-	int	j;
-
-	i = 0;
-	while (game->map.map[i])
-	{
-		j = 0;
-		while (game->map.map[i][j])
-		{
-			if (ft_strchr("NSEW", game->map.map[i][j]))
-			{
-				if (get_direct_pos(game, game->map.map[i][j], i, j))
-					return (1);
-			}
-			j++;
-		}
-		i++;
-	}
-	if (!game->player.direction)
-		return (1);
-	return (0);
-}
-
-void	bit_mask(char *c)
-{
-	if (*c == '1')
-		*c = WALL;
-	else if (*c == 'N' || *c == 'S' || *c == 'E' || *c == 'W')
-		*c = DIRECTION;
-	else if (*c == ' ')
-		*c = SPACE;
-	else if (*c == '0')
-		*c = EMPTY;
-	else if (*c == 'D')
-		*c = DOOR;
-}
-
-int	check_right_composition(t_game *game)
-{
-	int	i;
-	int	j;
-
-	i = 0;
-	while (game->map.map[i])
-	{
-		j = 0;
-		while (game->map.map[i][j])
-		{
-			if ((ft_strchr("NSEW10D ", game->map.map[i][j])))
-				bit_mask(&game->map.map[i][j]);
-			else
-				return (1);
-			j++;
-		}
-		i++;
-	}
-	return (0);
-}
-
-int	check_composition(t_game *game)
-{
-	if (check_right_direct(game))
-		return (1);
-	if (check_right_composition(game))
-		return (1);
-	if (check_full(game))
 		return (1);
 	return (0);
 }
@@ -149,7 +55,7 @@ int	check_map(t_game *game)
 	i = 0;
 	trim_map_front(game);
 	trim_map_back(game); 
-	if (check_composition(game))
+	if (check_content(game))
 		return (1);
 	return (0);
 }
