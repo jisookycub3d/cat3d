@@ -6,7 +6,7 @@
 /*   By: kyhan <kyhan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/24 19:48:20 by kyhan             #+#    #+#             */
-/*   Updated: 2022/09/24 20:19:13 by kyhan            ###   ########.fr       */
+/*   Updated: 2022/09/28 09:46:02 by kyhan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,13 +31,5 @@ enum {
 	ON_EXPOSE = 12,
 	ON_DESTROY = 17
 };
-
-typedef struct s_param
-{
-	int			x;
-	int			y;
-}				t_param;
-
-void	init_param(t_param *param);
 
 #endif

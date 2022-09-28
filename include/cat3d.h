@@ -6,7 +6,7 @@
 /*   By: kyhan <kyhan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/19 14:00:14 by jisookim          #+#    #+#             */
-/*   Updated: 2022/09/25 22:35:23 by kyhan            ###   ########.fr       */
+/*   Updated: 2022/09/28 09:47:29 by kyhan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,12 @@ typedef struct s_player
 	int			pos_y;
 }				t_player;
 
+typedef struct s_param
+{
+	int			x;
+	int			y;
+}				t_param;
+
 typedef struct s_game
 {
 	void		*mlx;
@@ -55,6 +61,7 @@ typedef struct s_game
 	t_map		map;
 	t_rgb		rgb;
 	t_player	player;
+	t_param		param;
 }				t_game;
 
 /* init.c */
