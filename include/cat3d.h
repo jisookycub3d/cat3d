@@ -6,7 +6,7 @@
 /*   By: kyhan <kyhan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/19 14:00:14 by jisookim          #+#    #+#             */
-/*   Updated: 2022/09/28 16:45:26 by kyhan            ###   ########.fr       */
+/*   Updated: 2022/09/30 11:03:41 by kyhan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,8 @@
 # define KEY_S 1
 # define KEY_D 2
 # define KEY_ESC 53 
+# define KEY_LEFT 123
+# define KEY_RIGHT 124
 
 enum {
 	ON_KEYDOWN = 2,

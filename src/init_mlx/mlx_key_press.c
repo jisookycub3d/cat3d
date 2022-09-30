@@ -6,7 +6,7 @@
 /*   By: kyhan <kyhan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/28 14:09:22 by jisookim          #+#    #+#             */
-/*   Updated: 2022/09/28 16:45:48 by kyhan            ###   ########.fr       */
+/*   Updated: 2022/09/30 10:44:40 by kyhan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,14 @@ int	key_press(int keycode, t_game *game)
 		mlx_pixel_put(game->mlx, game->win, game->player.pos_x, game->player.pos_y, rgb_to_i(game->rgb.floor));
 		game->player.pos_y++;
 		mlx_pixel_put(game->mlx, game->win, game->player.pos_x, game->player.pos_y, 255);
+	}
+	if (keycode == KEY_LEFT)
+	{
+		;
+	}
+	if (keycode == KEY_RIGHT)
+	{
+		;
 	}
 	return (0);
 }
