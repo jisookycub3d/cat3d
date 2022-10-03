@@ -6,7 +6,7 @@
 /*   By: kyhan <kyhan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/28 14:00:03 by jisookim          #+#    #+#             */
-/*   Updated: 2022/10/03 13:48:20 by kyhan            ###   ########.fr       */
+/*   Updated: 2022/10/03 13:50:35 by kyhan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ void	start_game(t_game *game)
 	game->param.plane_y = 0.66; //플레이어 카메라평면
 
 	// init_image(game, &image);
+	game->mlx = mlx_init();
 	game->win = mlx_new_window(game->mlx, 640, 480, "Cat3D");
 	// init_draw_obj(game, &image);
 	mlx_loop_hook(game->mlx, &main_loop, game);

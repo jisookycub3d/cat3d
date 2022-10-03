@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_game.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jisookim <jisookim@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: kyhan <kyhan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/20 02:28:13 by kyhan             #+#    #+#             */
-/*   Updated: 2022/09/28 14:33:01 by jisookim         ###   ########.fr       */
+/*   Updated: 2022/10/03 13:50:27 by kyhan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,5 +43,4 @@ int	init_content(t_game *game, char *gnl)
 void	init_game(t_game *game)
 {
 	ft_memset(game, 0, sizeof(t_game));
-	game->mlx = mlx_init();
 }
