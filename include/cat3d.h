@@ -6,7 +6,7 @@
 /*   By: kyhan <kyhan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/19 14:00:14 by jisookim          #+#    #+#             */
-/*   Updated: 2022/09/30 11:03:41 by kyhan            ###   ########.fr       */
+/*   Updated: 2022/10/03 12:50:07 by kyhan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,7 @@ typedef struct s_texture
 typedef struct s_map
 {
 	char	**map;
+	int		**imap;
 }				t_map;
 
 typedef struct s_rgb
@@ -80,8 +81,12 @@ typedef struct s_player
 
 typedef struct s_param
 {
-	int			x;
-	int			y;
+	double		pos_x;
+	double		pos_y;
+	double		dir_x;
+	double		dir_y;
+	double		plane_x;
+	double		plane_y;
 }				t_param;
 
 typedef struct s_image
@@ -176,5 +181,8 @@ int	rgb_atoi(t_game *game, char **rgb, char flag);
 /* utils.c */
 char	bit_mask(char c);
 int		rgb_to_i(int *arr);
+
+
+int	main_loop(t_game *game);
 
 #endif

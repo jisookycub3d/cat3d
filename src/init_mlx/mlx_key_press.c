@@ -6,39 +6,51 @@
 /*   By: kyhan <kyhan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/28 14:09:22 by jisookim          #+#    #+#             */
-/*   Updated: 2022/09/30 10:44:40 by kyhan            ###   ########.fr       */
+/*   Updated: 2022/10/03 12:57:48 by kyhan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/cat3d.h"
+#include <math.h>
 
 int	key_press(int keycode, t_game *game)
 {
+	double	move_speed = 0.05;
+	double	rot_speed = 0.05;
+	
 	if (keycode == KEY_ESC)
 		press_exit_button(game);
 	if (keycode == KEY_A)
 	{
-		mlx_pixel_put(game->mlx, game->win, game->player.pos_x, game->player.pos_y, rgb_to_i(game->rgb.floor));
-		game->player.pos_x--;
-		mlx_pixel_put(game->mlx, game->win, game->player.pos_x, game->player.pos_y, 255);
+		double	old_dir_x = game->param.dir_x;
+		game->param.dir_x = game->param.dir_x * cos(rot_speed) - game->param.dir_y * sin(rot_speed);
+		game->param.dir_y = old_dir_x * sin(rot_speed) + game->param.dir_y * cos(rot_speed);
+		double	old_plane_x = game->param.plane_x;
+		game->param.plane_x = game->param.plane_x * cos(rot_speed) - game->param.plane_y * sin(rot_speed);
+		game->param.plane_y = old_plane_x * sin(rot_speed) + game->param.plane_y * cos(rot_speed);
 	}
 	if (keycode == KEY_D)
 	{
-		mlx_pixel_put(game->mlx, game->win, game->player.pos_x, game->player.pos_y, rgb_to_i(game->rgb.floor));
-		game->player.pos_x++;
-		mlx_pixel_put(game->mlx, game->win, game->player.pos_x, game->player.pos_y, 255);
+		double	old_dir_x = game->param.dir_x;
+		game->param.dir_x = game->param.dir_x * cos(-rot_speed) - game->param.dir_y * sin(-rot_speed);
+		game->param.dir_y = old_dir_x * sin(-rot_speed) + game->param.dir_y * cos(-rot_speed);
+		double	old_plane_x = game->param.plane_x;
+		game->param.plane_x = game->param.plane_x * cos(-rot_speed) - game->param.plane_y * sin(-rot_speed);
+		game->param.plane_y = old_plane_x * sin(-rot_speed) + game->param.plane_y * cos(-rot_speed);
 	}
 	if (keycode == KEY_S)
 	{
-		mlx_pixel_put(game->mlx, game->win, game->player.pos_x, game->player.pos_y, rgb_to_i(game->rgb.floor));
-		game->player.pos_y--;
-		mlx_pixel_put(game->mlx, game->win, game->player.pos_x, game->player.pos_y, 255);
+		if (game->map.imap[(int)(game->param.pos_x - game->param.dir_x * move_speed)][(int)(game->param.pos_y)] & EMPTY)
+			game->param.pos_x -= game->param.dir_x * move_speed;
+		if (game->map.imap[(int)(game->param.pos_x)][(int)(game->param.pos_y - game->param.dir_y * move_speed)] & EMPTY)
+			game->param.pos_y -= game->param.dir_y * move_speed;
 	}
 	if (keycode == KEY_W)
 	{
-		mlx_pixel_put(game->mlx, game->win, game->player.pos_x, game->player.pos_y, rgb_to_i(game->rgb.floor));
-		game->player.pos_y++;
-		mlx_pixel_put(game->mlx, game->win, game->player.pos_x, game->player.pos_y, 255);
+		if (game->map.imap[(int)(game->param.pos_x + game->param.dir_x * move_speed)][(int)(game->param.pos_y)] & EMPTY)
+			game->param.pos_x += game->param.dir_x * move_speed;
+		if (game->map.imap[(int)(game->param.pos_x)][(int)(game->param.pos_y + game->param.dir_y * move_speed)] & EMPTY)
+			game->param.pos_y += game->param.dir_y * move_speed;
 	}
 	if (keycode == KEY_LEFT)
 	{
