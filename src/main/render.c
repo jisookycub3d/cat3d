@@ -1,7 +1,7 @@
 #include "../../include/cat3d.h"
 #include <math.h>
 
-void	verLine(t_game *game, int x, int y1, int y2, int color)
+void	ver_line(t_game *game, int x, int y1, int y2, int color)
 {
 	int	y;
 
@@ -20,98 +20,98 @@ void	render(t_game *game)
 	x = 0;
 	while (x < 640)
 	{
-		double cameraX = 2 * x / (double)640 - 1;
-		double rayDirX = game->param.dir_x + game->param.plane_x * cameraX;
-		double rayDirY = game->param.dir_y + game->param.plane_y * cameraX;
+		double camera_x = 2 * x / (double)640 - 1;
+		double ray_dir_x = game->param.dir_x + game->param.plane_x * camera_x;
+		double ray_dir_y = game->param.dir_y + game->param.plane_y * camera_x;
 		
-		int mapX = (int)game->param.pos_x;
-		int mapY = (int)game->param.pos_y;
+		int map_x = (int)game->param.pos_x;
+		int map_y = (int)game->param.pos_y;
 
 		//length of ray from current position to next x or y-side
-		double sideDistX;
-		double sideDistY;
+		double side_dist_x;
+		double side_dist_y;
 		
 		 //length of ray from one x or y-side to next x or y-side
-		double deltaDistX = fabs(1 / rayDirX);
-		double deltaDistY = fabs(1 / rayDirY);
-		double perpWallDist;
+		double delta_dist_x = fabs(1 / ray_dir_x);
+		double delta_dist_y = fabs(1 / ray_dir_y);
+		double perp_wall_dist;
 		
 		//what direction to step in x or y-direction (either +1 or -1)
-		int stepX;
-		int stepY;
+		int step_x;
+		int step_y;
 		
 		int hit = 0; //was there a wall hit?
 		int side; //was a NS or a EW wall hit?
 
-		if (rayDirX < 0)
+		if (ray_dir_x < 0)
 		{
-			stepX = -1;
-			sideDistX = (game->param.pos_x - mapX) * deltaDistX;
+			step_x = -1;
+			side_dist_x = (game->param.pos_x - map_x) * delta_dist_x;
 		}
 		else
 		{
-			stepX = 1;
-			sideDistX = (mapX + 1.0 - game->param.pos_x) * deltaDistX;
+			step_x = 1;
+			side_dist_x = (map_x + 1.0 - game->param.pos_x) * delta_dist_x;
 		}
-		if (rayDirY < 0)
+		if (ray_dir_y < 0)
 		{
-			stepY = -1;
-			sideDistY = (game->param.pos_y - mapY) * deltaDistY;
+			step_y = -1;
+			side_dist_y = (game->param.pos_y - map_y) * delta_dist_y;
 		}
 		else
 		{
-			stepY = 1;
-			sideDistY = (mapY + 1.0 - game->param.pos_y) * deltaDistY;
+			step_y = 1;
+			side_dist_y = (map_y + 1.0 - game->param.pos_y) * delta_dist_y;
 		}
 
 		while (hit == 0)
 		{
 			//jump to next map square, OR in x-direction, OR in y-direction
-			if (sideDistX < sideDistY)
+			if (side_dist_x < side_dist_y)
 			{
-				sideDistX += deltaDistX;
-				mapX += stepX;
+				side_dist_x += delta_dist_x;
+				map_x += step_x;
 				side = 0;
 			}
 			else
 			{
-				sideDistY += deltaDistY;
-				mapY += stepY;
+				side_dist_y += delta_dist_y;
+				map_y += step_y;
 				side = 1;
 			}
 			//Check if ray has hit a wall
-			if (!(game->map.imap[mapY][mapX] & EMPTY)) hit = 1;
+			if (!(game->map.imap[map_y][map_x] & EMPTY)) hit = 1;
 		}
 		if (side == 0)
-			perpWallDist = (mapX - game->param.pos_x + (1 - stepX) / 2) / rayDirX;
+			perp_wall_dist = (map_x - game->param.pos_x + (1 - step_x) / 2) / ray_dir_x;
 		else
-			perpWallDist = (mapY - game->param.pos_y + (1 - stepY) / 2) / rayDirY;
+			perp_wall_dist = (map_y - game->param.pos_y + (1 - step_y) / 2) / ray_dir_y;
 
 		//Calculate height of line to draw on screen
-		int lineHeight = (int)(480 / perpWallDist);
+		int line_height = (int)(480 / perp_wall_dist);
 
 		//calculate lowest and highest pixel to fill in current stripe
-		int drawStart = -lineHeight / 2 + 480 / 2;
-		if(drawStart < 0)
-			drawStart = 0;
-		int drawEnd = lineHeight / 2 + 480 / 2;
-		if(drawEnd >= 480)
-			drawEnd = 480 - 1;
+		int draw_start = -line_height / 2 + 480 / 2;
+		if(draw_start < 0)
+			draw_start = 0;
+		int draw_end = line_height / 2 + 480 / 2;
+		if(draw_end >= 480)
+			draw_end = 480 - 1;
 
 		int	color;
-		if (game->map.imap[mapY][mapX] & WALL)
+		if (game->map.imap[map_y][map_x] & WALL)
 			color = 0xFF0000;
-		else if (game->map.imap[mapY][mapX] & DOOR)
+		else if (game->map.imap[map_y][map_x] & DOOR)
 			color = 0x00FF00;
-		else if (game->map.imap[mapY][mapX] & EMPTY)
+		else if (game->map.imap[map_y][map_x] & EMPTY)
 			color = 0xFFFF00;
-		else if (game->map.imap[mapY][mapX] & DIRECTION)
+		else if (game->map.imap[map_y][map_x] & DIRECTION)
 			color = 0xFFFF00;
 		
 		if (side == 1)
 			color = color / 2;
 
-		verLine(game, x, drawStart, drawEnd, color);
+		ver_line(game, x, draw_start, draw_end, color);
 		
 		x++;
 	}
