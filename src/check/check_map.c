@@ -6,7 +6,7 @@
 /*   By: kyhan <kyhan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/23 05:22:12 by kyhan             #+#    #+#             */
-/*   Updated: 2022/10/03 13:04:28 by kyhan            ###   ########.fr       */
+/*   Updated: 2022/10/03 13:43:13 by kyhan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,8 +35,8 @@ int	get_direct_pos(t_game *game, char c, int i, int j)
 	if (!game->player.direction)
 	{
 		game->player.direction = c;
-		game->player.pos_x = i;
-		game->player.pos_y = j;
+		game->player.pos_x = j;
+		game->player.pos_y = i;
 	}
 	else
 		return (1);

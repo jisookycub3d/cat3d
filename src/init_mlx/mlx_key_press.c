@@ -6,7 +6,7 @@
 /*   By: kyhan <kyhan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/28 14:09:22 by jisookim          #+#    #+#             */
-/*   Updated: 2022/10/03 12:57:48 by kyhan            ###   ########.fr       */
+/*   Updated: 2022/10/03 13:45:22 by kyhan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,16 +40,16 @@ int	key_press(int keycode, t_game *game)
 	}
 	if (keycode == KEY_S)
 	{
-		if (game->map.imap[(int)(game->param.pos_x - game->param.dir_x * move_speed)][(int)(game->param.pos_y)] & EMPTY)
+		if (game->map.imap[(int)(game->param.pos_y)][(int)(game->param.pos_x - game->param.dir_x * move_speed)] & EMPTY)
 			game->param.pos_x -= game->param.dir_x * move_speed;
-		if (game->map.imap[(int)(game->param.pos_x)][(int)(game->param.pos_y - game->param.dir_y * move_speed)] & EMPTY)
+		if (game->map.imap[(int)(game->param.pos_y - game->param.dir_y * move_speed)][(int)(game->param.pos_x)] & EMPTY)
 			game->param.pos_y -= game->param.dir_y * move_speed;
 	}
 	if (keycode == KEY_W)
 	{
-		if (game->map.imap[(int)(game->param.pos_x + game->param.dir_x * move_speed)][(int)(game->param.pos_y)] & EMPTY)
+		if (game->map.imap[(int)(game->param.pos_y)][(int)(game->param.pos_x + game->param.dir_x * move_speed)] & EMPTY)
 			game->param.pos_x += game->param.dir_x * move_speed;
-		if (game->map.imap[(int)(game->param.pos_x)][(int)(game->param.pos_y + game->param.dir_y * move_speed)] & EMPTY)
+		if (game->map.imap[(int)(game->param.pos_y + game->param.dir_y * move_speed)][(int)(game->param.pos_x)] & EMPTY)
 			game->param.pos_y += game->param.dir_y * move_speed;
 	}
 	if (keycode == KEY_LEFT)
