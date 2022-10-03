@@ -32,7 +32,7 @@ void	render(t_game *game)
 		double side_dist_y;
 		
 		 //length of ray from one x or y-side to next x or y-side
-		double delta_distx = fabs(1 / ray_dir_x);
+		double delta_dist_x = fabs(1 / ray_dir_x);
 		double delta_dist_y = fabs(1 / ray_dir_y);
 		double perp_wall_dist;
 		
