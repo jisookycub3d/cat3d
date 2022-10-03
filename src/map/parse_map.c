@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_map.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jisookim <jisookim@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: kyhan <kyhan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/20 02:20:07 by kyhan             #+#    #+#             */
-/*   Updated: 2022/09/28 15:14:50 by jisookim         ###   ########.fr       */
+/*   Updated: 2022/10/03 13:06:01 by kyhan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,40 @@ void	get_lines(t_game *game, char *gnl, int fd)
 	}
 }
 
+void	init_imap(t_game *game)
+{
+	int	i;
+	int	j;
+
+	j = 0;
+	i = ft_strslen(game->map.map);
+	game->map.imap = ft_calloc(i, sizeof(int *));
+	while (j < i)
+	{
+		game->map.imap[j] = ft_calloc(ft_strlen(game->map.map[j]), sizeof(int));
+		j++;
+	}
+}
+
+void	make_imap(t_game *game)
+{
+	int	i;
+	int	j;
+	
+	i = 0;
+	init_imap(game);
+	while (game->map.map[i])
+	{
+		j = 0;
+		while (game->map.map[i][j])
+		{
+			game->map.imap[i][j] = game->map.map[i][j];
+			j++;
+		}
+		i++;
+	}
+}
+
 int	parse_map(t_game *game, char *mapfile)
 {
 	char	*gnl;
@@ -48,5 +82,6 @@ int	parse_map(t_game *game, char *mapfile)
 	fd = open(mapfile, O_RDONLY);
 	gnl = get_next_line(fd);
 	get_lines(game, gnl, fd);
+	make_imap(game);
 	return (0);
 }
