@@ -68,7 +68,7 @@ void	render(t_game *game)
 				map_y += step_y;
 				side = 1;
 			}
-			if (game->map.imap[map_x][map_y] & WALL)
+			if (!(game->map.imap[map_x][map_y] & EMPTY))
 				hit = 1;
 		}
 		if (side == 0)
@@ -84,7 +84,7 @@ void	render(t_game *game)
 		if (draw_end >= 720)
 			draw_end = 720 - 1;
 		int	color;
-		if (game->map.imap[map_x][map_y])
+		if (!(game->map.imap[map_x][map_y] & EMPTY))
 			color = 255;
 		if (side == 1)
 			color = color / 2;
