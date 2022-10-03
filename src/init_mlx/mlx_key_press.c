@@ -6,7 +6,7 @@
 /*   By: kyhan <kyhan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/28 14:09:22 by jisookim          #+#    #+#             */
-/*   Updated: 2022/10/03 13:45:22 by kyhan            ###   ########.fr       */
+/*   Updated: 2022/10/03 23:36:02 by kyhan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,8 @@ int	key_press(int keycode, t_game *game)
 	{
 		;
 	}
+	mlx_clear_window(game->mlx, game->win);
+	main_loop(game);
 	return (0);
 }
 

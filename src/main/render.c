@@ -12,12 +12,34 @@ void	ver_line(t_game *game, int x, int y1, int y2, int color)
 		y++;
 	}
 }
+void	draw(t_game *game)
+{
+	for (int y = 0; y < 480; y++)
+	{
+		for (int x = 0; x < 640; x++)
+		{
+			game->image.data[y * 640 + x] = game->map.buf[y][x];
+		}
+	}
+	mlx_put_image_to_window(game->mlx, game->win, game->image.wall_w, 0, 0);
+}
 
 void	render(t_game *game)
 {
 	int	x;
 
 	x = 0;
+	if (game->re_buf == 1)
+	{
+		for (int i = 0; i < 480; i++)
+		{
+			for (int j = 0; j < 640; j++)
+			{
+				game->map.buf[i][j] = 0;
+			}
+		}
+		game->re_buf = 0;
+	}
 	while (x < 640)
 	{
 		double camera_x = 2 * x / (double)640 - 1;
@@ -97,21 +119,47 @@ void	render(t_game *game)
 		int draw_end = line_height / 2 + 480 / 2;
 		if(draw_end >= 480)
 			draw_end = 480 - 1;
+		int tex_num;
+		if (!(game->map.imap[map_y][map_x] & EMPTY))
+			tex_num = 0;
 
-		int	color;
-		if (game->map.imap[map_y][map_x] & WALL)
-			color = 0xFF0000;
-		else if (game->map.imap[map_y][map_x] & DOOR)
-			color = 0x00FF00;
-		else if (game->map.imap[map_y][map_x] & EMPTY)
-			color = 0xFFFF00;
-		else if (game->map.imap[map_y][map_x] & DIRECTION)
-			color = 0xFFFF00;
+		double	wall_x;
+		if (side == 0)
+			wall_x = game->param.pos_y + perp_wall_dist * ray_dir_y;
+		else
+			wall_x = game->param.pos_x + perp_wall_dist * ray_dir_x;
+		wall_x -= floor(wall_x);
+		int	tex_x = (int)(wall_x * (double)64);
+		if (side == 0 && ray_dir_x > 0)
+			tex_x = 64 - tex_x - 1;
+		if (side == 1 && ray_dir_y < 0)
+			tex_x = 64 - tex_x - 1;
+		double step = 1.0 * 64 / line_height;
+		double	tex_pos = (draw_start - 480 / 2 + line_height / 2) * step;
+		for (int y = draw_start; y < draw_end; y++)
+		{
+			int	tex_y = (int)tex_pos & (64 - 1);
+			tex_pos += step;
+			int	color = game->map.tex[tex_num][64 * tex_y + tex_x];
+			if (side == 1)
+				color = (color >> 1) & 8355711;
+			game->map.buf[y][x] = color;
+			game->re_buf = 1;
+		}
+		// int	color;
+		// if (game->map.imap[map_y][map_x] & WALL)
+		// 	color = 0xFF0000;
+		// else if (game->map.imap[map_y][map_x] & DOOR)
+		// 	color = 0x00FF00;
+		// else if (game->map.imap[map_y][map_x] & EMPTY)
+		// 	color = 0xFFFF00;
+		// else if (game->map.imap[map_y][map_x] & DIRECTION)
+		// 	color = 0xFFFF00;
 		
-		if (side == 1)
-			color = color / 2;
+		// if (side == 1)
+		// 	color = color / 2;
 
-		ver_line(game, x, draw_start, draw_end, color);
+		// ver_line(game, x, draw_start, draw_end, color);
 		
 		x++;
 	}
@@ -120,5 +168,6 @@ void	render(t_game *game)
 int	main_loop(t_game *game)
 {
 	render(game);
+	draw(game);
 	return (0);
 }

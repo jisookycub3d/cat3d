@@ -4,6 +4,7 @@
 		"cat3d.h": "c",
 		"param.h": "c",
 		"image.h": "c",
-		"parse.h": "c"
+		"parse.h": "c",
+		"ios": "c"
 	}
 }

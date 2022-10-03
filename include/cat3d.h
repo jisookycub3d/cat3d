@@ -6,7 +6,7 @@
 /*   By: kyhan <kyhan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/19 14:00:14 by jisookim          #+#    #+#             */
-/*   Updated: 2022/10/03 12:50:07 by kyhan            ###   ########.fr       */
+/*   Updated: 2022/10/03 23:28:17 by kyhan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,8 @@ typedef struct s_map
 {
 	char	**map;
 	int		**imap;
+	int		**buf;
+	int		tex[8][64 * 64];
 }				t_map;
 
 typedef struct s_rgb
@@ -96,12 +98,17 @@ typedef struct s_image
 	void	*wall_w;
 	void	*wall_e;
 	void	*door;
+	int		*data;
+	int		size_l;
+	int		bpp;
+	int		endian;
 }				t_image;
 
 typedef struct s_game
 {
 	void		*mlx;
 	void		*win;
+	int			re_buf;
 	t_texture	texture;
 	t_map		map;
 	t_rgb		rgb;
