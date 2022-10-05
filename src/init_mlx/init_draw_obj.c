@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_draw_obj.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jisookim <jisookim@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: kyhan <kyhan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/28 13:49:07 by jisookim          #+#    #+#             */
-/*   Updated: 2022/09/28 15:03:57 by jisookim         ###   ########.fr       */
+/*   Updated: 2022/10/05 15:21:39 by kyhan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ static void	draw_wall(t_game *game, t_image *image)
 			{
 				printf ("%d, %d\n", i, j);
 				mlx_put_image_to_window(game->mlx, game->win, \
-											image->wall_n, j * 64, i * 64);
+											image->img, j * TEX_SIZE, i * TEX_SIZE);
 			}
 			j++;
 		}

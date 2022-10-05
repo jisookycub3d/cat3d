@@ -13,12 +13,22 @@ void	draw(t_game *game)
 	mlx_put_image_to_window(game->mlx, game->win, game->image.img, 0, 0);
 }
 
-
 void	render(t_game *game)
 {
 	int	x;
 
 	x = 0;
+	if (game->re_buf == 1)
+	{
+		for (int i = 0; i < S_HEIGHT; i++)
+		{
+			for (int j = 0; j < S_WIDTH; j++)
+			{
+				game->map.buf[i][j] = 0;
+			}
+		}
+		game->re_buf = 0;
+	}
 	while (x < S_WIDTH)
 	{
 		double camera_x = 2 * x / (double)S_WIDTH - 1;
@@ -52,7 +62,7 @@ void	render(t_game *game)
 		else
 		{
 			step_x = 1;
-			side_dist_x = (map_x + 1.0 - game->param.pos_x) * delta_dist_x;
+			side_dist_x = (map_x + 1.0 - game->param.pos_x) * delta_dist_x;0
 		}
 		if (ray_dir_y < 0)
 		{
@@ -123,18 +133,8 @@ void	render(t_game *game)
 			if (side == 1)
 				color = (color >> 1) & 8355711;
 			game->map.buf[y][x] = color;
+			game->re_buf = 1;
 		}
-		for (int y = 0; y < draw_start; y++)
-		{
-			// if (game->map.buf[y][x] & EMPTY)
-				game->map.buf[y][x] = rgb_to_i(game->rgb.ceiling);
-		}
-		for(int y = draw_end; y < S_HEIGHT; y++)
-		{
-			// if (game->map.buf[y][x] & EMPTY)
-				game->map.buf[y][x] = rgb_to_i(game->rgb.floor);
-		}
-		
 		// int	color;
 		// if (game->map.imap[map_y][map_x] & WALL)
 		// 	color = 0xFF0000;
@@ -170,7 +170,7 @@ void	load_image(t_game *game, int *tex, char *path)
 
 void	load_texture(t_game *game)
 {
-	load_image(game, game->tex[0], "./jisoocat2.png");
+	load_image(game, game->tex[0], "./jisoocat.png");
 	load_image(game, game->tex[1], "./jisoocat.png");
 	load_image(game, game->tex[2], "./jisoocat.png");
 	load_image(game, game->tex[3], "./jisoocat.png");

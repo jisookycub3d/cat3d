@@ -6,7 +6,7 @@
 /*   By: kyhan <kyhan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/28 14:40:52 by jisookim          #+#    #+#             */
-/*   Updated: 2022/09/28 16:02:44 by kyhan            ###   ########.fr       */
+/*   Updated: 2022/10/05 18:04:11 by kyhan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,12 +21,10 @@ char	bit_mask(char c)
 {
 	if (c == '1')
 		c = WALL;
-	else if (c == 'N' || c == 'S' || c == 'E' || c == 'W')
-		c = DIRECTION;
+	else if (c == '0' || c == 'N' || c == 'S' || c == 'E' || c == 'W')
+		c = EMPTY;
 	else if (c == ' ')
 		c = SPACE;
-	else if (c == '0')
-		c = EMPTY;
 	else if (c == 'D')
 		c = DOOR;
 	return (c);
