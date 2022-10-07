@@ -12,14 +12,43 @@
 
 #include "../include/cat3d.h"
 
+void	init_param_dir(t_game *game)
+{
+	if (game->player.direction == 'N')
+	{
+		game->param.dir_x = 0;
+		game->param.dir_y = -1;
+	}
+	else if (game->player.direction == 'S')
+	{
+		game->param.dir_x = 0;
+		game->param.dir_y = 1;
+	}
+	else if (game->player.direction == 'W')
+	{
+		game->param.dir_x = 1;
+		game->param.dir_y = 0;
+	}
+	else if (game->player.direction == 'E')
+	{
+		game->param.dir_x = -1;
+		game->param.dir_y = 0;
+	}
+}
+
 void init_param(t_game *game)
 {
 	game->param.pos_x = (double)(game->player.pos_x) + 0.5;
 	game->param.pos_y = (double)(game->player.pos_y) + 0.5; //플레이어 초기 위치벡터
-	game->param.dir_x = -1; //동서남북에 따라 바꿔주는 함수로 !
-	game->param.dir_y = 0; // 플레이어 초기 방향벡터
-	game->param.plane_x = 0;
-	game->param.plane_y = 0.66; //플레이어 카메라평면
+    init_param_dir(game);
+	if (game->param.dir_x < 0)
+		game->param.plane_y = 0.66;
+	else if (game->param.dir_x > 0)
+		game->param.plane_y = -0.66;
+	else if (game->param.dir_y < 0)
+		game->param.plane_x = -0.66;
+	else if (game->param.dir_y > 0)
+		game->param.plane_x = 0.66;
 	game->rgb.floor_rgb = rgb_to_i(game->rgb.floor);
 	game->rgb.ceiling_rgb = rgb_to_i(game->rgb.ceiling);
 }

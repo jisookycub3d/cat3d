@@ -51,20 +51,20 @@ int	key_press(int keycode, t_game *game)
 	if (keycode == KEY_LEFT)
 	{
 		double	old_dir_x = game->param.dir_x;
-		game->param.dir_x = game->param.dir_x * cos(rot_speed) - game->param.dir_y * sin(rot_speed);
-		game->param.dir_y = old_dir_x * sin(rot_speed) + game->param.dir_y * cos(rot_speed);
-		double	old_plane_x = game->param.plane_x;
-		game->param.plane_x = game->param.plane_x * cos(rot_speed) - game->param.plane_y * sin(rot_speed);
-		game->param.plane_y = old_plane_x * sin(rot_speed) + game->param.plane_y * cos(rot_speed);
-	}
-	if (keycode == KEY_RIGHT)
-	{
-		double	old_dir_x = game->param.dir_x;
 		game->param.dir_x = game->param.dir_x * cos(-rot_speed) - game->param.dir_y * sin(-rot_speed);
 		game->param.dir_y = old_dir_x * sin(-rot_speed) + game->param.dir_y * cos(-rot_speed);
 		double	old_plane_x = game->param.plane_x;
 		game->param.plane_x = game->param.plane_x * cos(-rot_speed) - game->param.plane_y * sin(-rot_speed);
 		game->param.plane_y = old_plane_x * sin(-rot_speed) + game->param.plane_y * cos(-rot_speed);
+	}
+	if (keycode == KEY_RIGHT)
+	{
+		double	old_dir_x = game->param.dir_x;
+		game->param.dir_x = game->param.dir_x * cos(rot_speed) - game->param.dir_y * sin(rot_speed);
+		game->param.dir_y = old_dir_x * sin(rot_speed) + game->param.dir_y * cos(rot_speed);
+		double	old_plane_x = game->param.plane_x;
+		game->param.plane_x = game->param.plane_x * cos(rot_speed) - game->param.plane_y * sin(rot_speed);
+		game->param.plane_y = old_plane_x * sin(rot_speed) + game->param.plane_y * cos(rot_speed);
 	}
 	printf("%f %f\n", game->param.pos_x, game->param.pos_y);
 	mlx_clear_window(game->mlx, game->win);

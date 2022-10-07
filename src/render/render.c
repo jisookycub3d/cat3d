@@ -15,7 +15,7 @@ void	draw(t_game *game)
 
 void	init_render(t_game *game, int x)
 {
-	game->render.camera_x = 2 * x / (double)S_WIDTH - 1;
+	game->render.camera_x = -(2 * x / (double)S_WIDTH - 1);
 	game->render.ray_dir_x = game->param.dir_x + game->param.plane_x * game->render.camera_x;
 	game->render.ray_dir_y = game->param.dir_y + game->param.plane_y * game->render.camera_x;
 	
