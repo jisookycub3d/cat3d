@@ -6,7 +6,7 @@
 /*   By: kyhan <kyhan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/19 14:00:14 by jisookim          #+#    #+#             */
-/*   Updated: 2022/10/07 09:14:42 by kyhan            ###   ########.fr       */
+/*   Updated: 2022/10/07 10:20:14 by kyhan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,6 +108,27 @@ typedef struct s_image
 	int		y;
 }				t_image;
 
+typedef struct s_render
+{
+	double camera_x;
+	double ray_dir_x;
+	double ray_dir_y;
+	int map_x;
+	int map_y;
+	double side_dist_x;
+	double side_dist_y;
+	double delta_dist_x;
+	double delta_dist_y;
+	double perp_wall_dist;
+	int step_x;
+	int step_y;
+	int draw_start;
+	int	draw_end;
+	int	tex_num;
+	int	tex_x;
+}				t_render;
+
+
 typedef struct s_game
 {
 	void		*mlx;
@@ -120,6 +141,7 @@ typedef struct s_game
 	t_player	player;
 	t_param		param;
 	t_image		image;
+	t_render	render;
 }				t_game;
 
 /* check_arg.c */
