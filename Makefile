@@ -25,7 +25,7 @@ SRC_INIT		:=	init_game.c init_map.c init_rgb.c init_start_game.c \
 					init_texture.c
 SRC_INIT		:=	$(addprefix $(DIR_INIT)/, $(SRC_INIT))
 
-SRC_INIT_MLX	:=	mlx_key_press.c
+SRC_INIT_MLX	:=	mlx_key_press.c mlx_mouse_hook.c
 SRC_INIT_MLX	:=	$(addprefix $(DIR_INIT_MLX)/, $(SRC_INIT_MLX))
 
 SRC_MAIN		:=	cat3d.c start_game.c

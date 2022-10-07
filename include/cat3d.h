@@ -128,6 +128,12 @@ typedef struct s_render
 	int	tex_x;
 }				t_render;
 
+typedef struct	s_mouse
+{
+    int	mouse_x;
+}				t_mouse;
+
+
 
 typedef struct s_game
 {
@@ -142,6 +148,7 @@ typedef struct s_game
 	t_param		param;
 	t_image		image;
 	t_render	render;
+	t_mouse		mouse;
 }				t_game;
 
 /* check_arg.c */
@@ -219,5 +226,6 @@ int		rgb_to_i(int *arr);
 
 int	main_loop(t_game *game);
 void	load_texture(t_game *game);
+void	mouse_move(t_game *game);
 
 #endif

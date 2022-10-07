@@ -85,6 +85,8 @@ void	start_game(t_game *game)
 	mlx_loop_hook(game->mlx, &main_loop, game);
 	mlx_hook(game->win, X_EVENT_EXIT_BUTTON, 0, &press_exit_button, game);
 	mlx_hook(game->win, X_EVENT_PRESS_KEY, 0, &key_press, game);
-	// mlx_mouse_hook(game->win, mouse_move, game);
+	// mlx_hook(game->win, 6, 3, mouse_move, game);
+    mlx_mouse_move(game->win, S_WIDTH / 2, S_HEIGHT / 2);
+    mlx_mouse_hide();
 	mlx_loop(game->mlx);
 }

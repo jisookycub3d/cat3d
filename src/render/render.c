@@ -193,6 +193,7 @@ void	load_texture(t_game *game)
 
 int	main_loop(t_game *game)
 {
+    mouse_move(game);
 	render(game);
 	draw(game);
 	return (0);
