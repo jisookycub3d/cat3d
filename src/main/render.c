@@ -7,12 +7,11 @@ void	draw(t_game *game)
 	{
 		for (int x = 0; x < S_WIDTH; x++)
 		{
-			game->image.data[y * S_WIDTH + x] = game->map.buf[y][x];
+			game->image.data[y * S_WIDTH + x] = game->buf[y][x];
 		}
 	}
 	mlx_put_image_to_window(game->mlx, game->win, game->image.img, 0, 0);
 }
-
 
 void	render(t_game *game)
 {
@@ -122,17 +121,17 @@ void	render(t_game *game)
 			int	color = game->tex[tex_num][TEX_SIZE * tex_y + tex_x];
 			if (side == 1)
 				color = (color >> 1) & 8355711;
-			game->map.buf[y][x] = color;
+			game->buf[y][x] = color;
 		}
 		for (int y = 0; y < draw_start; y++)
 		{
-			// if (game->map.buf[y][x] & EMPTY)
-				game->map.buf[y][x] = rgb_to_i(game->rgb.ceiling);
+			// if (game->buf[y][x] & EMPTY)
+				game->buf[y][x] = game->rgb.ceiling_rgb;
 		}
 		for(int y = draw_end; y < S_HEIGHT; y++)
 		{
-			// if (game->map.buf[y][x] & EMPTY)
-				game->map.buf[y][x] = rgb_to_i(game->rgb.floor);
+			// if (game->buf[y][x] & EMPTY)
+				game->buf[y][x] = game->rgb.floor_rgb;
 		}
 		
 		// int	color;

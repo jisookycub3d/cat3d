@@ -6,7 +6,7 @@
 /*   By: kyhan <kyhan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/19 14:00:14 by jisookim          #+#    #+#             */
-/*   Updated: 2022/10/05 18:03:47 by kyhan            ###   ########.fr       */
+/*   Updated: 2022/10/07 09:14:42 by kyhan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,13 +70,14 @@ typedef struct s_map
 {
 	char	**map;
 	int		**imap;
-	int		**buf;
 }				t_map;
 
 typedef struct s_rgb
 {
 	int			*floor;
 	int			*ceiling;
+	int			floor_rgb;
+	int			ceiling_rgb;
 }				t_rgb;
 
 typedef struct s_player
@@ -111,8 +112,8 @@ typedef struct s_game
 {
 	void		*mlx;
 	void		*win;
-	int			re_buf;
 	int			**tex;
+	int			**buf;
 	t_texture	texture;
 	t_map		map;
 	t_rgb		rgb;
