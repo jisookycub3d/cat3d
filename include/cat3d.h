@@ -70,6 +70,8 @@ typedef struct s_map
 {
 	char	**map;
 	int		**imap;
+    int     width;
+    int     height;
 }				t_map;
 
 typedef struct s_rgb
@@ -227,5 +229,6 @@ int		rgb_to_i(int *arr);
 int	main_loop(t_game *game);
 void	load_texture(t_game *game);
 void	mouse_move(t_game *game);
+void	minimap(t_game *game);
 
 #endif

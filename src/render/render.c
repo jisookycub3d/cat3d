@@ -196,5 +196,6 @@ int	main_loop(t_game *game)
     mouse_move(game);
 	render(game);
 	draw(game);
+    // minimap(game);
 	return (0);
 }
