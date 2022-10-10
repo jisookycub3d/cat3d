@@ -11,7 +11,7 @@ void	put_minimap_pixel(t_game *game, int rgb, int x, int y)
 		j = 0;
 		while (j < 10)
 		{
-			mlx_pixel_put(game->mlx, game->win, 50 + x * 10 + i, 50 + y * 10 + j, rgb);
+			game->buf[50 + y * 10 + j][50 + x * 10 + i] = rgb;
 			j++;
 		}
 		i++;
