@@ -1,4 +1,5 @@
 #include "../../include/cat3d.h"
+#include <math.h>
 
 void	put_minimap_pixel(t_game *game, int rgb, int x, int y)
 {
@@ -18,6 +19,14 @@ void	put_minimap_pixel(t_game *game, int rgb, int x, int y)
 	}
 }
 
+void	draw_player(t_game *game)
+{
+	double	ipart;
+
+	game->buf[50 + (int)floor(game->param.pos_y) * 10 + (int)floor(modf(game->param.pos_y, &ipart) * 10)][50 + (int)floor(game->param.pos_x) * 10 + (int)floor(modf(game->param.pos_x, &ipart) * 10)] = 0x0000FF;
+	(void)ipart;
+}
+
 void	draw_minimap(t_game *game, int type, int x, int y)
 {
 	if (type & WALL)
@@ -26,6 +35,7 @@ void	draw_minimap(t_game *game, int type, int x, int y)
 		put_minimap_pixel(game, 0xFFFFFF, x, y);
 	else if (type & DOOR)
 		put_minimap_pixel(game, 0xFFFF00, x, y);
+	draw_player(game);
 }
 
 void	minimap(t_game *game)
