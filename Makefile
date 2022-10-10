@@ -37,7 +37,7 @@ SRC_MAP			:=	$(addprefix $(DIR_MAP)/, $(SRC_MAP))
 SRC_TOOLS		:=	error.c free_game.c jk_tools.c tool_rgb_atoi.c utils.c
 SRC_TOOLS		:=	$(addprefix $(DIR_TOOLS)/, $(SRC_TOOLS))
 
-SRC_RENDER		:=	render.c minimap.c
+SRC_RENDER		:=	render.c minimap.c door.c
 SRC_RENDER		:=	$(addprefix $(DIR_RENDER)/, $(SRC_RENDER))
 
 SRCS			=	$(SRC_CHECK) $(SRC_INIT) $(SRC_INIT_MLX) $(SRC_MAIN) \
