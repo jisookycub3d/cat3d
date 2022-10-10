@@ -76,7 +76,8 @@ int	check_wall_hit(t_game *game)
 			side = 1;
 		}
 		//Check if ray has hit a wall
-		if (!(game->map.imap[game->render.map_y][game->render.map_x] & EMPTY)) hit = 1;
+		if (!(game->map.imap[game->render.map_y][game->render.map_x] & EMPTY))
+			hit = 1;
 	}
 	return (side);
 }
@@ -107,7 +108,18 @@ void		set_wall_texture(t_game *game, int side)
 	double	wall_x;
 
 	if (!(game->map.imap[game->render.map_y][game->render.map_x] & EMPTY))
-		game->render.tex_num = 0;
+	{
+		if (game->map.imap[game->render.map_y][game->render.map_x] & DOOR)
+			game->render.tex_num = 4;
+		else if (side == 1 && game->render.ray_dir_y < 0)
+			game->render.tex_num = 0; // N
+		else if (side == 1 && game->render.ray_dir_y > 0)
+			game->render.tex_num = 1;// S
+		else if (side == 0 && game->render.ray_dir_x > 0)
+			game->render.tex_num = 2; //E
+		else if (side == 0 && game->render.ray_dir_x < 0)
+			game->render.tex_num = 3; //W
+	}
 	if (side == 0)
 		wall_x = game->param.pos_y + game->render.perp_wall_dist * game->render.ray_dir_y;
 	else
@@ -120,11 +132,12 @@ void		set_wall_texture(t_game *game, int side)
 		game->render.tex_x = TEX_SIZE - game->render.tex_x - 1;
 }
 
-void	set_pixel_on_screen(t_game *game, int line_height, int side, int x)
+void	set_pixel_on_screen(t_game *game, int line_height, int x)
 {
 	double step;
 	double	tex_pos;
 	int		y;
+	int		color;
 	
 	step = 1.0 * TEX_SIZE / line_height;
 	tex_pos = (game->render.draw_start - S_HEIGHT / 2 + line_height / 2) * step;
@@ -133,9 +146,7 @@ void	set_pixel_on_screen(t_game *game, int line_height, int side, int x)
 	{
 		int	tex_y = (int)tex_pos & (TEX_SIZE - 1);
 		tex_pos += step;
-		int	color = game->tex[game->render.tex_num][TEX_SIZE * tex_y + game->render.tex_x];
-		if (side == 1)
-			color = (color >> 1) & 8355711;
+		color = game->tex[game->render.tex_num][TEX_SIZE * tex_y + game->render.tex_x];
 		game->buf[y][x] = color;
 		y++;
 	}
@@ -162,7 +173,7 @@ void	render(t_game *game)
 		line_height = set_line_height(game, side);
 		draw_start_to_end(game, line_height);
 		set_wall_texture(game, side);
-		set_pixel_on_screen(game, line_height, side, x);
+		set_pixel_on_screen(game, line_height, x);
 		x++;
 	}
 }
@@ -183,11 +194,11 @@ void	load_image(t_game *game, int *tex, char *path)
 
 void	load_texture(t_game *game)
 {
-	load_image(game, game->tex[0], "./jisoocat2.png");
-	load_image(game, game->tex[1], "./jisoocat.png");
-	load_image(game, game->tex[2], "./jisoocat.png");
-	load_image(game, game->tex[3], "./jisoocat.png");
-	load_image(game, game->tex[4], "./jisoocat.png");
+	load_image(game, game->tex[0], game->texture.north);
+	load_image(game, game->tex[1], game->texture.south);
+	load_image(game, game->tex[2], game->texture.east);
+	load_image(game, game->tex[3], game->texture.west);
+	load_image(game, game->tex[4], "./jisoocat2.png");
 	load_image(game, game->tex[5], "./jisoocat.png");
 }
 

@@ -22,8 +22,20 @@ void	put_minimap_pixel(t_game *game, int rgb, int x, int y)
 void	draw_player(t_game *game)
 {
 	double	ipart;
+	int		buf_x;
+	int		buf_y;
 
-	game->buf[(int)floor(game->param.pos_y) * 10 + (int)floor(modf(game->param.pos_y, &ipart) * 10)][(int)floor(game->param.pos_x) * 10 + (int)floor(modf(game->param.pos_x, &ipart) * 10)] = 0x0000FF;
+	buf_x = (int)floor(game->param.pos_y) * 10 + (int)floor(modf(game->param.pos_y, &ipart) * 10);
+	buf_y = (int)floor(game->param.pos_x) * 10 + (int)floor(modf(game->param.pos_x, &ipart) * 10);
+	game->buf[buf_x][buf_y] = 0xFF0000;
+	game->buf[buf_x + 1][buf_y] = 0xFF0000;
+	game->buf[buf_x - 1][buf_y] = 0xFF0000;
+	game->buf[buf_x][buf_y + 1] = 0xFF0000;
+	game->buf[buf_x][buf_y - 1] = 0xFF0000;
+	game->buf[buf_x + 1][buf_y - 1] = 0xFF0000;
+	game->buf[buf_x - 1][buf_y + 1] = 0xFF0000;
+	game->buf[buf_x + 1][buf_y + 1] = 0xFF0000;
+	game->buf[buf_x - 1][buf_y - 1] = 0xFF0000;
 	(void)ipart;
 }
 

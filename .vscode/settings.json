@@ -1,10 +1,11 @@
 {
 	"C_Cpp.dimInactiveRegions": false,
 	"files.associations": {
-		"cat3d.h": "c",
-		"param.h": "c",
-		"image.h": "c",
-		"parse.h": "c",
-		"ios": "c"
-	}
+        "cat3d.h": "c",
+        "param.h": "c",
+        "image.h": "c",
+        "parse.h": "c",
+        "ios": "c",
+        "math.h": "c"
+    }
 }
