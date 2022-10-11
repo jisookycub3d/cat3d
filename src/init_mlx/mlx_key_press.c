@@ -13,44 +13,42 @@
 #include "../include/cat3d.h"
 #include <math.h>
 
-int	key_press(int keycode, t_game *game)
+void	key_update(t_game *game)
 {
     double	move_speed = 0.07;
     double	rot_speed = 0.1;
     double  old_dir_x;
     double  old_plane_x;
-    
-    if (keycode == KEY_ESC)
-        press_exit_button(game);
-    if (keycode == KEY_A)
+
+    if (game->keycode.key_a)
     {
         if (game->map.imap[(int)(game->param.pos_y)][(int)(game->param.pos_x + game->param.plane_x * move_speed)] & EMPTY)
             game->param.pos_x += game->param.plane_x * move_speed;
         if (game->map.imap[(int)(game->param.pos_y + game->param.plane_y * move_speed)][(int)(game->param.pos_x)] & EMPTY)
             game->param.pos_y += game->param.plane_y * move_speed;
     }
-    if (keycode == KEY_D)
+    if (game->keycode.key_d)
     {
         if (game->map.imap[(int)(game->param.pos_y)][(int)(game->param.pos_x - game->param.plane_x * move_speed)] & EMPTY)
             game->param.pos_x -= game->param.plane_x * move_speed;
         if (game->map.imap[(int)(game->param.pos_y - game->param.plane_y * move_speed)][(int)(game->param.pos_x)] & EMPTY)
             game->param.pos_y -= game->param.plane_y * move_speed;
     }
-    if (keycode == KEY_S)
+    if (game->keycode.key_s)
     {
         if (game->map.imap[(int)(game->param.pos_y)][(int)(game->param.pos_x - game->param.dir_x * move_speed)] & EMPTY)
             game->param.pos_x -= game->param.dir_x * move_speed;
         if (game->map.imap[(int)(game->param.pos_y - game->param.dir_y * move_speed)][(int)(game->param.pos_x)] & EMPTY)
             game->param.pos_y -= game->param.dir_y * move_speed;
     }
-    if (keycode == KEY_W)
+    if (game->keycode.key_w)
     {
         if (game->map.imap[(int)(game->param.pos_y)][(int)(game->param.pos_x + game->param.dir_x * move_speed)] & EMPTY)
             game->param.pos_x += game->param.dir_x * move_speed;
         if (game->map.imap[(int)(game->param.pos_y + game->param.dir_y * move_speed)][(int)(game->param.pos_x)] & EMPTY)
             game->param.pos_y += game->param.dir_y * move_speed;
     }
-    if (keycode == KEY_LEFT)
+    if (game->keycode.key_left)
     {
         old_dir_x = game->param.dir_x;
         game->param.dir_x = game->param.dir_x * cos(-rot_speed) - game->param.dir_y * sin(-rot_speed);
@@ -59,7 +57,7 @@ int	key_press(int keycode, t_game *game)
         game->param.plane_x = game->param.plane_x * cos(-rot_speed) - game->param.plane_y * sin(-rot_speed);
         game->param.plane_y = old_plane_x * sin(-rot_speed) + game->param.plane_y * cos(-rot_speed);
     }
-    if (keycode == KEY_RIGHT)
+    if (game->keycode.key_right)
     {
         old_dir_x = game->param.dir_x;
         game->param.dir_x = game->param.dir_x * cos(rot_speed) - game->param.dir_y * sin(rot_speed);
@@ -68,21 +66,53 @@ int	key_press(int keycode, t_game *game)
         game->param.plane_x = game->param.plane_x * cos(rot_speed) - game->param.plane_y * sin(rot_speed);
         game->param.plane_y = old_plane_x * sin(rot_speed) + game->param.plane_y * cos(rot_speed);
     }
-    if (keycode == KEY_E)
-    {
-        if (game->map.imap[(int)floor(game->param.pos_y)][(int)floor(game->param.pos_x) + 1] & DOOR)
-            game->door = 1;
-        if (game->map.imap[(int)floor(game->param.pos_y)][(int)floor(game->param.pos_x) + 1] & DOOR)
-            game->door = 1;
-        if (game->map.imap[(int)floor(game->param.pos_y) + 1][(int)floor(game->param.pos_x)] & DOOR)
-            game->door = 1;
-        if (game->map.imap[(int)floor(game->param.pos_y) - 1][(int)floor(game->param.pos_x)] & DOOR)
-            game->door = 1;
-    }
-    printf("%f %f\n", game->param.dir_x, game->param.dir_y);
-    mlx_clear_window(game->mlx, game->win);
-    main_loop(game);
-    return (0);
+}
+
+int	key_press(int keycode, t_game *game)
+{
+	if (keycode == KEY_A)
+		game->keycode.key_a = 1;
+	if (keycode == KEY_W)
+		game->keycode.key_w = 1;
+	if (keycode == KEY_D)
+		game->keycode.key_d = 1;
+	if (keycode == KEY_S)
+		game->keycode.key_s = 1;
+	if (keycode == KEY_LEFT)
+		game->keycode.key_left = 1;
+	if (keycode == KEY_RIGHT)
+		game->keycode.key_right = 1;
+	return (0);
+}
+
+int	key_release(int keycode, t_game *game)
+{
+	if (keycode == KEY_ESC)
+		 press_exit_button(game);
+	if (keycode == KEY_A)
+		game->keycode.key_a = 0;
+	if (keycode == KEY_W)
+		game->keycode.key_w = 0;
+	if (keycode == KEY_D)
+		game->keycode.key_d = 0;
+	if (keycode == KEY_S)
+		game->keycode.key_s = 0;
+	if (keycode == KEY_LEFT)
+		game->keycode.key_left = 0;
+	if (keycode == KEY_RIGHT)
+		game->keycode.key_right = 0;
+	if (keycode == KEY_E)
+	{
+		if (game->map.imap[(int)floor(game->param.pos_y)][(int)floor(game->param.pos_x) + 1] & DOOR)
+			game->door = 1;
+		if (game->map.imap[(int)floor(game->param.pos_y)][(int)floor(game->param.pos_x) + 1] & DOOR)
+			game->door = 1;
+		if (game->map.imap[(int)floor(game->param.pos_y) + 1][(int)floor(game->param.pos_x)] & DOOR)
+			game->door = 1;
+		if (game->map.imap[(int)floor(game->param.pos_y) - 1][(int)floor(game->param.pos_x)] & DOOR)
+			game->door = 1;
+	}
+	return (0);
 }
 
 int	press_exit_button(t_game *game)

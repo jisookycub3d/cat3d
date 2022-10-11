@@ -136,6 +136,17 @@ typedef struct	s_mouse
     int	mouse_x;
 }				t_mouse;
 
+typedef	struct s_keycode
+{
+	int			key_a;
+	int			key_s;
+	int			key_d;
+	int			key_w;
+	int			key_right;
+	int			key_left;
+}				t_keycode;
+
+
 
 
 typedef struct s_game
@@ -153,6 +164,7 @@ typedef struct s_game
 	t_image		image;
 	t_render	render;
 	t_mouse		mouse;
+	t_keycode	keycode;
 }				t_game;
 
 /* check_arg.c */
@@ -233,5 +245,6 @@ void	load_texture(t_game *game);
 void	mouse_move(t_game *game);
 void	minimap(t_game *game);
 void	door(t_game *game);
-
+void	key_update(t_game *game);
+int	key_release(int keycode, t_game *game);
 #endif

@@ -209,5 +209,6 @@ int	main_loop(t_game *game)
 	render(game);
     minimap(game);
 	draw(game);
+	key_update(game);
 	return (0);
 }
