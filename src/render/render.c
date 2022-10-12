@@ -202,7 +202,7 @@ void	load_texture(t_game *game)
 	load_image(game, game->tex[2], game->texture.east);
 	load_image(game, game->tex[3], game->texture.west);
 	load_image(game, game->tex[4], "./jisoocat2.png");
-	load_image(game, game->tex[5], "./doju.png");
+	load_image(game, game->tex[5], "./ghost.png");
 }
 
 int	main_loop(t_game *game)

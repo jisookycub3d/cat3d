@@ -18,11 +18,11 @@
   10D0100100000000000001010000001
   10D0100100000000000000000000001
   1111111111111111111111111111111
-		F 255,192,203
-NO			 				./jisoocat2.png
-	C 225,30,0000
+		F 44,12,34
+NO			 				./purple_window.png
+	C 000,000,0000
 
-		SO  	./doju.png
-WE	 	./white.png
+		SO  	./blue_light_window.png
+WE	 	./black_wall.png
 EA     ./black.png
 
