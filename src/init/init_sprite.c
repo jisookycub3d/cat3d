@@ -18,7 +18,6 @@ void	get_sprite_pos(t_game *game)
 				game->sprite[cnt].texture = 5;
 				game->sprite[cnt].x = j + 0.5;
 				game->sprite[cnt].y = i + 0.5;
-				game->map.imap[i][j] = EMPTY;
 				cnt++;
 			}
 			j++;

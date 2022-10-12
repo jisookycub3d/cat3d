@@ -12,8 +12,8 @@ void	door(t_game *game)
 		return ;
 	if (game->map.imap[map_y][map_x + 1] & DOOR)
 		game->map.imap[map_y][map_x + 1] = EMPTY;
-	if (game->map.imap[map_y][map_x + 1] & DOOR)
-		game->map.imap[map_y][map_x + 1] = EMPTY;
+	if (game->map.imap[map_y][map_x - 1] & DOOR)
+		game->map.imap[map_y][map_x - 1] = EMPTY;
 	if (game->map.imap[map_y + 1][map_x] & DOOR)
 		game->map.imap[map_y + 1][map_x] = EMPTY;
 	if (game->map.imap[map_y - 1][map_x] & DOOR)

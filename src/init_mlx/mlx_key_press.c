@@ -20,30 +20,30 @@ void	key_update(t_game *game)
 
     if (game->keycode.key_d)
     {
-        if (game->map.imap[(int)(game->param.pos_y)][(int)(game->param.pos_x + game->param.plane_x * game->player.move_speed)] & EMPTY)
+        if (game->map.imap[(int)(game->param.pos_y)][(int)(game->param.pos_x + game->param.plane_x * game->player.move_speed)] & EMPTY || game->map.imap[(int)(game->param.pos_y)][(int)(game->param.pos_x + game->param.plane_x * game->player.move_speed)] & SPRITE)
             game->param.pos_x += game->param.plane_x * game->player.move_speed;
-        if (game->map.imap[(int)(game->param.pos_y + game->param.plane_y * game->player.move_speed)][(int)(game->param.pos_x)] & EMPTY)
+        if (game->map.imap[(int)(game->param.pos_y + game->param.plane_y * game->player.move_speed)][(int)(game->param.pos_x)] & EMPTY || game->map.imap[(int)(game->param.pos_y + game->param.plane_y * game->player.move_speed)][(int)(game->param.pos_x)] & SPRITE)
             game->param.pos_y += game->param.plane_y * game->player.move_speed;
     }
     if (game->keycode.key_a)
     {
-        if (game->map.imap[(int)(game->param.pos_y)][(int)(game->param.pos_x - game->param.plane_x * game->player.move_speed)] & EMPTY)
+        if (game->map.imap[(int)(game->param.pos_y)][(int)(game->param.pos_x - game->param.plane_x * game->player.move_speed)] & EMPTY || game->map.imap[(int)(game->param.pos_y)][(int)(game->param.pos_x - game->param.plane_x * game->player.move_speed)] & SPRITE)
             game->param.pos_x -= game->param.plane_x * game->player.move_speed;
-        if (game->map.imap[(int)(game->param.pos_y - game->param.plane_y * game->player.move_speed)][(int)(game->param.pos_x)] & EMPTY)
+        if (game->map.imap[(int)(game->param.pos_y - game->param.plane_y * game->player.move_speed)][(int)(game->param.pos_x)] & EMPTY || game->map.imap[(int)(game->param.pos_y - game->param.plane_y * game->player.move_speed)][(int)(game->param.pos_x)] & SPRITE)
             game->param.pos_y -= game->param.plane_y * game->player.move_speed;
     }
     if (game->keycode.key_s)
     {
-        if (game->map.imap[(int)(game->param.pos_y)][(int)(game->param.pos_x - game->param.dir_x * game->player.move_speed)] & EMPTY)
+        if (game->map.imap[(int)(game->param.pos_y)][(int)(game->param.pos_x - game->param.dir_x * game->player.move_speed)] & EMPTY || game->map.imap[(int)(game->param.pos_y)][(int)(game->param.pos_x - game->param.dir_x * game->player.move_speed)] & SPRITE)
             game->param.pos_x -= game->param.dir_x * game->player.move_speed;
-        if (game->map.imap[(int)(game->param.pos_y - game->param.dir_y * game->player.move_speed)][(int)(game->param.pos_x)] & EMPTY)
+        if (game->map.imap[(int)(game->param.pos_y - game->param.dir_y * game->player.move_speed)][(int)(game->param.pos_x)] & EMPTY || game->map.imap[(int)(game->param.pos_y - game->param.dir_y * game->player.move_speed)][(int)(game->param.pos_x)] & SPRITE)
             game->param.pos_y -= game->param.dir_y * game->player.move_speed;
     }
     if (game->keycode.key_w)
     {
-        if (game->map.imap[(int)(game->param.pos_y)][(int)(game->param.pos_x + game->param.dir_x * game->player.move_speed)] & EMPTY)
+        if (game->map.imap[(int)(game->param.pos_y)][(int)(game->param.pos_x + game->param.dir_x * game->player.move_speed)] & EMPTY || game->map.imap[(int)(game->param.pos_y)][(int)(game->param.pos_x + game->param.dir_x * game->player.move_speed)] & SPRITE)
             game->param.pos_x += game->param.dir_x * game->player.move_speed;
-        if (game->map.imap[(int)(game->param.pos_y + game->param.dir_y * game->player.move_speed)][(int)(game->param.pos_x)] & EMPTY)
+        if (game->map.imap[(int)(game->param.pos_y + game->param.dir_y * game->player.move_speed)][(int)(game->param.pos_x)] & EMPTY || game->map.imap[(int)(game->param.pos_y + game->param.dir_y * game->player.move_speed)][(int)(game->param.pos_x)] & SPRITE)
             game->param.pos_y += game->param.dir_y * game->player.move_speed;
     }
     if (game->keycode.key_left)
@@ -103,7 +103,7 @@ int	key_release(int keycode, t_game *game)
 	{
 		if (game->map.imap[(int)floor(game->param.pos_y)][(int)floor(game->param.pos_x) + 1] & DOOR)
 			game->door = 1;
-		if (game->map.imap[(int)floor(game->param.pos_y)][(int)floor(game->param.pos_x) + 1] & DOOR)
+		if (game->map.imap[(int)floor(game->param.pos_y)][(int)floor(game->param.pos_x) - 1] & DOOR)
 			game->door = 1;
 		if (game->map.imap[(int)floor(game->param.pos_y) + 1][(int)floor(game->param.pos_x)] & DOOR)
 			game->door = 1;

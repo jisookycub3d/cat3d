@@ -76,7 +76,7 @@ int	check_wall_hit(t_game *game)
 			side = 1;
 		}
 		//Check if ray has hit a wall
-		if (!(game->map.imap[game->render.map_y][game->render.map_x] & EMPTY))
+		if (!(game->map.imap[game->render.map_y][game->render.map_x] & EMPTY) && !(game->map.imap[game->render.map_y][game->render.map_x] & SPRITE)/* && !(game->map.imap[game->render.map_y][game->render.map_x] & DOOR)*/)
 			hit = 1;
 	}
 	return (side);
@@ -201,7 +201,7 @@ void	load_texture(t_game *game)
 	load_image(game, game->tex[1], game->texture.south);
 	load_image(game, game->tex[2], game->texture.east);
 	load_image(game, game->tex[3], game->texture.west);
-	load_image(game, game->tex[4], "./jisoocat2.png");
+	load_image(game, game->tex[4], "./door.png");
 	load_image(game, game->tex[5], "./ghost.png");
 }
 
