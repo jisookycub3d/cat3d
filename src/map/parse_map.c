@@ -85,5 +85,6 @@ int	parse_map(t_game *game, char *mapfile)
 	gnl = get_next_line(fd);
 	get_lines(game, gnl, fd);
 	make_imap(game);
+	init_sprite(game);
 	return (0);
 }

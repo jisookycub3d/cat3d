@@ -38,6 +38,9 @@
 # define S_HEIGHT (480 * 2)
 # define TEX_SIZE 128
 
+#define UDIV 1
+#define VDIV 1
+#define VMOVE 0.0
 
 
 enum {
@@ -56,7 +59,8 @@ enum e_words
 	EMPTY = 1 << 1,
 	DIRECTION = 1 << 2,
 	DOOR = 1 << 3,
-	SPACE = 1 << 4
+	SPACE = 1 << 4,
+	SPRITE = 1 << 5
 };
 
 typedef struct s_texture
@@ -88,6 +92,8 @@ typedef struct s_player
 	char		direction;
 	int			pos_x;
 	int			pos_y;
+	double		move_speed;
+	double		rot_speed;
 }				t_player;
 
 typedef struct s_param
@@ -146,8 +152,35 @@ typedef	struct s_keycode
 	int			key_left;
 }				t_keycode;
 
+typedef struct	s_sprite
+{
+	double		x;
+	double		y;
+	int			texture;
+}				t_sprite;
 
+typedef struct	s_sprite_param
+{
+	double		*zbuffer;
+	double		sprite_x;
+	double		sprite_y;
+	double		transform_x;
+	double		transform_y;
+	int			sprite_screen_x;
+	int			vmove_screen;
+	int			sprite_height;
+	int			draw_start_y;
+	int			draw_end_y;
+	int			sprite_width;
+	int			draw_start_x;
+	int			draw_end_x;
+}				t_sprite_param;
 
+typedef struct	s_pair
+{
+	double		first;
+	int			second;
+}				t_pair;
 
 typedef struct s_game
 {
@@ -156,6 +189,9 @@ typedef struct s_game
 	int			**tex;
 	int			**buf;
     int         door;
+	int			*sprite_order;
+	double		*sprite_distance;
+	int			sprite_cnt;
 	t_texture	texture;
 	t_map		map;
 	t_rgb		rgb;
@@ -165,6 +201,8 @@ typedef struct s_game
 	t_render	render;
 	t_mouse		mouse;
 	t_keycode	keycode;
+	t_sprite	*sprite;
+	t_sprite_param	sp_param;
 }				t_game;
 
 /* check_arg.c */
@@ -236,7 +274,7 @@ int	ft_strlen_without_space(char *str);
 int	rgb_atoi(t_game *game, char **rgb, char flag);
 
 /* utils.c */
-char	bit_mask(char c);
+char	bit_mask(t_game *game, char c);
 int		rgb_to_i(int *arr);
 
 
@@ -247,4 +285,7 @@ void	minimap(t_game *game);
 void	door(t_game *game);
 void	key_update(t_game *game);
 int	key_release(int keycode, t_game *game);
+void	render_sprite(t_game *game);
+void	init_sprite(t_game *game);
+
 #endif

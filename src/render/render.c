@@ -15,7 +15,7 @@ void	draw(t_game *game)
 
 void	init_render(t_game *game, int x)
 {
-	game->render.camera_x = -(2 * x / (double)S_WIDTH - 1);
+	game->render.camera_x = (2 * x / (double)S_WIDTH - 1);
 	game->render.ray_dir_x = game->param.dir_x + game->param.plane_x * game->render.camera_x;
 	game->render.ray_dir_y = game->param.dir_y + game->param.plane_y * game->render.camera_x;
 	
@@ -174,8 +174,11 @@ void	render(t_game *game)
 		draw_start_to_end(game, line_height);
 		set_wall_texture(game, side);
 		set_pixel_on_screen(game, line_height, x);
+		if (game->sprite_cnt)
+			game->sp_param.zbuffer[x] = game->render.perp_wall_dist;
 		x++;
 	}
+	render_sprite(game);
 }
 
 void	load_image(t_game *game, int *tex, char *path)
@@ -199,7 +202,7 @@ void	load_texture(t_game *game)
 	load_image(game, game->tex[2], game->texture.east);
 	load_image(game, game->tex[3], game->texture.west);
 	load_image(game, game->tex[4], "./jisoocat2.png");
-	load_image(game, game->tex[5], "./jisoocat.png");
+	load_image(game, game->tex[5], "./doju.png");
 }
 
 int	main_loop(t_game *game)

@@ -17,7 +17,7 @@ int	rgb_to_i(int *arr)
 	return (arr[0] * 16 * 16 * 16 * 16 + arr[1] * 16 * 16 + arr[2]);
 }
 
-char	bit_mask(char c)
+char	bit_mask(t_game *game, char c)
 {
 	if (c == '1')
 		c = WALL;
@@ -27,6 +27,11 @@ char	bit_mask(char c)
 		c = SPACE;
 	else if (c == 'D')
 		c = DOOR;
+	else if (c == '2')
+	{
+		c = SPRITE;
+		game->sprite_cnt++;
+	}
 	return (c);
 }
 

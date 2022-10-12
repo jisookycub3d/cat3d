@@ -48,8 +48,8 @@ static int	check_right_composition(t_game *game)
 		j = 0;
 		while (game->map.map[i][j])
 		{
-			if ((ft_strchr("NSEW10D ", game->map.map[i][j])))
-				game->map.map[i][j] = bit_mask(game->map.map[i][j]);
+			if ((ft_strchr("NSEW10D2 ", game->map.map[i][j])))
+				game->map.map[i][j] = bit_mask(game, game->map.map[i][j]);
 			else
 				return (1);
 			j++;

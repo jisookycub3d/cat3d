@@ -40,14 +40,16 @@ void init_param(t_game *game)
 {
 	game->param.pos_x = (double)(game->player.pos_x) + 0.5;
 	game->param.pos_y = (double)(game->player.pos_y) + 0.5; //플레이어 초기 위치벡터
+	game->player.move_speed = 0.05;
+	game->player.rot_speed = 0.05;
     init_param_dir(game);
 	if (game->param.dir_x < 0)
 		game->param.plane_y = 0.66;
 	else if (game->param.dir_x > 0)
 		game->param.plane_y = -0.66;
-	else if (game->param.dir_y < 0)
-		game->param.plane_x = -0.66;
 	else if (game->param.dir_y > 0)
+		game->param.plane_x = -0.66;
+	else if (game->param.dir_y < 0)
 		game->param.plane_x = 0.66;
 	game->rgb.floor_rgb = rgb_to_i(game->rgb.floor);
 	game->rgb.ceiling_rgb = rgb_to_i(game->rgb.ceiling);

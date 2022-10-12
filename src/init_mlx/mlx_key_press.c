@@ -15,56 +15,54 @@
 
 void	key_update(t_game *game)
 {
-    double	move_speed = 0.07;
-    double	rot_speed = 0.1;
     double  old_dir_x;
     double  old_plane_x;
 
-    if (game->keycode.key_a)
-    {
-        if (game->map.imap[(int)(game->param.pos_y)][(int)(game->param.pos_x + game->param.plane_x * move_speed)] & EMPTY)
-            game->param.pos_x += game->param.plane_x * move_speed;
-        if (game->map.imap[(int)(game->param.pos_y + game->param.plane_y * move_speed)][(int)(game->param.pos_x)] & EMPTY)
-            game->param.pos_y += game->param.plane_y * move_speed;
-    }
     if (game->keycode.key_d)
     {
-        if (game->map.imap[(int)(game->param.pos_y)][(int)(game->param.pos_x - game->param.plane_x * move_speed)] & EMPTY)
-            game->param.pos_x -= game->param.plane_x * move_speed;
-        if (game->map.imap[(int)(game->param.pos_y - game->param.plane_y * move_speed)][(int)(game->param.pos_x)] & EMPTY)
-            game->param.pos_y -= game->param.plane_y * move_speed;
+        if (game->map.imap[(int)(game->param.pos_y)][(int)(game->param.pos_x + game->param.plane_x * game->player.move_speed)] & EMPTY)
+            game->param.pos_x += game->param.plane_x * game->player.move_speed;
+        if (game->map.imap[(int)(game->param.pos_y + game->param.plane_y * game->player.move_speed)][(int)(game->param.pos_x)] & EMPTY)
+            game->param.pos_y += game->param.plane_y * game->player.move_speed;
+    }
+    if (game->keycode.key_a)
+    {
+        if (game->map.imap[(int)(game->param.pos_y)][(int)(game->param.pos_x - game->param.plane_x * game->player.move_speed)] & EMPTY)
+            game->param.pos_x -= game->param.plane_x * game->player.move_speed;
+        if (game->map.imap[(int)(game->param.pos_y - game->param.plane_y * game->player.move_speed)][(int)(game->param.pos_x)] & EMPTY)
+            game->param.pos_y -= game->param.plane_y * game->player.move_speed;
     }
     if (game->keycode.key_s)
     {
-        if (game->map.imap[(int)(game->param.pos_y)][(int)(game->param.pos_x - game->param.dir_x * move_speed)] & EMPTY)
-            game->param.pos_x -= game->param.dir_x * move_speed;
-        if (game->map.imap[(int)(game->param.pos_y - game->param.dir_y * move_speed)][(int)(game->param.pos_x)] & EMPTY)
-            game->param.pos_y -= game->param.dir_y * move_speed;
+        if (game->map.imap[(int)(game->param.pos_y)][(int)(game->param.pos_x - game->param.dir_x * game->player.move_speed)] & EMPTY)
+            game->param.pos_x -= game->param.dir_x * game->player.move_speed;
+        if (game->map.imap[(int)(game->param.pos_y - game->param.dir_y * game->player.move_speed)][(int)(game->param.pos_x)] & EMPTY)
+            game->param.pos_y -= game->param.dir_y * game->player.move_speed;
     }
     if (game->keycode.key_w)
     {
-        if (game->map.imap[(int)(game->param.pos_y)][(int)(game->param.pos_x + game->param.dir_x * move_speed)] & EMPTY)
-            game->param.pos_x += game->param.dir_x * move_speed;
-        if (game->map.imap[(int)(game->param.pos_y + game->param.dir_y * move_speed)][(int)(game->param.pos_x)] & EMPTY)
-            game->param.pos_y += game->param.dir_y * move_speed;
+        if (game->map.imap[(int)(game->param.pos_y)][(int)(game->param.pos_x + game->param.dir_x * game->player.move_speed)] & EMPTY)
+            game->param.pos_x += game->param.dir_x * game->player.move_speed;
+        if (game->map.imap[(int)(game->param.pos_y + game->param.dir_y * game->player.move_speed)][(int)(game->param.pos_x)] & EMPTY)
+            game->param.pos_y += game->param.dir_y * game->player.move_speed;
     }
     if (game->keycode.key_left)
     {
         old_dir_x = game->param.dir_x;
-        game->param.dir_x = game->param.dir_x * cos(-rot_speed) - game->param.dir_y * sin(-rot_speed);
-        game->param.dir_y = old_dir_x * sin(-rot_speed) + game->param.dir_y * cos(-rot_speed);
+        game->param.dir_x = game->param.dir_x * cos(-game->player.rot_speed) - game->param.dir_y * sin(-game->player.rot_speed);
+        game->param.dir_y = old_dir_x * sin(-game->player.rot_speed) + game->param.dir_y * cos(-game->player.rot_speed);
         old_plane_x = game->param.plane_x;
-        game->param.plane_x = game->param.plane_x * cos(-rot_speed) - game->param.plane_y * sin(-rot_speed);
-        game->param.plane_y = old_plane_x * sin(-rot_speed) + game->param.plane_y * cos(-rot_speed);
+        game->param.plane_x = game->param.plane_x * cos(-game->player.rot_speed) - game->param.plane_y * sin(-game->player.rot_speed);
+        game->param.plane_y = old_plane_x * sin(-game->player.rot_speed) + game->param.plane_y * cos(-game->player.rot_speed);
     }
     if (game->keycode.key_right)
     {
         old_dir_x = game->param.dir_x;
-        game->param.dir_x = game->param.dir_x * cos(rot_speed) - game->param.dir_y * sin(rot_speed);
-        game->param.dir_y = old_dir_x * sin(rot_speed) + game->param.dir_y * cos(rot_speed);
+        game->param.dir_x = game->param.dir_x * cos(game->player.rot_speed) - game->param.dir_y * sin(game->player.rot_speed);
+        game->param.dir_y = old_dir_x * sin(game->player.rot_speed) + game->param.dir_y * cos(game->player.rot_speed);
         old_plane_x = game->param.plane_x;
-        game->param.plane_x = game->param.plane_x * cos(rot_speed) - game->param.plane_y * sin(rot_speed);
-        game->param.plane_y = old_plane_x * sin(rot_speed) + game->param.plane_y * cos(rot_speed);
+        game->param.plane_x = game->param.plane_x * cos(game->player.rot_speed) - game->param.plane_y * sin(game->player.rot_speed);
+        game->param.plane_y = old_plane_x * sin(game->player.rot_speed) + game->param.plane_y * cos(game->player.rot_speed);
     }
 }
 
