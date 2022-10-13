@@ -58,8 +58,12 @@ int	check_wall_hit(t_game *game)
 {
 	int side;
 	int hit;
+	double	wallx;
 
 	hit = 0; //was there a wall hit?
+	wallx = 0;
+	game->render.wall_offset_x = 0;
+	game->render.wall_offset_y = 0;
 	while (hit == 0)
 	{
 		//jump to next map square, OR in x-direction, OR in y-direction
@@ -75,8 +79,47 @@ int	check_wall_hit(t_game *game)
 			game->render.map_y += game->render.step_y;
 			side = 1;
 		}
+		if (game->map.imap[game->render.map_y][game->render.map_x] & DOOR)
+		{
+			hit = 1;
+			if (side == 1)
+			{
+				game->render.wall_offset_y = 0.5 * game->render.step_y;
+				game->render.perp_wall_dist = (game->render.map_y - game->param.pos_y + game->render.wall_offset_y + (1 - game->render.step_y) / 2) / game->render.ray_dir_y;
+				wallx = game->param.pos_x + game->render.perp_wall_dist * game->render.ray_dir_x;
+				wallx -= floor(wallx);
+				if (game->render.side_dist_y - (game->render.delta_dist_y / 2) < game->render.side_dist_x)
+				{
+					;
+				}
+				else
+				{
+					game->render.map_x += game->render.step_x;
+					side = 0;
+					game->render.wall_offset_y = 0;
+				}
+			}
+			else
+			{
+				game->render.wall_offset_x = 0.5 * game->render.step_x;
+				game->render.perp_wall_dist = (game->render.map_x - game->param.pos_x + game->render.wall_offset_x + (1 - game->render.step_x) / 2) / game->render.ray_dir_x;
+				wallx = game->param.pos_y + game->render.perp_wall_dist * game->render.ray_dir_y;
+				wallx -= floor(wallx);
+				if (game->render.side_dist_x - (game->render.delta_dist_x / 2) < game->render.side_dist_y)
+				{
+					;
+				}
+				else
+				{
+					game->render.map_y += game->render.step_y;
+					side = 1;
+					game->render.wall_offset_x = 0;
+				}
+			}
+			
+		}
 		//Check if ray has hit a wall
-		if (!(game->map.imap[game->render.map_y][game->render.map_x] & EMPTY) && !(game->map.imap[game->render.map_y][game->render.map_x] & SPRITE)/* && !(game->map.imap[game->render.map_y][game->render.map_x] & DOOR)*/)
+		else if (!(game->map.imap[game->render.map_y][game->render.map_x] & SPRITE) && !(game->map.imap[game->render.map_y][game->render.map_x] & EMPTY))
 			hit = 1;
 	}
 	return (side);
@@ -85,9 +128,9 @@ int	check_wall_hit(t_game *game)
 int	set_line_height(t_game *game, int side)
 {
 	if (side == 0)
-		game->render.perp_wall_dist = (game->render.map_x - game->param.pos_x + (1 - game->render.step_x) / 2) / game->render.ray_dir_x;
+		game->render.perp_wall_dist = (game->render.map_x - game->param.pos_x + game->render.wall_offset_x + (1 - game->render.step_x) / 2) / game->render.ray_dir_x;
 	else
-		game->render.perp_wall_dist = (game->render.map_y - game->param.pos_y + (1 - game->render.step_y) / 2) / game->render.ray_dir_y;
+		game->render.perp_wall_dist = (game->render.map_y - game->param.pos_y + game->render.wall_offset_y + (1 - game->render.step_y) / 2) / game->render.ray_dir_y;
 	//Calculate height of line to draw on screen
 	return((int)(S_HEIGHT / game->render.perp_wall_dist));
 }
@@ -119,6 +162,10 @@ void		set_wall_texture(t_game *game, int side)
 			game->render.tex_num = 2; //E
 		else if (side == 0 && game->render.ray_dir_x < 0)
 			game->render.tex_num = 3; //W
+		if (side == 0 && game->map.imap[game->render.map_y][game->render.map_x - game->render.step_x] & DOOR)
+			game->render.tex_num = 2;
+		else if (side == 1 && game->map.imap[game->render.map_y - game->render.step_y][game->render.map_x] & DOOR)
+			game->render.tex_num = 2;
 	}
 	if (side == 0)
 		wall_x = game->param.pos_y + game->render.perp_wall_dist * game->render.ray_dir_y;

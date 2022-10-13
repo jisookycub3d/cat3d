@@ -6,7 +6,7 @@
 /*   By: kyhan <kyhan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/23 05:22:12 by kyhan             #+#    #+#             */
-/*   Updated: 2022/10/03 13:43:13 by kyhan            ###   ########.fr       */
+/*   Updated: 2022/10/13 16:22:57 by kyhan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@ int	check_wall(t_game *game, int i, int j)
 {
 	int	row_len;
 	int	col_len;
+	int	cnt;
 
 	row_len = ft_strlen(game->map.map[i]) - 1;
 	col_len = ft_strslen(game->map.map) - 1;
@@ -27,6 +28,16 @@ int	check_wall(t_game *game, int i, int j)
 		return (1);
 	if (((j && (game->map.map[i][j - 1] & SPACE)) || j == 0))
 		return (1);
+	if (game->map.map[i][j] & DOOR)
+	{
+		cnt = 0;
+		if (game->map.map[i - 1][j] & WALL && game->map.map[i + 1][j] & WALL)
+			cnt++;
+		if (game->map.map[i][j - 1] & WALL && game->map.map[i][j + 1] & WALL)
+			cnt++;
+		if (!cnt)
+			return (1);
+	}
 	return (0);
 }
 

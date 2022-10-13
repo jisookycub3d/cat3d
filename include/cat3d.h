@@ -6,7 +6,7 @@
 /*   By: kyhan <kyhan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/19 14:00:14 by jisookim          #+#    #+#             */
-/*   Updated: 2022/10/07 10:20:14 by kyhan            ###   ########.fr       */
+/*   Updated: 2022/10/13 15:25:50 by kyhan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -135,6 +135,8 @@ typedef struct s_render
 	int	draw_end;
 	int	tex_num;
 	int	tex_x;
+	double	wall_offset_x;
+	double	wall_offset_y;
 }				t_render;
 
 typedef struct	s_mouse
