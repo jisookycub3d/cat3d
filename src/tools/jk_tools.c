@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   jk_tools.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kyhan <kyhan@student.42.fr>                +#+  +:+       +#+        */
+/*   By: jisookim <jisookim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/28 14:39:35 by jisookim          #+#    #+#             */
-/*   Updated: 2022/09/28 16:03:48 by kyhan            ###   ########.fr       */
+/*   Updated: 2022/10/17 11:47:06 by jisookim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ int	is_space(char c)
 {
 	if ((c >= 9 && c <= 13) || c == 32)
 		return (1);
-	return(0);
+	return (0);
 }
 
 int	ft_strslen(char **strs)

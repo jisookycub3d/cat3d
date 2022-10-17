@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_map.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kyhan <kyhan@student.42.fr>                +#+  +:+       +#+        */
+/*   By: jisookim <jisookim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/20 02:20:07 by kyhan             #+#    #+#             */
-/*   Updated: 2022/10/03 18:11:00 by kyhan            ###   ########.fr       */
+/*   Updated: 2022/10/17 11:28:50 by jisookim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ void	make_imap(t_game *game)
 {
 	int	i;
 	int	j;
-	
+
 	i = 0;
 	init_imap(game);
 	while (game->map.map[i])
@@ -72,8 +72,8 @@ void	make_imap(t_game *game)
 		}
 		i++;
 	}
-    game->map.width = j - 1;
-    game->map.height = i - 1;
+	game->map.width = j - 1;
+	game->map.height = i - 1;
 }
 
 int	parse_map(t_game *game, char *mapfile)

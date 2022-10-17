@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_map_trim.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kyhan <kyhan@student.42.fr>                +#+  +:+       +#+        */
+/*   By: jisookim <jisookim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/23 05:25:09 by kyhan             #+#    #+#             */
-/*   Updated: 2022/09/28 15:57:20 by kyhan            ###   ########.fr       */
+/*   Updated: 2022/10/17 11:24:36 by jisookim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 static void	add_space(t_game *game, int cnt)
 {
-	int	i;
-	int	j;
+	int		i;
+	int		j;
 	char	*tmp;
 
 	i = 0;
@@ -55,7 +55,7 @@ static void	del_space(t_game *game, int cnt)
 {
 	int	i;
 	int	j;
-	
+
 	if (!cnt)
 		return ;
 	i = 0;

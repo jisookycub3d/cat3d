@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_map.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kyhan <kyhan@student.42.fr>                +#+  +:+       +#+        */
+/*   By: jisookim <jisookim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/23 05:22:12 by kyhan             #+#    #+#             */
-/*   Updated: 2022/10/13 16:22:57 by kyhan            ###   ########.fr       */
+/*   Updated: 2022/10/17 11:23:27 by jisookim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,11 +63,6 @@ int	check_map(t_game *game)
 	i = ft_strslen(game->map.map);
 	if (i < 3)
 		return (1);
-	i = 0;
-	for(int i = 0; game->map.map[i]; i++)
-	{
-		printf("%s\n", game->map.map[i]);
-	}
 	trim_map_front(game);
 	trim_map_back(game);
 	if (check_content(game))

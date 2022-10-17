@@ -3,67 +3,31 @@
 /*                                                        :::      ::::::::   */
 /*   mlx_key_press.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kyhan <kyhan@student.42.fr>                +#+  +:+       +#+        */
+/*   By: jisookim <jisookim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/09/28 14:09:22 by jisookim          #+#    #+#             */
-/*   Updated: 2022/10/13 16:32:25 by kyhan            ###   ########.fr       */
+/*   Created: 2022/10/17 11:27:30 by jisookim          #+#    #+#             */
+/*   Updated: 2022/10/17 12:00:26 by jisookim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/cat3d.h"
-#include <math.h>
 
 void	key_update(t_game *game)
 {
-    double  old_dir_x;
-    double  old_plane_x;
-
-    if (game->keycode.key_d)
-    {
-        if (game->map.imap[(int)(game->param.pos_y)][(int)(game->param.pos_x + game->param.plane_x * game->player.move_speed)] & EMPTY || game->map.imap[(int)(game->param.pos_y)][(int)(game->param.pos_x + game->param.plane_x * game->player.move_speed)] & SPRITE)
-            game->param.pos_x += game->param.plane_x * game->player.move_speed;
-        if (game->map.imap[(int)(game->param.pos_y + game->param.plane_y * game->player.move_speed)][(int)(game->param.pos_x)] & EMPTY || game->map.imap[(int)(game->param.pos_y + game->param.plane_y * game->player.move_speed)][(int)(game->param.pos_x)] & SPRITE)
-            game->param.pos_y += game->param.plane_y * game->player.move_speed;
-    }
-    if (game->keycode.key_a)
-    {
-        if (game->map.imap[(int)(game->param.pos_y)][(int)(game->param.pos_x - game->param.plane_x * game->player.move_speed)] & EMPTY || game->map.imap[(int)(game->param.pos_y)][(int)(game->param.pos_x - game->param.plane_x * game->player.move_speed)] & SPRITE)
-            game->param.pos_x -= game->param.plane_x * game->player.move_speed;
-        if (game->map.imap[(int)(game->param.pos_y - game->param.plane_y * game->player.move_speed)][(int)(game->param.pos_x)] & EMPTY || game->map.imap[(int)(game->param.pos_y - game->param.plane_y * game->player.move_speed)][(int)(game->param.pos_x)] & SPRITE)
-            game->param.pos_y -= game->param.plane_y * game->player.move_speed;
-    }
-    if (game->keycode.key_s)
-    {
-        if (game->map.imap[(int)(game->param.pos_y)][(int)(game->param.pos_x - game->param.dir_x * game->player.move_speed)] & EMPTY || game->map.imap[(int)(game->param.pos_y)][(int)(game->param.pos_x - game->param.dir_x * game->player.move_speed)] & SPRITE)
-            game->param.pos_x -= game->param.dir_x * game->player.move_speed;
-        if (game->map.imap[(int)(game->param.pos_y - game->param.dir_y * game->player.move_speed)][(int)(game->param.pos_x)] & EMPTY || game->map.imap[(int)(game->param.pos_y - game->param.dir_y * game->player.move_speed)][(int)(game->param.pos_x)] & SPRITE)
-            game->param.pos_y -= game->param.dir_y * game->player.move_speed;
-    }
-    if (game->keycode.key_w)
-    {
-        if (game->map.imap[(int)(game->param.pos_y)][(int)(game->param.pos_x + game->param.dir_x * game->player.move_speed)] & EMPTY || game->map.imap[(int)(game->param.pos_y)][(int)(game->param.pos_x + game->param.dir_x * game->player.move_speed)] & SPRITE)
-            game->param.pos_x += game->param.dir_x * game->player.move_speed;
-        if (game->map.imap[(int)(game->param.pos_y + game->param.dir_y * game->player.move_speed)][(int)(game->param.pos_x)] & EMPTY || game->map.imap[(int)(game->param.pos_y + game->param.dir_y * game->player.move_speed)][(int)(game->param.pos_x)] & SPRITE)
-            game->param.pos_y += game->param.dir_y * game->player.move_speed;
-    }
-    if (game->keycode.key_left)
-    {
-        old_dir_x = game->param.dir_x;
-        game->param.dir_x = game->param.dir_x * cos(-game->player.rot_speed) - game->param.dir_y * sin(-game->player.rot_speed);
-        game->param.dir_y = old_dir_x * sin(-game->player.rot_speed) + game->param.dir_y * cos(-game->player.rot_speed);
-        old_plane_x = game->param.plane_x;
-        game->param.plane_x = game->param.plane_x * cos(-game->player.rot_speed) - game->param.plane_y * sin(-game->player.rot_speed);
-        game->param.plane_y = old_plane_x * sin(-game->player.rot_speed) + game->param.plane_y * cos(-game->player.rot_speed);
-    }
-    if (game->keycode.key_right)
-    {
-        old_dir_x = game->param.dir_x;
-        game->param.dir_x = game->param.dir_x * cos(game->player.rot_speed) - game->param.dir_y * sin(game->player.rot_speed);
-        game->param.dir_y = old_dir_x * sin(game->player.rot_speed) + game->param.dir_y * cos(game->player.rot_speed);
-        old_plane_x = game->param.plane_x;
-        game->param.plane_x = game->param.plane_x * cos(game->player.rot_speed) - game->param.plane_y * sin(game->player.rot_speed);
-        game->param.plane_y = old_plane_x * sin(game->player.rot_speed) + game->param.plane_y * cos(game->player.rot_speed);
-    }
+	if (game->keycode.key_d)
+		press_d(game);
+	if (game->keycode.key_a)
+		press_a(game);
+	if (game->keycode.key_s)
+		press_s(game);
+	if (game->keycode.key_w)
+		press_w(game);
+	if (game->keycode.key_left)
+		rotate_vision(game, -game->player.rot_speed, game->param.dir_x, \
+														game->param.plane_x);
+	if (game->keycode.key_right)
+		rotate_vision(game, game->player.rot_speed, game->param.dir_x, \
+														game->param.plane_x);
 }
 
 int	key_press(int keycode, t_game *game)
@@ -83,41 +47,27 @@ int	key_press(int keycode, t_game *game)
 	return (0);
 }
 
-int	key_release(int keycode, t_game *game)
+void	press_key_e(t_game *game)
 {
-	if (keycode == KEY_ESC)
-		 press_exit_button(game);
-	if (keycode == KEY_A)
-		game->keycode.key_a = 0;
-	if (keycode == KEY_W)
-		game->keycode.key_w = 0;
-	if (keycode == KEY_D)
-		game->keycode.key_d = 0;
-	if (keycode == KEY_S)
-		game->keycode.key_s = 0;
-	if (keycode == KEY_LEFT)
-		game->keycode.key_left = 0;
-	if (keycode == KEY_RIGHT)
-		game->keycode.key_right = 0;
-	if (keycode == KEY_E)
-	{
-		if (game->map.imap[(int)floor(game->param.pos_y)][(int)floor(game->param.pos_x) + 1] & DOOR)
-			game->door = 1;
-		if (game->map.imap[(int)floor(game->param.pos_y)][(int)floor(game->param.pos_x) - 1] & DOOR)
-			game->door = 1;
-		if (game->map.imap[(int)floor(game->param.pos_y) + 1][(int)floor(game->param.pos_x)] & DOOR)
-			game->door = 1;
-		if (game->map.imap[(int)floor(game->param.pos_y) - 1][(int)floor(game->param.pos_x)] & DOOR)
-			game->door = 1;
-	}
-	return (0);
+	if (game->map.imap[(int)floor(game->param.pos_y)] \
+									[(int)floor(game->param.pos_x) + 1] & DOOR)
+		game->door = 1;
+	if (game->map.imap[(int)floor(game->param.pos_y)] \
+									[(int)floor(game->param.pos_x) - 1] & DOOR)
+		game->door = 1;
+	if (game->map.imap[(int)floor(game->param.pos_y) + 1] \
+									[(int)floor(game->param.pos_x)] & DOOR)
+		game->door = 1;
+	if (game->map.imap[(int)floor(game->param.pos_y) - 1] \
+									[(int)floor(game->param.pos_x)] & DOOR)
+		game->door = 1;
 }
 
 int	press_exit_button(t_game *game)
 {
-    mlx_destroy_window(game->mlx, game->win);
-    free_game(game);
-    printf("The End\n");
-    exit(0);
-    return (0);
+	mlx_destroy_window(game->mlx, game->win);
+	free_game(game);
+	printf("The End\n");
+	exit(0);
+	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: jisookim <jisookim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/23 03:11:02 by kyhan             #+#    #+#             */
-/*   Updated: 2022/09/28 15:09:56 by jisookim         ###   ########.fr       */
+/*   Updated: 2022/10/17 11:46:58 by jisookim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ static int	check_unsigned_char(char *str)
 {
 	int				i;
 	unsigned int	num;
-	
+
 	i = 0;
 	num = 0;
 	while (str[i])

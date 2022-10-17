@@ -1,12 +1,23 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   render_sprite.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jisookim <jisookim@student.42seoul.kr>     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/10/17 11:31:32 by jisookim          #+#    #+#             */
+/*   Updated: 2022/10/17 11:57:59 by jisookim         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../include/cat3d.h"
-#include <math.h>
 
 void	sort_order(t_game *game, t_pair	*orders)
 {
 	t_pair	tmp;
 	int		i;
 	int		j;
-	
+
 	i = 0;
 	while (i < game->sprite_cnt)
 	{
@@ -54,73 +65,22 @@ void	sort_sprites(t_game *game)
 
 void	get_sprites_dist(t_game *game)
 {
-	int	i;
+	int		i;
+	double	sprite_dist_x;
+	double	sprite_dist_y;
 
 	i = 0;
 	while (i < game->sprite_cnt)
 	{
 		game->sprite_order[i] = i;
-		game->sprite_distance[i] = ((game->param.pos_x - game->sprite[i].x) * (game->param.pos_x - game->sprite[i].x) + (game->param.pos_y - game->sprite[i].y) * (game->param.pos_y - game->sprite[i].y));
+		sprite_dist_x = (game->param.pos_x - game->sprite[i].x) * \
+										(game->param.pos_x - game->sprite[i].x);
+		sprite_dist_y = (game->param.pos_y - game->sprite[i].y) * \
+										(game->param.pos_y - game->sprite[i].y);
+		game->sprite_distance[i] = sprite_dist_x + sprite_dist_y;
 		i++;
 	}
 	sort_sprites(game);
-}
-
-void	set_sprite_param(t_game *game, int i)
-{
-	double	int_det;
-
-	game->sp_param.sprite_x = game->sprite[game->sprite_order[i]].x - game->param.pos_x;
-	game->sp_param.sprite_y = game->sprite[game->sprite_order[i]].y - game->param.pos_y;
-	int_det	= 1.0 / (game->param.plane_x * game->param.dir_y - game->param.dir_x * game->param.plane_y);
-	game->sp_param.transform_x = int_det * (game->param.dir_y * game->sp_param.sprite_x - game->param.dir_x * game->sp_param.sprite_y);
-	game->sp_param.transform_y = int_det * (-game->param.plane_y * game->sp_param.sprite_x + game->param.plane_x * game->sp_param.sprite_y);
-	game->sp_param.sprite_screen_x = (int)(S_WIDTH / 2) * (1 + game->sp_param.transform_x / game->sp_param.transform_y);
-	game->sp_param.vmove_screen = (int)(VMOVE / game->sp_param.transform_y);
-	game->sp_param.sprite_height = (int)fabs((S_HEIGHT / game->sp_param.transform_y) / VDIV);
-	game->sp_param.draw_start_y = -game->sp_param.sprite_height / 2 + S_HEIGHT / 2 + game->sp_param.vmove_screen;
-	if (game->sp_param.draw_start_y < 0)
-		game->sp_param.draw_start_y = 0;
-	game->sp_param.draw_end_y = game->sp_param.sprite_height / 2 + S_HEIGHT / 2 + game->sp_param.vmove_screen;
-	if (game->sp_param.draw_end_y >= S_HEIGHT)
-		game->sp_param.draw_end_y = S_HEIGHT - 1;
-	game->sp_param.sprite_width = (int)fabs((S_HEIGHT / game->sp_param.transform_y) / UDIV);
-	game->sp_param.draw_start_x = -game->sp_param.sprite_width / 2 + game->sp_param.sprite_screen_x;
-	if (game->sp_param.draw_start_x < 0)
-		game->sp_param.draw_start_x = 0;
-	game->sp_param.draw_end_x = game->sp_param.sprite_width / 2 + game->sp_param.sprite_screen_x;
-	if (game->sp_param.draw_end_x >= S_WIDTH)
-		game->sp_param.draw_end_x = S_WIDTH - 1;
-}
-
-void	get_sprite_tex(t_game *game, int i)
-{
-	int	stripe;
-	int	tex_x;
-	int	y;
-	int	tex_y;
-	int	color;
-	int	d;
-
-	stripe = game->sp_param.draw_start_x;
-	while (stripe < game->sp_param.draw_end_x)
-	{
-		tex_x = (int)((256 * (stripe - (-game->sp_param.sprite_width / 2 + game->sp_param.sprite_screen_x)) * TEX_SIZE / game->sp_param.sprite_width) / 256);
-		if (game->sp_param.transform_y > 0 && stripe > 0 && stripe < S_WIDTH && game->sp_param.transform_y < game->sp_param.zbuffer[stripe])
-		{
-			y = game->sp_param.draw_start_y;
-			while (y < game->sp_param.draw_end_y)
-			{
-				d = (y - game->sp_param.vmove_screen) * 256 - S_HEIGHT * 128 + game->sp_param.sprite_height * 128;
-				tex_y = ((d * TEX_SIZE) / game->sp_param.sprite_height) / 256;
-				color = game->tex[game->sprite[game->sprite_order[i]].texture][TEX_SIZE * tex_y + tex_x];
-				if ((color & 0x00FFFFFF) != 0)
-					game->buf[y][stripe] = color;
-				y++;
-			}
-		}
-		stripe++;
-	}
 }
 
 void	render_sprite(t_game *game)

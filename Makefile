@@ -22,10 +22,11 @@ SRC_CHECK		:=	check_arg.c check_content.c	check_map_trim.c check_map.c \
 SRC_CHECK		:=	$(addprefix $(DIR_CHECK)/, $(SRC_CHECK))
 
 SRC_INIT		:=	init_game.c init_map.c init_rgb.c init_start_game.c \
-					init_texture.c init_sprite.c
+					init_texture.c init_sprite.c init_param.c init_player.c
 SRC_INIT		:=	$(addprefix $(DIR_INIT)/, $(SRC_INIT))
 
-SRC_INIT_MLX	:=	mlx_key_press.c mlx_mouse_hook.c
+SRC_INIT_MLX	:=	mlx_key_press.c mlx_mouse_hook.c mlx_key_release.c \
+					move_key_action.c
 SRC_INIT_MLX	:=	$(addprefix $(DIR_INIT_MLX)/, $(SRC_INIT_MLX))
 
 SRC_MAIN		:=	cat3d.c start_game.c
@@ -37,7 +38,8 @@ SRC_MAP			:=	$(addprefix $(DIR_MAP)/, $(SRC_MAP))
 SRC_TOOLS		:=	error.c free_game.c jk_tools.c tool_rgb_atoi.c utils.c
 SRC_TOOLS		:=	$(addprefix $(DIR_TOOLS)/, $(SRC_TOOLS))
 
-SRC_RENDER		:=	render.c minimap.c door.c render_sprite.c
+SRC_RENDER		:=	render.c minimap.c door.c render_sprite.c set_sprite_param.c \
+					get_sprite_tex.c
 SRC_RENDER		:=	$(addprefix $(DIR_RENDER)/, $(SRC_RENDER))
 
 SRCS			=	$(SRC_CHECK) $(SRC_INIT) $(SRC_INIT_MLX) $(SRC_MAIN) \

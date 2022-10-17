@@ -1,5 +1,16 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   minimap.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jisookim <jisookim@student.42seoul.kr>     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/10/17 11:30:33 by jisookim          #+#    #+#             */
+/*   Updated: 2022/10/17 11:48:18 by jisookim         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../include/cat3d.h"
-#include <math.h>
 
 int	translucent_color(int origin, int map)
 {
@@ -14,7 +25,7 @@ int	translucent_color(int origin, int map)
 void	put_minimap_pixel(t_game *game, int rgb, int x, int y)
 {
 	int	i;
-    int	j;
+	int	j;
 
 	i = 0;
 	while (i < 10)
@@ -22,7 +33,8 @@ void	put_minimap_pixel(t_game *game, int rgb, int x, int y)
 		j = 0;
 		while (j < 10)
 		{
-			game->buf[y * 10 + j][x * 10 + i] = translucent_color(game->buf[y * 10 + j][x * 10 + i], rgb);
+			game->buf[y * 10 + j][x * 10 + i] = \
+					translucent_color(game->buf[y * 10 + j][x * 10 + i], rgb);
 			j++;
 		}
 		i++;
@@ -35,8 +47,10 @@ void	draw_player(t_game *game)
 	int		buf_x;
 	int		buf_y;
 
-	buf_x = (int)floor(game->param.pos_y) * 10 + (int)floor(modf(game->param.pos_y, &ipart) * 10);
-	buf_y = (int)floor(game->param.pos_x) * 10 + (int)floor(modf(game->param.pos_x, &ipart) * 10);
+	buf_x = (int)floor(game->param.pos_y) * 10 + \
+						(int)floor(modf(game->param.pos_y, &ipart) * 10);
+	buf_y = (int)floor(game->param.pos_x) * 10 + \
+						(int)floor(modf(game->param.pos_x, &ipart) * 10);
 	game->buf[buf_x][buf_y] = 0xACFF0000;
 	game->buf[buf_x + 1][buf_y] = 0xACFF0000;
 	game->buf[buf_x - 1][buf_y] = 0xACFF0000;

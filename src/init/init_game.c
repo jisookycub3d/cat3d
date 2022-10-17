@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_game.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kyhan <kyhan@student.42.fr>                +#+  +:+       +#+        */
+/*   By: jisookim <jisookim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/20 02:28:13 by kyhan             #+#    #+#             */
-/*   Updated: 2022/10/03 13:50:27 by kyhan            ###   ########.fr       */
+/*   Updated: 2022/10/17 11:24:20 by jisookim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 int	init_content(t_game *game, char *gnl)
 {
-	int	i;
-	int	checked;
+	int			i;
+	int			checked;
 	static int	map_flag;
 
 	i = 0;
@@ -38,7 +38,6 @@ int	init_content(t_game *game, char *gnl)
 		return (1);
 	return (0);
 }
-
 
 void	init_game(t_game *game)
 {

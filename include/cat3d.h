@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cat3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kyhan <kyhan@student.42.fr>                +#+  +:+       +#+        */
+/*   By: jisookim <jisookim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/19 14:00:14 by jisookim          #+#    #+#             */
-/*   Updated: 2022/10/13 15:25:50 by kyhan            ###   ########.fr       */
+/*   Updated: 2022/10/17 11:58:58 by jisookim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 # include <unistd.h>
 # include <fcntl.h>
 # include <errno.h>
+# include <math.h>
 # include "../mlx/mlx.h"
 # include "../libft/libft.h"
 
@@ -280,14 +281,37 @@ char	bit_mask(t_game *game, char c);
 int		rgb_to_i(int *arr);
 
 
-int	main_loop(t_game *game);
+int		main_loop(t_game *game);
 void	load_texture(t_game *game);
 void	mouse_move(t_game *game);
 void	minimap(t_game *game);
 void	door(t_game *game);
 void	key_update(t_game *game);
-int	key_release(int keycode, t_game *game);
+int		key_release(int keycode, t_game *game);
 void	render_sprite(t_game *game);
 void	init_sprite(t_game *game);
+
+void	render(t_game *game);
+void	draw(t_game *game);
+void	init_param(t_game *game);
+void	set_buf_and_tex(t_game *game);
+
+void	init_struct_player(t_game *game);
+void	press_key_e(t_game *game);
+
+/* set_sprite_param */
+void	sp_param_draw_x(t_game *game);
+void	sp_param_draw_y(t_game *game);
+void	set_sprite_param(t_game *game, int i);
+
+void	press_d(t_game *game);
+void	press_a(t_game *game);
+void	press_s(t_game *game);
+void	press_w(t_game *game);
+
+void	rotate_vision(t_game *game, double rot_speed, double old_dir_x, \
+															double old_plane_x);
+/* get_sprite_tex */
+void	get_sprite_tex(t_game *game, int i);
 
 #endif

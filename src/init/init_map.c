@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_map.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kyhan <kyhan@student.42.fr>                +#+  +:+       +#+        */
+/*   By: jisookim <jisookim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/23 03:17:04 by kyhan             #+#    #+#             */
-/*   Updated: 2022/09/28 15:35:36 by kyhan            ###   ########.fr       */
+/*   Updated: 2022/10/17 11:24:54 by jisookim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ static void	do_map_append(t_game *game, char *line)
 
 static void	init_set_map(t_game *game, char *line)
 {
-	if (!game->map.map) // set map if there's no initialized map.
+	if (!game->map.map)
 	{
 		game->map.map = ft_calloc(2, sizeof(char *));
 		game->map.map[0] = line;
@@ -69,7 +69,7 @@ int	init_map(t_game *game, char *gnl, int *checked, int *map_flag)
 {
 	int		ret;
 	char	*line;
-	
+
 	ret = 0;
 	ret = init_check_gnl_in_map(gnl, checked, map_flag);
 	if (ret == -1)

@@ -6,15 +6,15 @@
 /*   By: jisookim <jisookim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/23 03:14:28 by kyhan             #+#    #+#             */
-/*   Updated: 2022/09/28 15:00:10 by jisookim         ###   ########.fr       */
+/*   Updated: 2022/10/17 11:23:56 by jisookim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/cat3d.h"
 
-static int	 check_texture(t_game *game)
+static int	check_texture(t_game *game)
 {
-	if (game->texture.east && game->texture.west 
+	if (game->texture.east && game->texture.west \
 		&& game->texture.north && game->texture.south)
 		return (0);
 	return (1);

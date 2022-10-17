@@ -1,5 +1,4 @@
 #include "../../include/cat3d.h"
-#include <math.h>
 
 void	draw(t_game *game)
 {
@@ -250,15 +249,4 @@ void	load_texture(t_game *game)
 	load_image(game, game->tex[3], game->texture.west);
 	load_image(game, game->tex[4], "./door.png");
 	load_image(game, game->tex[5], "./ghost.png");
-}
-
-int	main_loop(t_game *game)
-{
-    mouse_move(game);
-	door(game);
-	render(game);
-    minimap(game);
-	draw(game);
-	key_update(game);
-	return (0);
 }

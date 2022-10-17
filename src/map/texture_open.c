@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   open_texture.c                                     :+:      :+:    :+:   */
+/*   texture_open.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kyhan <kyhan@student.42.fr>                +#+  +:+       +#+        */
+/*   By: jisookim <jisookim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/23 03:19:19 by kyhan             #+#    #+#             */
-/*   Updated: 2022/09/23 03:21:45 by kyhan            ###   ########.fr       */
+/*   Updated: 2022/10/17 11:29:11 by jisookim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,5 +25,5 @@ void	open_texture(t_game *game, char *path, char *gnl)
 		printf("%s\n", strerror(errno));
 		exit(0);
 	}
-	close(fd);	
+	close(fd);
 }

@@ -6,7 +6,7 @@
 /*   By: jisookim <jisookim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/23 03:10:20 by kyhan             #+#    #+#             */
-/*   Updated: 2022/09/28 15:01:12 by jisookim         ###   ########.fr       */
+/*   Updated: 2022/10/17 11:25:15 by jisookim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ static int	get_rgb(t_game *game, char *line)
 	if (rgb_atoi(game, rgb, flag))
 	{
 		ft_free(rgb);
-		return(1);
+		return (1);
 	}
 	ft_free(rgb);
 	return (0);
