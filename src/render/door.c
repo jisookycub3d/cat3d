@@ -6,7 +6,7 @@
 /*   By: kyhan <kyhan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/17 11:08:03 by jisookim          #+#    #+#             */
-/*   Updated: 2022/10/18 01:35:31 by kyhan            ###   ########.fr       */
+/*   Updated: 2022/10/18 08:03:57 by kyhan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,6 @@ void	close_door(t_game *game, int map_x, int map_y)
 		game->open_door.door_state[map_y][map_x] = CLOSE;
 		game->door = 0;
 	}
-	printf("close%f %lld\n", game->open_door.door_offset[map_y][map_x], game->time.deltatime);
 }
 
 void	open_door(t_game *game, int map_x, int map_y)
@@ -48,7 +47,6 @@ void	open_door(t_game *game, int map_x, int map_y)
 		game->open_door.door_state[map_y][map_x] = OPEN;
 		game->door = 0;
 	}
-	printf("open%f %lld\n", game->open_door.door_offset[map_y][map_x], game->time.deltatime);
 }
 
 void	door_events(t_game *game, int map_x, int map_y)
