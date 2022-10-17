@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   render.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jisookim <jisookim@student.42seoul.kr>     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/10/17 14:03:00 by jisookim          #+#    #+#             */
+/*   Updated: 2022/10/17 14:15:43 by jisookim         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../include/cat3d.h"
 
 void	draw(t_game *game)
@@ -21,12 +33,8 @@ void	init_render(t_game *game, int x)
 	game->render.map_x = (int)game->param.pos_x;
 	game->render.map_y = (int)game->param.pos_y;
 
-	//length of ray from current position to next x or y-side
-	
-		//length of ray from one x or y-side to next x or y-side
 	game->render.delta_dist_x = fabs(1 / game->render.ray_dir_x);
 	game->render.delta_dist_y = fabs(1 / game->render.ray_dir_y);
-		//what direction to step in x or y-direction (either +1 or -1)
 }
 
 void	init_ray_direction(t_game *game)
@@ -156,7 +164,7 @@ void		set_wall_texture(t_game *game, int side)
 		else if (side == 1 && game->render.ray_dir_y < 0)
 			game->render.tex_num = 0; // N
 		else if (side == 1 && game->render.ray_dir_y > 0)
-			game->render.tex_num = 1;// S
+			game->render.tex_num = 1; // S
 		else if (side == 0 && game->render.ray_dir_x > 0)
 			game->render.tex_num = 2; //E
 		else if (side == 0 && game->render.ray_dir_x < 0)
@@ -172,10 +180,6 @@ void		set_wall_texture(t_game *game, int side)
 		wall_x = game->param.pos_x + game->render.perp_wall_dist * game->render.ray_dir_x;
 	wall_x -= floor(wall_x);
 	game->render.tex_x = (int)(wall_x * (double)TEX_SIZE);
-	if (side == 0 && game->render.ray_dir_x > 0)
-		game->render.tex_x = TEX_SIZE - game->render.tex_x - 1;
-	if (side == 1 && game->render.ray_dir_y < 0)
-		game->render.tex_x = TEX_SIZE - game->render.tex_x - 1;
 }
 
 void	set_pixel_on_screen(t_game *game, int line_height, int x)
@@ -204,29 +208,6 @@ void	set_pixel_on_screen(t_game *game, int line_height, int x)
 		game->buf[y][x] = game->rgb.floor_rgb;
 }
 
-void	render(t_game *game)
-{
-	int	x;
-	int	side;	//was a NS or a EW wall hit?
-	int	line_height;
-
-	x = 0;
-	while (x < S_WIDTH)
-	{
-		init_render(game, x);
-		init_ray_direction(game);
-		side = check_wall_hit(game);
-		line_height = set_line_height(game, side);
-		draw_start_to_end(game, line_height);
-		set_wall_texture(game, side);
-		set_pixel_on_screen(game, line_height, x);
-		if (game->sprite_cnt)
-			game->sp_param.zbuffer[x] = game->render.perp_wall_dist;
-		x++;
-	}
-	render_sprite(game);
-}
-
 void	load_image(t_game *game, int *tex, char *path)
 {
 	game->image.img = mlx_png_file_to_image(game->mlx, path, &game->image.x, &game->image.y);
@@ -249,4 +230,27 @@ void	load_texture(t_game *game)
 	load_image(game, game->tex[3], game->texture.west);
 	load_image(game, game->tex[4], "./door.png");
 	load_image(game, game->tex[5], "./ghost.png");
+}
+
+void	render(t_game *game)
+{
+	int	x;
+	int	side;	//was a NS or a EW wall hit?
+	int	line_height;
+
+	x = 0;
+	while (x < S_WIDTH)
+	{
+		init_render(game, x);
+		init_ray_direction(game);
+		side = check_wall_hit(game);
+		line_height = set_line_height(game, side);
+		draw_start_to_end(game, line_height);
+		set_wall_texture(game, side);
+		set_pixel_on_screen(game, line_height, x);
+		if (game->sprite_cnt)
+			game->sp_param.zbuffer[x] = game->render.perp_wall_dist;
+		x++;
+	}
+	render_sprite(game);
 }
