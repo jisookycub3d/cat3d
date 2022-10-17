@@ -6,7 +6,7 @@
 /*   By: kyhan <kyhan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/17 14:03:00 by jisookim          #+#    #+#             */
-/*   Updated: 2022/10/18 01:20:49 by kyhan            ###   ########.fr       */
+/*   Updated: 2022/10/18 01:38:53 by kyhan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -189,6 +189,8 @@ void		set_wall_texture(t_game *game, int side)
 	else
 		wall_x = game->param.pos_x + game->render.perp_wall_dist * game->render.ray_dir_x;
 	wall_x -= floor(wall_x);
+	if (game->render.tex_num == 4)
+		wall_x += game->open_door.door_offset[game->render.map_y][game->render.map_x];
 	game->render.tex_x = (int)(wall_x * (double)TEX_SIZE);
 }
 
