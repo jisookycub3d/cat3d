@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cat3d.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jisookim <jisookim@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: kyhan <kyhan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/19 14:00:23 by jisookim          #+#    #+#             */
-/*   Updated: 2022/10/17 11:28:11 by jisookim         ###   ########.fr       */
+/*   Updated: 2022/10/18 00:54:40 by kyhan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,10 @@
 
 int	main_loop(t_game *game)
 {
+	update_time(game);
 	mouse_move(game);
-	door(game);
+	if (game->door)
+		door(game);
 	render(game);
 	minimap(game);
 	draw(game);
@@ -27,6 +29,7 @@ void	start_game(t_game *game)
 {	
 	init_param(game);
 	set_buf_and_tex(game);
+	init_door(game);
 	game->mlx = mlx_init();
 	load_texture(game);
 	game->win = mlx_new_window(game->mlx, S_WIDTH, S_HEIGHT, "Cat3D");

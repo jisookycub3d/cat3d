@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   move_key_action.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jisookim <jisookim@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: kyhan <kyhan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/17 11:45:19 by jisookim          #+#    #+#             */
-/*   Updated: 2022/10/17 11:45:20 by jisookim         ###   ########.fr       */
+/*   Updated: 2022/10/18 00:24:48 by kyhan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,32 +14,44 @@
 
 void	press_d(t_game *game)
 {
-	if (game->map.imap[(int)(game->param.pos_y)] \
-				[(int)(game->param.pos_x + game->param.plane_x * \
+	if (game->open_door.door_state[(int)(game->param.pos_y)] \
+									[(int)(game->param.pos_x + game->param.plane_x * \
+										game->player.move_speed)] == OPEN
+		|| game->map.imap[(int)(game->param.pos_y)] \
+						[(int)(game->param.pos_x + game->param.plane_x * \
 										game->player.move_speed)] & EMPTY
 		|| game->map.imap[(int)(game->param.pos_y)] \
-					[(int)(game->param.pos_x + game->param.plane_x * \
+							[(int)(game->param.pos_x + game->param.plane_x * \
 										game->player.move_speed)] & SPRITE)
 		game->param.pos_x += game->param.plane_x * game->player.move_speed;
-	if (game->map.imap[(int)(game->param.pos_y + game->param.plane_y * \
+	if (game->open_door.door_state[(int)(game->param.pos_y + game->param.plane_y * \
 										game->player.move_speed)] \
-										[(int)(game->param.pos_x)] & EMPTY
+						[(int)(game->param.pos_x)] == OPEN
 		|| game->map.imap[(int)(game->param.pos_y + game->param.plane_y * \
 										game->player.move_speed)] \
-										[(int)(game->param.pos_x)] & SPRITE)
+						[(int)(game->param.pos_x)] & EMPTY
+		|| game->map.imap[(int)(game->param.pos_y + game->param.plane_y * \
+										game->player.move_speed)] \
+							[(int)(game->param.pos_x)] & SPRITE)
 		game->param.pos_y += game->param.plane_y * game->player.move_speed;
 }
 
 void	press_a(t_game *game)
 {
-	if (game->map.imap[(int)(game->param.pos_y)] \
+	if (game->open_door.door_state[(int)(game->param.pos_y)] \
+						[(int)(game->param.pos_x - game->param.plane_x * \
+						game->player.move_speed)] == OPEN
+		|| game->map.imap[(int)(game->param.pos_y)] \
 						[(int)(game->param.pos_x - game->param.plane_x * \
 						game->player.move_speed)] & EMPTY
 			|| game->map.imap[(int)(game->param.pos_y)] \
 							[(int)(game->param.pos_x - game->param.plane_x * \
 										game->player.move_speed)] & SPRITE)
 		game->param.pos_x -= game->param.plane_x * game->player.move_speed;
-	if (game->map.imap[(int)(game->param.pos_y - game->param.plane_y * \
+	if (game->open_door.door_state[(int)(game->param.pos_y - game->param.plane_y * \
+										game->player.move_speed)] \
+						[(int)(game->param.pos_x)] == OPEN
+		|| game->map.imap[(int)(game->param.pos_y - game->param.plane_y * \
 										game->player.move_speed)] \
 						[(int)(game->param.pos_x)] & EMPTY
 			|| game->map.imap[(int)(game->param.pos_y - game->param.plane_y * \
@@ -50,14 +62,20 @@ void	press_a(t_game *game)
 
 void	press_s(t_game *game)
 {
-	if (game->map.imap[(int)(game->param.pos_y)] \
+	if (game->open_door.door_state[(int)(game->param.pos_y)] \
+						[(int)(game->param.pos_x - game->param.dir_x * \
+											game->player.move_speed)] == OPEN
+		|| game->map.imap[(int)(game->param.pos_y)] \
 						[(int)(game->param.pos_x - game->param.dir_x * \
 											game->player.move_speed)] & EMPTY
 			|| game->map.imap[(int)(game->param.pos_y)] \
 							[(int)(game->param.pos_x - game->param.dir_x * \
 											game->player.move_speed)] & SPRITE)
 		game->param.pos_x -= game->param.dir_x * game->player.move_speed;
-	if (game->map.imap[(int)(game->param.pos_y - game->param.dir_y * \
+	if (game->open_door.door_state[(int)(game->param.pos_y - game->param.dir_y * \
+									game->player.move_speed)] \
+					[(int)(game->param.pos_x)] == OPEN
+		|| game->map.imap[(int)(game->param.pos_y - game->param.dir_y * \
 									game->player.move_speed)] \
 					[(int)(game->param.pos_x)] & EMPTY
 			|| game->map.imap[(int)(game->param.pos_y - game->param.dir_y * \
@@ -68,14 +86,20 @@ void	press_s(t_game *game)
 
 void	press_w(t_game *game)
 {
-	if (game->map.imap[(int)(game->param.pos_y)] \
+	if (game->open_door.door_state[(int)(game->param.pos_y)] \
+						[(int)(game->param.pos_x + game->param.dir_x * \
+									game->player.move_speed)] == OPEN
+		|| game->map.imap[(int)(game->param.pos_y)] \
 						[(int)(game->param.pos_x + game->param.dir_x * \
 									game->player.move_speed)] & EMPTY
 		|| game->map.imap[(int)(game->param.pos_y)] \
 							[(int)(game->param.pos_x + game->param.dir_x * \
 										game->player.move_speed)] & SPRITE)
 		game->param.pos_x += game->param.dir_x * game->player.move_speed;
-	if (game->map.imap[(int)(game->param.pos_y + game->param.dir_y * \
+	if (game->open_door.door_state[(int)(game->param.pos_y + game->param.dir_y * \
+											game->player.move_speed)] \
+						[(int)(game->param.pos_x)] == OPEN
+		|| game->map.imap[(int)(game->param.pos_y + game->param.dir_y * \
 											game->player.move_speed)] \
 						[(int)(game->param.pos_x)] & EMPTY
 		|| game->map.imap[(int)(game->param.pos_y + game->param.dir_y * \

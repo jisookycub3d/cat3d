@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   render.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jisookim <jisookim@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: kyhan <kyhan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/17 14:03:00 by jisookim          #+#    #+#             */
-/*   Updated: 2022/10/17 14:15:43 by jisookim         ###   ########.fr       */
+/*   Updated: 2022/10/18 01:20:49 by kyhan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,7 @@ int	check_wall_hit(t_game *game)
 			game->render.map_y += game->render.step_y;
 			side = 1;
 		}
-		if (game->map.imap[game->render.map_y][game->render.map_x] & DOOR)
+		if (game->map.imap[game->render.map_y][game->render.map_x] & DOOR && game->open_door.door_state[game->render.map_y][game->render.map_x] != OPEN)
 		{
 			hit = 1;
 			if (side == 1)
@@ -97,7 +97,11 @@ int	check_wall_hit(t_game *game)
 				wallx -= floor(wallx);
 				if (game->render.side_dist_y - (game->render.delta_dist_y / 2) < game->render.side_dist_x)
 				{
-					;
+					if (1.0 - wallx <= game->open_door.door_offset[game->render.map_y][game->render.map_x])
+					{
+						hit = 0;
+						game->render.wall_offset_y = 0;
+					}
 				}
 				else
 				{
@@ -114,7 +118,11 @@ int	check_wall_hit(t_game *game)
 				wallx -= floor(wallx);
 				if (game->render.side_dist_x - (game->render.delta_dist_x / 2) < game->render.side_dist_y)
 				{
-					;
+					if (1.0 - wallx < game->open_door.door_offset[game->render.map_y][game->render.map_x])
+					{
+						hit = 0;
+						game->render.wall_offset_x = 0;
+					}
 				}
 				else
 				{
@@ -126,7 +134,9 @@ int	check_wall_hit(t_game *game)
 			
 		}
 		//Check if ray has hit a wall
-		else if (!(game->map.imap[game->render.map_y][game->render.map_x] & SPRITE) && !(game->map.imap[game->render.map_y][game->render.map_x] & EMPTY))
+		else if (!(game->map.imap[game->render.map_y][game->render.map_x] & DOOR && game->open_door.door_state[game->render.map_y][game->render.map_x] == OPEN)
+				&& (!(game->map.imap[game->render.map_y][game->render.map_x] & SPRITE) 
+				&& !(game->map.imap[game->render.map_y][game->render.map_x] & EMPTY)))
 			hit = 1;
 	}
 	return (side);

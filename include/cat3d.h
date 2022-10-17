@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cat3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jisookim <jisookim@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: kyhan <kyhan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/19 14:00:14 by jisookim          #+#    #+#             */
-/*   Updated: 2022/10/17 11:58:58 by jisookim         ###   ########.fr       */
+/*   Updated: 2022/10/18 01:00:27 by kyhan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 # include <fcntl.h>
 # include <errno.h>
 # include <math.h>
+# include <time.h>
 # include "../mlx/mlx.h"
 # include "../libft/libft.h"
 
@@ -62,6 +63,13 @@ enum e_words
 	DOOR = 1 << 3,
 	SPACE = 1 << 4,
 	SPRITE = 1 << 5
+};
+
+enum {
+	CLOSE = 0,
+	CLOSING = 1,
+	OPENING = 2,
+	OPEN = 3
 };
 
 typedef struct s_texture
@@ -185,6 +193,19 @@ typedef struct	s_pair
 	int			second;
 }				t_pair;
 
+typedef struct	s_door
+{
+	int			**door_state;
+	double		**door_offset;
+}				t_door;
+
+typedef struct	s_time
+{
+	long long	deltatime;
+	long long	now;
+	long long	last;
+}				t_time;
+
 typedef struct s_game
 {
 	void		*mlx;
@@ -206,6 +227,8 @@ typedef struct s_game
 	t_keycode	keycode;
 	t_sprite	*sprite;
 	t_sprite_param	sp_param;
+	t_door		open_door;
+	t_time		time;
 }				t_game;
 
 /* check_arg.c */
@@ -314,4 +337,7 @@ void	rotate_vision(t_game *game, double rot_speed, double old_dir_x, \
 /* get_sprite_tex */
 void	get_sprite_tex(t_game *game, int i);
 
+
+void	init_door(t_game *game);
+void	update_time(t_game *game);
 #endif
