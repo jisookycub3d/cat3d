@@ -31,4 +31,4 @@ $(NAME): $(MODULE_OBJ) $(OBJ) $(C_OBJ)
 clean:
 	@rm -f $(NAME) $(OBJ) $(MODULE_OBJ) $(C_OBJ) *.swiftdoc *~
 
-.SILENT: $(C_OBJ)
+.SILENT: $(C_OBJ) $(OBJ) $(MODULE_OBJ)

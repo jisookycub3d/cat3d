@@ -18,10 +18,10 @@ DIR_TOOLS		:=	$(SRCS_DIR)/tools
 DIR_RENDER		:=	$(SRCS_DIR)/render
 
 SRC_CHECK		:=	check_arg.c check_content.c	check_map_trim.c check_map.c \
-					check_valid.c
+					check_valid.c 
 SRC_CHECK		:=	$(addprefix $(DIR_CHECK)/, $(SRC_CHECK))
 
-SRC_INIT		:=	init_game.c init_map.c init_rgb.c init_start_game.c \
+SRC_INIT		:=	init_game.c init_map.c init_rgb.c \
 					init_texture.c init_sprite.c init_param.c init_player.c
 SRC_INIT		:=	$(addprefix $(DIR_INIT)/, $(SRC_INIT))
 
@@ -38,8 +38,9 @@ SRC_MAP			:=	$(addprefix $(DIR_MAP)/, $(SRC_MAP))
 SRC_TOOLS		:=	error.c free_game.c jk_tools.c tool_rgb_atoi.c utils.c
 SRC_TOOLS		:=	$(addprefix $(DIR_TOOLS)/, $(SRC_TOOLS))
 
-SRC_RENDER		:=	render.c minimap.c door.c render_sprite.c set_sprite_param.c \
-					get_sprite_tex.c
+SRC_RENDER		:=	render.c minimap.c door.c render_sprite.c \
+					set_sprite_param.c get_sprite_tex.c render_pixel.c \
+					render_texture.c init_render.c check_wall_hit.c
 SRC_RENDER		:=	$(addprefix $(DIR_RENDER)/, $(SRC_RENDER))
 
 SRCS			=	$(SRC_CHECK) $(SRC_INIT) $(SRC_INIT_MLX) $(SRC_MAIN) \
@@ -56,7 +57,6 @@ bonus : $(BONUS)
 
 $(NAME) :	$(OBJS)
 			@make -C ./mlx
-			@clear
 			@cat ./decoration/cat
 			@make -C ./libft fclean
 			@make -C ./libft
@@ -67,7 +67,6 @@ $(NAME) :	$(OBJS)
 
 $(BONUS) :	$(OBJS_BONUS)
 			@make -C ./mlx
-			@clear
 			@cat ./decoration/cat
 			@make -C ./libft fclean
 			@make -C ./libft

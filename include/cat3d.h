@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cat3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kyhan <kyhan@student.42.fr>                +#+  +:+       +#+        */
+/*   By: jisookim <jisookim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/19 14:00:14 by jisookim          #+#    #+#             */
-/*   Updated: 2022/10/18 01:00:27 by kyhan            ###   ########.fr       */
+/*   Updated: 2022/10/18 18:13:58 by jisookim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -262,9 +262,6 @@ int	init_rgb(t_game *game, char *gnl, int *checked, int *map_flag);
 /* init_texture.c */
 int	init_texture(t_game *game, char *gnl, int *checked, int *map_flag);
 
-/* init_start_game.c */
-int	move_player(t_game *game);
-
 /* parse_map.c */
 int	parse_map(t_game *game, char *mapfile);
 
@@ -340,4 +337,11 @@ void	get_sprite_tex(t_game *game, int i);
 
 void	init_door(t_game *game);
 void	update_time(t_game *game);
+
+int		check_wall_hit(t_game *game);
+void	init_ray_direction(t_game *game);
+void	set_wall_texture(t_game *game, int side);
+void	set_pixel_on_screen(t_game *game, int line_height, int x);
+void	init_render(t_game *game, int x);
+
 #endif

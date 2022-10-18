@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   start_game.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kyhan <kyhan@student.42.fr>                +#+  +:+       +#+        */
+/*   By: jisookim <jisookim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/28 14:00:03 by jisookim          #+#    #+#             */
-/*   Updated: 2022/10/18 01:01:03 by kyhan            ###   ########.fr       */
+/*   Updated: 2022/10/18 18:26:41 by jisookim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,8 +41,8 @@ void	init_door(t_game *game)
 	game->open_door.door_state = ft_calloc(game->map.height, sizeof(int *));
 	while (i < game->map.height)
 	{
-		game->open_door.door_offset[i] = ft_calloc(game->map.width, sizeof(double));
-		game->open_door.door_state[i] = ft_calloc(game->map.width, sizeof(int));
+		game->open_door.door_offset[i] = ft_calloc(game->map.width + 1, sizeof(double));
+		game->open_door.door_state[i] = ft_calloc(game->map.width + 1, sizeof(int));
 		i++;
 	}
 }

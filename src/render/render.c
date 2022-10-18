@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   render.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kyhan <kyhan@student.42.fr>                +#+  +:+       +#+        */
+/*   By: jisookim <jisookim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/17 14:03:00 by jisookim          #+#    #+#             */
-/*   Updated: 2022/10/18 01:38:53 by kyhan            ###   ########.fr       */
+/*   Updated: 2022/10/18 17:43:38 by jisookim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,137 +24,21 @@ void	draw(t_game *game)
 	mlx_put_image_to_window(game->mlx, game->win, game->image.img, 0, 0);
 }
 
-void	init_render(t_game *game, int x)
-{
-	game->render.camera_x = (2 * x / (double)S_WIDTH - 1);
-	game->render.ray_dir_x = game->param.dir_x + game->param.plane_x * game->render.camera_x;
-	game->render.ray_dir_y = game->param.dir_y + game->param.plane_y * game->render.camera_x;
-	
-	game->render.map_x = (int)game->param.pos_x;
-	game->render.map_y = (int)game->param.pos_y;
-
-	game->render.delta_dist_x = fabs(1 / game->render.ray_dir_x);
-	game->render.delta_dist_y = fabs(1 / game->render.ray_dir_y);
-}
-
-void	init_ray_direction(t_game *game)
-{
-	if (game->render.ray_dir_x < 0)
-	{
-		game->render.step_x = -1;
-		game->render.side_dist_x = (game->param.pos_x - game->render.map_x) * game->render.delta_dist_x;
-	}
-	else
-	{
-		game->render.step_x = 1;
-		game->render.side_dist_x = (game->render.map_x + 1.0 - game->param.pos_x) * game->render.delta_dist_x;
-	}
-	if (game->render.ray_dir_y < 0)
-	{
-		game->render.step_y = -1;
-		game->render.side_dist_y = (game->param.pos_y - game->render.map_y) * game->render.delta_dist_y;
-	}
-	else
-	{
-		game->render.step_y = 1;
-		game->render.side_dist_y = (game->render.map_y + 1.0 - game->param.pos_y) * game->render.delta_dist_y;
-	}
-}
-
-int	check_wall_hit(t_game *game)
-{
-	int side;
-	int hit;
-	double	wallx;
-
-	hit = 0; //was there a wall hit?
-	wallx = 0;
-	game->render.wall_offset_x = 0;
-	game->render.wall_offset_y = 0;
-	while (hit == 0)
-	{
-		//jump to next map square, OR in x-direction, OR in y-direction
-		if (game->render.side_dist_x < game->render.side_dist_y)
-		{
-			game->render.side_dist_x += game->render.delta_dist_x;
-			game->render.map_x += game->render.step_x;
-			side = 0;
-		}
-		else
-		{
-			game->render.side_dist_y += game->render.delta_dist_y;
-			game->render.map_y += game->render.step_y;
-			side = 1;
-		}
-		if (game->map.imap[game->render.map_y][game->render.map_x] & DOOR && game->open_door.door_state[game->render.map_y][game->render.map_x] != OPEN)
-		{
-			hit = 1;
-			if (side == 1)
-			{
-				game->render.wall_offset_y = 0.5 * game->render.step_y;
-				game->render.perp_wall_dist = (game->render.map_y - game->param.pos_y + game->render.wall_offset_y + (1 - game->render.step_y) / 2) / game->render.ray_dir_y;
-				wallx = game->param.pos_x + game->render.perp_wall_dist * game->render.ray_dir_x;
-				wallx -= floor(wallx);
-				if (game->render.side_dist_y - (game->render.delta_dist_y / 2) < game->render.side_dist_x)
-				{
-					if (1.0 - wallx <= game->open_door.door_offset[game->render.map_y][game->render.map_x])
-					{
-						hit = 0;
-						game->render.wall_offset_y = 0;
-					}
-				}
-				else
-				{
-					game->render.map_x += game->render.step_x;
-					side = 0;
-					game->render.wall_offset_y = 0;
-				}
-			}
-			else
-			{
-				game->render.wall_offset_x = 0.5 * game->render.step_x;
-				game->render.perp_wall_dist = (game->render.map_x - game->param.pos_x + game->render.wall_offset_x + (1 - game->render.step_x) / 2) / game->render.ray_dir_x;
-				wallx = game->param.pos_y + game->render.perp_wall_dist * game->render.ray_dir_y;
-				wallx -= floor(wallx);
-				if (game->render.side_dist_x - (game->render.delta_dist_x / 2) < game->render.side_dist_y)
-				{
-					if (1.0 - wallx < game->open_door.door_offset[game->render.map_y][game->render.map_x])
-					{
-						hit = 0;
-						game->render.wall_offset_x = 0;
-					}
-				}
-				else
-				{
-					game->render.map_y += game->render.step_y;
-					side = 1;
-					game->render.wall_offset_x = 0;
-				}
-			}
-			
-		}
-		//Check if ray has hit a wall
-		else if (!(game->map.imap[game->render.map_y][game->render.map_x] & DOOR && game->open_door.door_state[game->render.map_y][game->render.map_x] == OPEN)
-				&& (!(game->map.imap[game->render.map_y][game->render.map_x] & SPRITE) 
-				&& !(game->map.imap[game->render.map_y][game->render.map_x] & EMPTY)))
-			hit = 1;
-	}
-	return (side);
-}
-
 int	set_line_height(t_game *game, int side)
 {
 	if (side == 0)
-		game->render.perp_wall_dist = (game->render.map_x - game->param.pos_x + game->render.wall_offset_x + (1 - game->render.step_x) / 2) / game->render.ray_dir_x;
+		game->render.perp_wall_dist = (game->render.map_x - game->param.pos_x \
+				+ game->render.wall_offset_x + (1 - game->render.step_x) / 2) \
+													/ game->render.ray_dir_x;
 	else
-		game->render.perp_wall_dist = (game->render.map_y - game->param.pos_y + game->render.wall_offset_y + (1 - game->render.step_y) / 2) / game->render.ray_dir_y;
-	//Calculate height of line to draw on screen
+		game->render.perp_wall_dist = (game->render.map_y - game->param.pos_y \
+				+ game->render.wall_offset_y + (1 - game->render.step_y) / 2) \
+													/ game->render.ray_dir_y;
 	return((int)(S_HEIGHT / game->render.perp_wall_dist));
 }
 
 void	draw_start_to_end(t_game *game, int line_height)
 {
-		//calculate lowest and highest pixel to fill in current stripe
 		game->render.draw_start = - line_height / 2 + S_HEIGHT / 2;
 		if(game->render.draw_start < 0)
 			game->render.draw_start = 0;
@@ -163,62 +47,6 @@ void	draw_start_to_end(t_game *game, int line_height)
 			game->render.draw_end = S_HEIGHT - 1;
 }
 
-void		set_wall_texture(t_game *game, int side)
-{
-	double	wall_x;
-
-	if (!(game->map.imap[game->render.map_y][game->render.map_x] & EMPTY))
-	{
-		if (game->map.imap[game->render.map_y][game->render.map_x] & DOOR)
-			game->render.tex_num = 4;
-		else if (side == 1 && game->render.ray_dir_y < 0)
-			game->render.tex_num = 0; // N
-		else if (side == 1 && game->render.ray_dir_y > 0)
-			game->render.tex_num = 1; // S
-		else if (side == 0 && game->render.ray_dir_x > 0)
-			game->render.tex_num = 2; //E
-		else if (side == 0 && game->render.ray_dir_x < 0)
-			game->render.tex_num = 3; //W
-		if (side == 0 && game->map.imap[game->render.map_y][game->render.map_x - game->render.step_x] & DOOR)
-			game->render.tex_num = 2;
-		else if (side == 1 && game->map.imap[game->render.map_y - game->render.step_y][game->render.map_x] & DOOR)
-			game->render.tex_num = 2;
-	}
-	if (side == 0)
-		wall_x = game->param.pos_y + game->render.perp_wall_dist * game->render.ray_dir_y;
-	else
-		wall_x = game->param.pos_x + game->render.perp_wall_dist * game->render.ray_dir_x;
-	wall_x -= floor(wall_x);
-	if (game->render.tex_num == 4)
-		wall_x += game->open_door.door_offset[game->render.map_y][game->render.map_x];
-	game->render.tex_x = (int)(wall_x * (double)TEX_SIZE);
-}
-
-void	set_pixel_on_screen(t_game *game, int line_height, int x)
-{
-	double step;
-	double	tex_pos;
-	int		y;
-	int		color;
-	
-	step = 1.0 * TEX_SIZE / line_height;
-	tex_pos = (game->render.draw_start - S_HEIGHT / 2 + line_height / 2) * step;
-	y = game->render.draw_start;
-	while (y < game->render.draw_end)
-	{
-		int	tex_y = (int)tex_pos & (TEX_SIZE - 1);
-		tex_pos += step;
-		color = game->tex[game->render.tex_num][TEX_SIZE * tex_y + game->render.tex_x];
-		game->buf[y][x] = color;
-		y++;
-	}
-	y = -1;
-	while (++y < game->render.draw_start)
-		game->buf[y][x] = game->rgb.ceiling_rgb;
-	y = game->render.draw_end - 1;
-	while (++y < S_HEIGHT)
-		game->buf[y][x] = game->rgb.floor_rgb;
-}
 
 void	load_image(t_game *game, int *tex, char *path)
 {
@@ -253,12 +81,12 @@ void	render(t_game *game)
 	x = 0;
 	while (x < S_WIDTH)
 	{
-		init_render(game, x);
-		init_ray_direction(game);
-		side = check_wall_hit(game);
+		init_render(game, x);			//init/init_render.c
+		init_ray_direction(game);		//init/init_render.c
+		side = check_wall_hit(game);	//check/check_wall_hit.c
 		line_height = set_line_height(game, side);
 		draw_start_to_end(game, line_height);
-		set_wall_texture(game, side);
+		set_wall_texture(game, side);	//render/render_texture.c
 		set_pixel_on_screen(game, line_height, x);
 		if (game->sprite_cnt)
 			game->sp_param.zbuffer[x] = game->render.perp_wall_dist;
