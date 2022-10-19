@@ -27,7 +27,7 @@ void	sp_param_draw_sprite_texture(t_game *game, int i, int tex_x, int stripe)
 		tex_y = ((d * TEX_SIZE) / game->sp_param.sprite_height) / 256;
 		color = game->tex[game->sprite[game->sprite_order[i]].texture] \
 							[TEX_SIZE * tex_y + tex_x];
-		if ((color != 0x5DE63E))
+		if ((color & 0x00FFFFFF) != 0)
 			game->buf[y][stripe] = color;
 		y++;
 	}

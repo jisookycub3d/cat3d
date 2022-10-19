@@ -21,9 +21,9 @@ void	init_struct_param_rgb(t_game *game)
 void	init_struct_param_plane(t_game *game)
 {
 	if (game->param.dir_x < 0)
-		game->param.plane_y = 0.66;
-	else if (game->param.dir_x > 0)
 		game->param.plane_y = -0.66;
+	else if (game->param.dir_x > 0)
+		game->param.plane_y = 0.66;
 	else if (game->param.dir_y > 0)
 		game->param.plane_x = -0.66;
 	else if (game->param.dir_y < 0)

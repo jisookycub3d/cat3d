@@ -26,12 +26,12 @@ void	init_struct_player_direction(t_game *game)
 	}
 	else if (game->player.direction == 'W')
 	{
-		game->param.dir_x = 1;
+		game->param.dir_x = -1;
 		game->param.dir_y = 0;
 	}
 	else if (game->player.direction == 'E')
 	{
-		game->param.dir_x = -1;
+		game->param.dir_x = 1;
 		game->param.dir_y = 0;
 	}
 }

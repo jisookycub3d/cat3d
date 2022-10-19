@@ -40,7 +40,7 @@
 # define S_HEIGHT (480 * 2)
 # define TEX_SIZE 128
 
-#define UDIV 1
+#define UDIV 1.3
 #define VDIV 1
 #define VMOVE 0.0
 

@@ -44,7 +44,9 @@ static int	init_ceiling(t_game *game, char *line, int *complited)
 {
 	if (*complited == 1)
 		return (0);
-	if (ft_strncmp(line, "C", 1) && !is_space(line[1]))
+	if (ft_strncmp(line, "C", 1))
+		return (0);
+	if (!is_space(line[1]))
 		return (0);
 	if (game->rgb.ceiling)
 		return (1);
@@ -61,7 +63,9 @@ static int	init_floor(t_game *game, char *line, int *complited)
 {
 	if (*complited == 1)
 		return (0);
-	if (ft_strncmp(line, "F", 1) && !is_space(line[1]))
+	if (ft_strncmp(line, "F", 1))
+		return (0);
+	if (!is_space(line[1]))
 		return (0);
 	if (game->rgb.floor)
 		return (1);

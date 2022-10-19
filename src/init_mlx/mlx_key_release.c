@@ -30,5 +30,7 @@ int	key_release(int keycode, t_game *game)
 		game->keycode.key_right = 0;
 	if (keycode == KEY_E)
 		press_key_e(game);
+	// if (keycode == KEY_M)
+	// 	on_off_minimap(game);
 	return (0);
 }

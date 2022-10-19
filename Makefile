@@ -56,6 +56,7 @@ all : $(NAME)
 bonus : $(BONUS)
 
 $(NAME) :	$(OBJS)
+			@make -C ./mlx clean
 			@make -C ./mlx
 			@cat ./decoration/cat
 			@make -C ./libft fclean
@@ -66,6 +67,7 @@ $(NAME) :	$(OBJS)
 			@install_name_tool -change libmlx.dylib mlx/libmlx.dylib cat3D
 
 $(BONUS) :	$(OBJS_BONUS)
+			@make -C ./mlx clean
 			@make -C ./mlx
 			@cat ./decoration/cat
 			@make -C ./libft fclean
