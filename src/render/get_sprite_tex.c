@@ -6,7 +6,7 @@
 /*   By: jisookim <jisookim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/17 11:48:14 by jisookim          #+#    #+#             */
-/*   Updated: 2022/10/17 11:59:12 by jisookim         ###   ########.fr       */
+/*   Updated: 2022/10/19 19:51:04 by jisookim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,20 @@ void	sp_param_draw_sprite_texture(t_game *game, int i, int tex_x, int stripe)
 		d = (y - game->sp_param.vmove_screen) * 256 - \
 				S_HEIGHT * 128 + game->sp_param.sprite_height * 128;
 		tex_y = ((d * TEX_SIZE) / game->sp_param.sprite_height) / 256;
+		// if (!((0 <= tex_y) && (tex_y <= 127)))
+		// {
+		// 	// printf("y : [%d] game->sp_param.vmove_screen : [%d] // ", y, game->sp_param.vmove_screen);
+		// 	// printf("game->sp_param.sprite_height : [%d] // ", game->sp_param.sprite_height);
+		// 	// printf("game->param.dir_x : [%f] // ", game->param.dir_x);
+		// 	// printf("game->param.dir_y : [%f] \n ", game->param.dir_y);
+		// 	// printf("game->sprite.y : [%f] // ",game->sprite[game->sprite_order[i]].y);
+		// 	// printf("game->param.pos_y : [%f] \n ",game->param.pos_y);
+			// printf("tex size : x[%d] y[%d]\n", tex_x, tex_y);
+		// }
+		if (tex_x < 0)
+			tex_x = abs(tex_x);
+		if (tex_y < 0)
+			tex_y = abs(tex_y);
 		color = game->tex[game->sprite[game->sprite_order[i]].texture] \
 							[TEX_SIZE * tex_y + tex_x];
 		if ((color & 0x00FFFFFF) != 0)
