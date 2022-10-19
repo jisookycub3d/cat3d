@@ -82,10 +82,10 @@ void	minimap(t_game *game)
 	int	y;
 
 	y = 0;
-	while (y <= game->map.height)
+	while (y < game->map.height)
 	{
 		x = 0;
-		while (x <= game->map.width)
+		while (x < game->map.width)
 		{
 			if (game->map.imap[y][x] & WALL)
 				draw_minimap(game, WALL, x, y);

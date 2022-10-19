@@ -72,8 +72,8 @@ void	make_imap(t_game *game)
 		}
 		i++;
 	}
-	game->map.width = j - 1;
-	game->map.height = i - 1;
+	game->map.width = j;
+	game->map.height = i;
 }
 
 int	parse_map(t_game *game, char *mapfile)
