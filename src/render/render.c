@@ -69,7 +69,7 @@ void	load_texture(t_game *game)
 	load_image(game, game->tex[2], game->texture.east);
 	load_image(game, game->tex[3], game->texture.west);
 	load_image(game, game->tex[4], "./door.png");
-	load_image(game, game->tex[5], "./ghost.png");
+	load_image(game, game->tex[5], "./cat.png");
 }
 
 void	render(t_game *game)
