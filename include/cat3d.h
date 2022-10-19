@@ -6,7 +6,7 @@
 /*   By: jisookim <jisookim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/19 14:00:14 by jisookim          #+#    #+#             */
-/*   Updated: 2022/10/18 18:13:58 by jisookim         ###   ########.fr       */
+/*   Updated: 2022/10/19 20:08:42 by jisookim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -343,5 +343,11 @@ void	init_ray_direction(t_game *game);
 void	set_wall_texture(t_game *game, int side);
 void	set_pixel_on_screen(t_game *game, int line_height, int x);
 void	init_render(t_game *game, int x);
+
+void	load_image(t_game *game, int *tex, char *path);
+void	load_texture(t_game *game);
+
+long long	get_time(void);
+void		update_time(t_game *game);
 
 #endif

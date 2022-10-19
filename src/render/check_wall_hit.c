@@ -6,7 +6,7 @@
 /*   By: jisookim <jisookim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/18 17:19:35 by jisookim          #+#    #+#             */
-/*   Updated: 2022/10/18 19:38:37 by jisookim         ###   ########.fr       */
+/*   Updated: 2022/10/19 20:03:50 by jisookim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,8 @@ void	init_check_wall_hit(t_game *game)
 	game->render.wall_offset_y = 0;
 }
 
-void	move_to_next_map_square(t_game *game, int *side, int *imap_coord, int *door_state)
+void	move_to_next_map_square(t_game *game, \
+									int *side, int *imap_coord, int *door_state)
 {
 	if (game->render.side_dist_x < game->render.side_dist_y)
 	{
@@ -35,7 +36,6 @@ void	move_to_next_map_square(t_game *game, int *side, int *imap_coord, int *door
 	*imap_coord = game->map.imap[game->render.map_y][game->render.map_x];
 	*door_state = \
 			game->open_door.door_state[game->render.map_y][game->render.map_x];
-	// printf ("%d %d\n", game->render.map_x, game->render.map_y);
 }
 
 void	side_1_operation(t_game *game, double *wallx, int *hit, int *side)
@@ -106,9 +106,6 @@ int	check_wall_hit(t_game *game)
 	while (hit == 0)
 	{
 		move_to_next_map_square(game, &side, &imap_coord, &door_state);
-		// *imap_coord = game->map.imap[game->render.map_y][game->render.map_x];
-		// *door_state = \
-		// 	game->open_door.door_state[game->render.map_y][game->render.map_x];
 		if ((imap_coord & DOOR) && (door_state != OPEN))
 		{
 			hit = 1;

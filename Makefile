@@ -40,7 +40,8 @@ SRC_TOOLS		:=	$(addprefix $(DIR_TOOLS)/, $(SRC_TOOLS))
 
 SRC_RENDER		:=	render.c minimap.c door.c render_sprite.c \
 					set_sprite_param.c get_sprite_tex.c render_pixel.c \
-					render_texture.c init_render.c check_wall_hit.c
+					render_texture.c init_render.c check_wall_hit.c \
+					load_texture.c time.c
 SRC_RENDER		:=	$(addprefix $(DIR_RENDER)/, $(SRC_RENDER))
 
 SRCS			=	$(SRC_CHECK) $(SRC_INIT) $(SRC_INIT_MLX) $(SRC_MAIN) \

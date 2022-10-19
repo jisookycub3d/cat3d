@@ -3,33 +3,19 @@
 /*                                                        :::      ::::::::   */
 /*   door.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kyhan <kyhan@student.42.fr>                +#+  +:+       +#+        */
+/*   By: jisookim <jisookim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/17 11:08:03 by jisookim          #+#    #+#             */
-/*   Updated: 2022/10/18 08:03:57 by kyhan            ###   ########.fr       */
+/*   Updated: 2022/10/19 20:08:23 by jisookim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/cat3d.h"
 
-long long	get_time(void)
-{
-	long long	now;
-
-	now = clock();
-	return (now);
-}
-
-void	update_time(t_game *game)
-{
-	game->time.last = game->time.now;
-	game->time.now = get_time();
-	game->time.deltatime = (game->time.now - game->time.last) / 1000;
-}
-
 void	close_door(t_game *game, int map_x, int map_y)
 {
-	game->open_door.door_offset[map_y][map_x] -= (double)game->time.deltatime / 300;
+	game->open_door.door_offset[map_y][map_x] -= \
+											(double)game->time.deltatime / 300;
 	if (game->open_door.door_offset[map_y][map_x] < 0)
 	{
 		game->open_door.door_offset[map_y][map_x] = 0;
@@ -40,7 +26,8 @@ void	close_door(t_game *game, int map_x, int map_y)
 
 void	open_door(t_game *game, int map_x, int map_y)
 {
-	game->open_door.door_offset[map_y][map_x] += (double)game->time.deltatime / 300;
+	game->open_door.door_offset[map_y][map_x] += \
+											(double)game->time.deltatime / 300;
 	if (game->open_door.door_offset[map_y][map_x] > 1)
 	{
 		game->open_door.door_offset[map_y][map_x] = 1;
@@ -76,5 +63,4 @@ void	door(t_game *game)
 		door_events(game, map_x, map_y + 1);
 	if (game->map.imap[map_y - 1][map_x] & DOOR)
 		door_events(game, map_x, map_y - 1);
-	//open || close has different event
 }

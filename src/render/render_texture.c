@@ -6,7 +6,7 @@
 /*   By: jisookim <jisookim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/18 17:31:24 by jisookim          #+#    #+#             */
-/*   Updated: 2022/10/18 17:57:59 by jisookim         ###   ########.fr       */
+/*   Updated: 2022/10/19 20:18:06 by jisookim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ void	set_wall_by_direction(t_game *game, int side)
 double	set_wall_x(t_game *game, int side)
 {
 	double	wall_x;
-	
+
 	if (side == 0)
 		wall_x = game->param.pos_y + \
 						game->render.perp_wall_dist * game->render.ray_dir_y;

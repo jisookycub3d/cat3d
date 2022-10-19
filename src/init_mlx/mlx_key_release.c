@@ -6,7 +6,7 @@
 /*   By: jisookim <jisookim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/17 10:45:48 by jisookim          #+#    #+#             */
-/*   Updated: 2022/10/17 11:26:04 by jisookim         ###   ########.fr       */
+/*   Updated: 2022/10/19 20:26:15 by jisookim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,11 @@ int	key_release(int keycode, t_game *game)
 	if (keycode == KEY_E)
 		press_key_e(game);
 	// if (keycode == KEY_M)
-	// 	on_off_minimap(game);
+	// 	****on_off_minimap(game);
+	// ****run - key
+	// *****minimap resize
+	// **control rot_speed - mainmenu - seetting?
+	// ***darkness wall
+	// *collect cat 
 	return (0);
 }
