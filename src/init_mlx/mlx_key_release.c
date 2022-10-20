@@ -6,7 +6,7 @@
 /*   By: kyhan <kyhan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/17 10:45:48 by jisookim          #+#    #+#             */
-/*   Updated: 2022/10/20 21:25:58 by kyhan            ###   ########.fr       */
+/*   Updated: 2022/10/20 21:28:44 by kyhan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ int	key_release(int keycode, t_game *game)
 		press_key_e(game);
 	if (keycode == KEY_SHIFT)
 		game->keycode.key_shift = 0;
-	if (keycode == KEY_I)
+	if (keycode == KEY_M)
 		toggle_minimap(game);
 	return (0);
 }
