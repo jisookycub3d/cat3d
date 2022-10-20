@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cat3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jisookim <jisookim@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: kyhan <kyhan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/19 14:00:14 by jisookim          #+#    #+#             */
-/*   Updated: 2022/10/20 09:05:41 by jisookim         ###   ########.fr       */
+/*   Updated: 2022/10/20 21:19:57 by kyhan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@
 # define KEY_ESC 53 
 # define KEY_LEFT 123
 # define KEY_RIGHT 124
+# define KEY_SHIFT 257
 # define S_WIDTH 1280
 # define S_HEIGHT 960
 # define TEX_SIZE 128
@@ -158,6 +159,7 @@ typedef struct s_keycode
 	int			key_w;
 	int			key_right;
 	int			key_left;
+	int			key_shift;
 }				t_keycode;
 
 typedef struct s_sprite

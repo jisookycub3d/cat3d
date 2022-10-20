@@ -6,7 +6,7 @@
 /*   By: kyhan <kyhan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/17 11:27:30 by jisookim          #+#    #+#             */
-/*   Updated: 2022/10/18 00:53:48 by kyhan            ###   ########.fr       */
+/*   Updated: 2022/10/20 21:21:55 by kyhan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,10 @@
 
 void	key_update(t_game *game)
 {
+	if (!game->keycode.key_shift)
+		game->player.move_speed = 0.05;
+	if (game->keycode.key_shift)
+		game->player.move_speed = 0.1;
 	if (game->keycode.key_d)
 		press_d(game);
 	if (game->keycode.key_a)
@@ -44,6 +48,8 @@ int	key_press(int keycode, t_game *game)
 		game->keycode.key_left = 1;
 	if (keycode == KEY_RIGHT)
 		game->keycode.key_right = 1;
+	if (keycode == KEY_SHIFT)
+		game->keycode.key_shift = 1;
 	return (0);
 }
 

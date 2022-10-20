@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mlx_key_release.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jisookim <jisookim@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: kyhan <kyhan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/17 10:45:48 by jisookim          #+#    #+#             */
-/*   Updated: 2022/10/20 08:58:08 by jisookim         ###   ########.fr       */
+/*   Updated: 2022/10/20 21:21:28 by kyhan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,5 +30,7 @@ int	key_release(int keycode, t_game *game)
 		game->keycode.key_right = 0;
 	if (keycode == KEY_E)
 		press_key_e(game);
+	if (keycode == KEY_SHIFT)
+		game->keycode.key_shift = 0;
 	return (0);
 }
