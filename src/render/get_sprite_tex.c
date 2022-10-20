@@ -6,7 +6,7 @@
 /*   By: kyhan <kyhan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/17 11:48:14 by jisookim          #+#    #+#             */
-/*   Updated: 2022/10/20 13:55:21 by kyhan            ###   ########.fr       */
+/*   Updated: 2022/10/20 14:06:24 by kyhan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,8 @@ void	get_sprite_tex(t_game *game, int i)
 											game->sp_param.sprite_width) / 256);
 		if ((game->sp_param.transform_y > 0) && (stripe > 0)
 			&& (stripe < S_WIDTH)
-			&& (sqrtf(game->sprite_distance[i]) < game->sp_param.zbuffer[stripe])
+			&& (sqrtf(game->sprite_distance[i])
+				< game->sp_param.zbuffer[stripe])
 			&& (game->sp_param.transform_y < game->sp_param.zbuffer[stripe]))
 			sp_param_draw_sprite_texture(game, i, tex_x, stripe);
 		stripe++;
