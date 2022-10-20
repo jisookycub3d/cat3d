@@ -6,7 +6,7 @@
 /*   By: kyhan <kyhan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/19 14:00:14 by jisookim          #+#    #+#             */
-/*   Updated: 2022/10/20 21:19:57 by kyhan            ###   ########.fr       */
+/*   Updated: 2022/10/20 21:24:32 by kyhan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@
 # define KEY_S 1
 # define KEY_D 2
 # define KEY_E 14
+# define KEY_I 34
 # define KEY_ESC 53 
 # define KEY_LEFT 123
 # define KEY_RIGHT 124
@@ -215,6 +216,7 @@ typedef struct s_game
 	int			*sprite_order;
 	double		*sprite_distance;
 	int			sprite_cnt;
+	int			minimap;
 	t_texture	texture;
 	t_map		map;
 	t_rgb		rgb;

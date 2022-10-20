@@ -6,11 +6,19 @@
 /*   By: kyhan <kyhan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/17 10:45:48 by jisookim          #+#    #+#             */
-/*   Updated: 2022/10/20 21:21:28 by kyhan            ###   ########.fr       */
+/*   Updated: 2022/10/20 21:25:58 by kyhan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/cat3d.h"
+
+void	toggle_minimap(t_game *game)
+{
+	if (game->minimap)
+		game->minimap = 0;
+	else
+		game->minimap = 1;
+}
 
 int	key_release(int keycode, t_game *game)
 {
@@ -32,5 +40,7 @@ int	key_release(int keycode, t_game *game)
 		press_key_e(game);
 	if (keycode == KEY_SHIFT)
 		game->keycode.key_shift = 0;
+	if (keycode == KEY_I)
+		toggle_minimap(game);
 	return (0);
 }

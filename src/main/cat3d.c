@@ -6,7 +6,7 @@
 /*   By: kyhan <kyhan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/19 14:00:23 by jisookim          #+#    #+#             */
-/*   Updated: 2022/10/18 00:54:40 by kyhan            ###   ########.fr       */
+/*   Updated: 2022/10/20 21:23:53 by kyhan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,8 @@ int	main_loop(t_game *game)
 	if (game->door)
 		door(game);
 	render(game);
-	minimap(game);
+	if (game->minimap)
+		minimap(game);
 	draw(game);
 	key_update(game);
 	return (0);
